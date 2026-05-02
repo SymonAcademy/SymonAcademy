@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Symon Academy ・ 少操練,多結構 ・ 結構化分層教學</title>
+<meta name="description" content="Symon Academy ・ 結構化分層教學體系 ・ 高小呈分試備戰 ・ 3-5 人小班 ・ 粉嶺・上水區" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============== TOKENS ============== */
+:root{
+  --black: #0A0A0A;
+  --black-2: #141414;
+  --black-3: #1C1C1C;
+  --warm-dark: #1F1812;       /* 暖調深色取代純黑 */
+  --warm-dark-2: #2A2118;
+  --orange: #FF6B1A;
+  --orange-2: #FF8540;
+  --orange-soft: #FFF1E8;
+  --cream: #F5F1EA;
+  --cream-2: #EDE7DD;
+  --cream-3: #FAF6EF;          /* 更亮的米白 */
+  --line: rgba(255,255,255,0.08);
+  --line-warm: rgba(255,107,26,0.12);
+  --line-dark: rgba(0,0,0,0.08);
+  --line-dark-2: rgba(0,0,0,0.12);
+  --txt-light: #F5F1EA;
+  --txt-mute: rgba(245,241,234,0.6);
+  --txt-dark: #1A1A1A;
+  --txt-dark-mute: rgba(26,26,26,0.65);
+  --easing: cubic-bezier(0.65, 0.05, 0.35, 1);
+}
+
+/* ============== RESET ============== */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+body{
+  font-family: 'Noto Sans TC','Space Grotesk',sans-serif;
+  background:var(--cream);
+  color:var(--txt-dark);
+  overflow-x:hidden;
+  line-height:1.7;
+  font-weight:400;
+}
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+a{ color:inherit; text-decoration:none; }
+
+/* ============== SCROLL PROGRESS ============== */
+.scroll-progress{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:linear-gradient(90deg,var(--orange),var(--orange-2));
+  z-index:1000; transition:width .1s linear;
+  box-shadow:0 0 12px rgba(255,107,26,0.6);
+}
+
+/* ============== NAV DOTS (desktop) ============== */
+.nav-dots{
+  position:fixed; right:32px; top:50%; transform:translateY(-50%);
+  z-index:90; display:flex; flex-direction:column; gap:14px;
+}
+.nav-dots button{
+  width:8px; height:8px; border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  transition:all .3s var(--easing);
+  position:relative;
+}
+.nav-dots button.active{ background:var(--orange); transform:scale(1.4); }
+.nav-dots button:hover{ background:var(--orange); }
+.nav-dots button::before{
+  content:attr(data-label);
+  position:absolute; right:20px; top:50%; transform:translateY(-50%);
+  background:var(--black-2); color:var(--orange);
+  padding:4px 10px; border-radius:4px; font-size:11px;
+  white-space:nowrap; opacity:0; pointer-events:none;
+  transition:opacity .25s var(--easing);
+  border:1px solid var(--line);
+}
+.nav-dots button:hover::before{ opacity:1; }
+@media (max-width:1024px){ .nav-dots{ display:none; } }
+
+/* ============== FLOATING WHATSAPP ============== */
+.fab-whatsapp{
+  position:fixed; right:24px; bottom:24px; z-index:95;
+  width:64px; height:64px; border-radius:50%;
+  background:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 12px 32px rgba(255,107,26,0.45), 0 0 0 0 rgba(255,107,26,0.6);
+  animation:fabPulse 2.5s var(--easing) infinite;
+  transition:transform .25s var(--easing);
+}
+.fab-whatsapp:hover{ transform:scale(1.1) rotate(-6deg); }
+.fab-whatsapp svg{ width:32px; height:32px; fill:white; }
+@keyframes fabPulse{
+  0%,100%{ box-shadow:0 12px 32px rgba(255,107,26,0.45), 0 0 0 0 rgba(255,107,26,0.5); }
+  50%   { box-shadow:0 12px 32px rgba(255,107,26,0.45), 0 0 0 16px rgba(255,107,26,0); }
+}
+
+/* ============== HEADER ============== */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:80;
+  padding:18px 40px; display:flex; justify-content:space-between; align-items:center;
+  transition:all .35s var(--easing);
+  background:transparent;
+  color:white;
+}
+.site-header.scrolled{
+  background:rgba(20,15,12,0.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  padding:14px 40px;
+  color:white;
+}
+.brand-mark{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px; letter-spacing:0.12em;
+  display:flex; align-items:center; gap:10px;
+  color:inherit;
+}
+.brand-mark .accent{ color:var(--orange); }
+.brand-mark .bar{
+  width:24px; height:2px; background:var(--orange);
+}
+.header-cta{
+  font-size:13px; font-weight:500;
+  padding:10px 20px; border-radius:100px;
+  background:var(--orange); color:white;
+  display:flex; align-items:center; gap:8px;
+  transition:all .25s var(--easing);
+  letter-spacing:0.04em;
+}
+.header-cta:hover{ background:var(--orange-2); transform:translateY(-2px); }
+.header-cta svg{ width:14px; height:14px; fill:white; }
+@media (max-width:768px){
+  .site-header{ padding:14px 18px; }
+  .site-header.scrolled{ padding:12px 18px; }
+  .header-cta span{ display:none; }
+  .header-cta{ width:38px; height:38px; padding:0; justify-content:center; }
+  .header-cta svg{ width:16px; height:16px; }
+}
+
+/* ============== UTILITIES ============== */
+.container{ max-width:1280px; margin:0 auto; padding:0 40px; }
+@media (max-width:768px){ .container{ padding:0 20px; } }
+
+.section{ position:relative; padding:140px 0; overflow:hidden; }
+@media (max-width:768px){ .section{ padding:90px 0; } }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px; letter-spacing:0.25em; color:var(--orange);
+  margin-bottom:24px;
+}
+.eyebrow .line{ width:32px; height:1px; background:var(--orange); }
+
+.section-title{
+  font-family:'Noto Serif TC',serif;
+  font-weight:900;
+  font-size:clamp(34px, 5vw, 60px);
+  line-height:1.15;
+  letter-spacing:-0.01em;
+  margin-bottom:24px;
+  color:var(--txt-dark);
+}
+.section-title .hl{ color:var(--orange); }
+.section-sub{
+  font-size:17px; color:var(--txt-dark-mute); max-width:640px; line-height:1.8;
+}
+.section.light .section-sub{ color:var(--txt-dark-mute); }
+.section.light .section-title{ color:var(--txt-dark); }
+.section.cream-light .section-title{ color:var(--txt-dark); }
+.section.cream-light .section-sub{ color:var(--txt-dark-mute); }
+/* Dark sections override */
+.section.loss .section-title,
+.section.sprint .section-title,
+.section.cta h2{ color:white; }
+.section.loss .section-sub,
+.section.sprint .section-sub,
+.section.cta p{ color:rgba(255,255,255,0.75); }
+
+/* reveal animation */
+.reveal{ opacity:0; transform:translateY(40px); transition:opacity .9s var(--easing), transform .9s var(--easing); }
+.reveal.in{ opacity:1; transform:translateY(0); }
+.reveal.delay-1{ transition-delay:.1s; }
+.reveal.delay-2{ transition-delay:.2s; }
+.reveal.delay-3{ transition-delay:.3s; }
+.reveal.delay-4{ transition-delay:.4s; }
+.reveal.delay-5{ transition-delay:.5s; }
+
+/* ============== HERO ============== */
+.hero{
+  min-height:100vh; position:relative;
+  display:flex; align-items:center;
+  background:linear-gradient(135deg, #1A1410 0%, #0F0A06 100%);
+  color:var(--txt-light);
+  padding:120px 0 80px;
+}
+.hero-bg{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,107,26,0.28), transparent 55%),
+    radial-gradient(circle at 15% 90%, rgba(255,133,64,0.15), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(255,107,26,0.05), transparent 70%);
+}
+.hero-bg::before{
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.hero-grain{
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0.4;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+.hero-inner{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1.15fr 1fr; gap:60px; align-items:center;
+}
+@media (max-width:1024px){
+  .hero-inner{ grid-template-columns:1fr; gap:40px; }
+}
+
+.hero-eyebrow{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px; letter-spacing:0.3em; color:var(--orange);
+  margin-bottom:32px;
+  display:flex; align-items:center; gap:14px;
+}
+.hero-eyebrow .line{ width:48px; height:1px; background:var(--orange); }
+
+.hero-title{
+  font-family:'Noto Serif TC',serif;
+  font-weight:900;
+  font-size:clamp(40px, 6.5vw, 86px);
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  margin-bottom:32px;
+  color:white;
+}
+.hero-title .word{
+  display:inline-block;
+  opacity:0; transform:translateY(30px);
+  animation:wordIn 1s var(--easing) forwards;
+}
+.hero-title .punct{ color:var(--orange); }
+.hero-title .quote{
+  display:inline-block; padding:0 4px; color:var(--orange); position:relative;
+}
+.hero-title .quote::before{ content:'「'; }
+.hero-title .quote::after{ content:'」'; }
+@keyframes wordIn{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.hero-sub{
+  font-size:18px; color:var(--txt-mute); max-width:520px;
+  line-height:1.9; margin-bottom:48px;
+  border-left:2px solid var(--orange); padding-left:20px;
+  opacity:0; transform:translateY(20px);
+  animation:wordIn 1s var(--easing) forwards 1.2s;
+}
+
+.hero-actions{
+  display:flex; gap:18px; flex-wrap:wrap; align-items:center;
+  opacity:0; transform:translateY(20px);
+  animation:wordIn 1s var(--easing) forwards 1.4s;
+}
+.btn-primary{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:18px 32px;
+  background:var(--orange); color:white;
+  font-weight:700; font-size:15px; letter-spacing:0.05em;
+  border-radius:100px;
+  transition:all .3s var(--easing);
+  position:relative;
+  box-shadow:0 8px 24px rgba(255,107,26,0.35);
+}
+.btn-primary:hover{
+  background:var(--orange-2); transform:translateY(-3px);
+  box-shadow:0 16px 36px rgba(255,107,26,0.5);
+}
+.btn-primary svg{ width:18px; height:18px; fill:white; }
+.btn-primary .arrow{ transition:transform .3s var(--easing); }
+.btn-primary:hover .arrow{ transform:translateX(4px); }
+
+.btn-ghost{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:18px 24px; color:var(--txt-light);
+  font-weight:500; font-size:14px; letter-spacing:0.05em;
+  border:1px solid var(--line); border-radius:100px;
+  transition:all .3s var(--easing);
+}
+.btn-ghost:hover{ border-color:var(--orange); color:var(--orange); }
+
+.hero-phone{
+  display:flex; align-items:center; gap:8px;
+  font-family:'Space Grotesk',sans-serif; font-size:13px;
+  color:var(--txt-mute); letter-spacing:0.04em;
+}
+.hero-phone .dot{ width:6px; height:6px; background:var(--orange); border-radius:50%; animation:livePulse 1.6s var(--easing) infinite; }
+@keyframes livePulse{ 0%,100%{ opacity:1; } 50%{ opacity:0.3; } }
+
+/* hero portrait */
+.hero-portrait{
+  position:relative; height:680px; max-height:80vh;
+}
+@media (max-width:1024px){
+  .hero-portrait{ height:540px; max-width:440px; margin:0 auto; }
+}
+.hero-portrait .frame{
+  position:absolute; inset:0; overflow:hidden;
+  border-radius:6px;
+  background:linear-gradient(135deg, var(--orange) 0%, var(--orange) 45%, var(--black-2) 45%, var(--black-2) 100%);
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.hero-portrait .frame::before{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(115deg, transparent 0%, transparent 38%, var(--black-2) 38%, var(--black-2) 100%);
+  z-index:1;
+}
+.hero-portrait img{
+  position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  height:100%; width:auto; max-width:none; z-index:2;
+  object-fit:cover; object-position:center top;
+  animation:portraitFloat 6s ease-in-out infinite;
+}
+@keyframes portraitFloat{
+  0%,100%{ transform:translateX(-50%) translateY(0); }
+  50%   { transform:translateX(-50%) translateY(-8px); }
+}
+.hero-portrait .deco-num{
+  position:absolute; top:24px; right:24px; z-index:3;
+  font-family:'Bebas Neue',sans-serif; font-size:80px;
+  color:rgba(255,255,255,0.12); line-height:1;
+  letter-spacing:0.05em;
+}
+.hero-portrait .deco-tag{
+  position:absolute; bottom:32px; left:32px; z-index:3;
+  background:rgba(10,10,10,0.85); backdrop-filter:blur(12px);
+  padding:14px 18px; border-radius:4px;
+  border-left:3px solid var(--orange);
+  max-width:240px;
+}
+.hero-portrait .deco-tag .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.25em;
+  color:var(--orange); margin-bottom:4px;
+}
+.hero-portrait .deco-tag .nm{
+  font-size:18px; font-weight:700; color:white; margin-bottom:2px;
+}
+.hero-portrait .deco-tag .ed{
+  font-size:11px; color:var(--txt-mute); letter-spacing:0.04em;
+}
+
+/* hero metrics */
+.hero-metrics{
+  display:flex; gap:32px; margin-top:56px; flex-wrap:wrap;
+  opacity:0; animation:wordIn 1s var(--easing) forwards 1.6s;
+}
+.hero-metric{ flex:1; min-width:120px; }
+.hero-metric .num{
+  font-family:'Bebas Neue',sans-serif; font-size:42px; line-height:1;
+  color:var(--orange); margin-bottom:4px; letter-spacing:0.04em;
+}
+.hero-metric .lbl{
+  font-size:12px; color:var(--txt-mute); letter-spacing:0.1em;
+}
+
+/* scroll cue */
+.scroll-cue{
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  z-index:3;
+  font-size:11px; letter-spacing:0.25em; color:var(--txt-mute);
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  font-family:'Bebas Neue',sans-serif;
+}
+.scroll-cue .line{
+  width:1px; height:48px; background:linear-gradient(to bottom, transparent, var(--orange));
+  animation:scrollLine 2s var(--easing) infinite;
+}
+@keyframes scrollLine{
+  0%   { transform:scaleY(0); transform-origin:top; }
+  50%  { transform:scaleY(1); transform-origin:top; }
+  50.1%{ transform:scaleY(1); transform-origin:bottom; }
+  100% { transform:scaleY(0); transform-origin:bottom; }
+}
+@media (max-width:1024px){ .scroll-cue{ display:none; } }
+
+/* ============== SECTION 02 ・ PAIN (light) ============== */
+.section.dark{ background:var(--black); }
+.section.cream{ background:var(--cream); color:var(--txt-dark); }
+.section.cream-light{ background:var(--cream-3); color:var(--txt-dark); }
+
+.pain-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:64px;
+}
+@media (max-width:900px){ .pain-grid{ grid-template-columns:1fr; } }
+
+.pain-card{
+  position:relative; padding:36px 28px;
+  background:white;
+  border:1px solid var(--line-dark);
+  border-radius:6px;
+  transition:all .4s var(--easing);
+  box-shadow:0 2px 12px rgba(0,0,0,0.03);
+}
+.pain-card:hover{
+  transform:translateY(-6px);
+  border-color:var(--orange);
+  box-shadow:0 20px 40px rgba(255,107,26,0.12);
+}
+.pain-card .num{
+  font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.3em;
+  color:var(--orange); margin-bottom:24px;
+}
+.pain-card h3{
+  font-family:'Noto Serif TC',serif;
+  font-size:22px; font-weight:700; margin-bottom:14px; line-height:1.4;
+  color:var(--txt-dark);
+}
+.pain-card p{ font-size:14.5px; color:var(--txt-dark-mute); line-height:1.85; }
+.pain-card .x-mark{
+  position:absolute; top:28px; right:24px;
+  width:36px; height:36px; border-radius:50%;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+}
+
+.pain-quote{
+  margin-top:80px; padding:64px 48px;
+  background:linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+  border-radius:8px; position:relative; overflow:hidden;
+  text-align:center;
+  box-shadow:0 24px 60px rgba(255,107,26,0.25);
+}
+.pain-quote::before{
+  content:'"'; position:absolute; top:-40px; left:30px;
+  font-size:300px; font-family:'Noto Serif TC',serif; line-height:1;
+  color:rgba(255,255,255,0.12); font-weight:900;
+}
+.pain-quote h3{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(22px, 3vw, 36px); font-weight:900;
+  color:white; line-height:1.7; position:relative; z-index:1;
+}
+.pain-quote h3 .em{
+  position:relative;
+  display:inline-block;
+  padding:0 4px;
+  color:white;
+  font-weight:900;
+}
+.pain-quote h3 .em::after{
+  content:'';
+  position:absolute;
+  left:-2px; right:-2px;
+  bottom:-6px;
+  height:8px;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 12' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M2 8 Q 50 2, 100 6 T 198 5' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' opacity='0.95'/%3E%3C/svg%3E") no-repeat;
+  background-size:100% 100%;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform 1s var(--easing) .3s;
+}
+.pain-quote.in h3 .em::after,
+.pain-quote h3 .em.in::after{ transform:scaleX(1); }
+.pain-quote.in h3 .em:nth-of-type(2)::after{ transition-delay:.9s; }
+
+/* ============== SECTION 03 ・ LOSS (warm dark) ============== */
+.loss{
+  background:linear-gradient(180deg, var(--warm-dark) 0%, #2A1810 100%);
+  position:relative;
+  color:var(--txt-light);
+}
+.loss::before{
+  content:''; position:absolute; inset:0; z-index:0;
+  background:repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,107,26,0.04) 60px, rgba(255,107,26,0.04) 61px);
+}
+.loss::after{
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(ellipse at 70% 40%, rgba(255,107,26,0.12), transparent 60%);
+}
+.loss .container{ position:relative; z-index:1; }
+.loss .section-title{ color:white; }
+.loss .section-sub{ color:var(--txt-mute); }
+
+.loss-list{
+  display:flex; flex-direction:column; gap:0; margin-top:64px;
+  border-top:1px solid rgba(255,255,255,0.12);
+}
+.loss-item{
+  display:grid; grid-template-columns:80px 1fr auto; gap:32px; align-items:center;
+  padding:36px 0; border-bottom:1px solid rgba(255,255,255,0.12);
+  transition:all .4s var(--easing);
+}
+.loss-item:hover{ padding-left:24px; background:rgba(255,107,26,0.05); }
+.loss-item .idx{
+  font-family:'Bebas Neue',sans-serif; font-size:48px;
+  color:var(--orange); line-height:1;
+}
+.loss-item h4{
+  font-family:'Noto Serif TC',serif;
+  font-size:22px; font-weight:700; margin-bottom:6px; color:white;
+}
+.loss-item p{ font-size:14px; color:var(--txt-mute); line-height:1.7; }
+.loss-item .arrow{
+  width:48px; height:48px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center;
+  color:var(--orange); transition:all .3s var(--easing);
+}
+.loss-item:hover .arrow{ background:var(--orange); border-color:var(--orange); color:white; transform:translateX(8px); }
+@media (max-width:768px){
+  .loss-item{ grid-template-columns:60px 1fr; }
+  .loss-item .arrow{ display:none; }
+  .loss-item .idx{ font-size:36px; }
+}
+
+/* ============== SECTION 04 ・ METHOD (light) ============== */
+.method-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:64px;
+}
+@media (max-width:900px){ .method-grid{ grid-template-columns:1fr; } }
+
+.method-card{
+  padding:40px 32px; background:white;
+  border:1px solid var(--line-dark);
+  border-radius:6px;
+  position:relative; transition:all .4s var(--easing);
+  overflow:hidden;
+}
+.method-card::before{
+  content:''; position:absolute; inset:auto 0 0 0; height:3px;
+  background:var(--orange); transform:scaleX(0); transform-origin:left;
+  transition:transform .5s var(--easing);
+}
+.method-card:hover{ transform:translateY(-8px); box-shadow:0 24px 48px rgba(0,0,0,0.08); }
+.method-card:hover::before{ transform:scaleX(1); }
+
+.method-icon{
+  width:56px; height:56px; border-radius:8px;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:24px;
+}
+.method-icon svg{ width:28px; height:28px; }
+.method-card h3{
+  font-family:'Noto Serif TC',serif;
+  font-size:24px; font-weight:700; margin-bottom:8px; color:var(--txt-dark);
+}
+.method-card .en{
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.2em;
+  color:var(--orange); margin-bottom:16px;
+}
+.method-card p{ font-size:14.5px; color:var(--txt-dark-mute); line-height:1.85; }
+
+/* ============== SECTION 05 ・ COMPARISON (light) ============== */
+.comp{
+  background:var(--cream-3);
+  color:var(--txt-dark);
+  position:relative;
+}
+.comp-wrap{
+  display:grid; grid-template-columns:1fr 60px 1fr; gap:0;
+  margin-top:64px; align-items:stretch;
+}
+@media (max-width:900px){ .comp-wrap{ grid-template-columns:1fr; } }
+
+.comp-col{
+  padding:40px 32px;
+  border-radius:6px;
+  position:relative;
+}
+.comp-col.bad{
+  background:white;
+  border:1px solid var(--line-dark);
+  box-shadow:0 8px 24px rgba(0,0,0,0.04);
+}
+.comp-col.good{
+  background:linear-gradient(135deg, var(--orange) 0%, #FF7B2D 100%);
+  color:white;
+  box-shadow:0 24px 60px rgba(255,107,26,0.3);
+}
+.comp-col .col-tag{
+  display:inline-block; font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:0.25em;
+  padding:6px 12px; border-radius:4px;
+  margin-bottom:24px;
+}
+.comp-col.bad .col-tag{ background:rgba(0,0,0,0.06); color:var(--txt-dark-mute); }
+.comp-col.good .col-tag{ background:rgba(0,0,0,0.18); color:white; }
+.comp-col h3{
+  font-family:'Noto Serif TC',serif;
+  font-size:26px; font-weight:700; margin-bottom:32px; line-height:1.4;
+}
+.comp-col.bad h3{ color:var(--txt-dark); }
+.comp-col ul{ list-style:none; }
+.comp-col li{
+  display:flex; gap:14px; padding:16px 0;
+  border-bottom:1px solid;
+  font-size:15px; line-height:1.6;
+}
+.comp-col.bad li{ border-color:var(--line-dark); color:var(--txt-dark-mute); }
+.comp-col.good li{ border-color:rgba(255,255,255,0.18); color:white; }
+.comp-col li:last-child{ border-bottom:none; }
+.comp-col .mark{
+  flex-shrink:0; width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700;
+  margin-top:1px;
+}
+.comp-col.bad .mark{ background:rgba(0,0,0,0.06); color:var(--txt-dark-mute); }
+.comp-col.good .mark{ background:white; color:var(--orange); }
+
+.comp-vs{
+  display:flex; align-items:center; justify-content:center;
+}
+.comp-vs span{
+  font-family:'Bebas Neue',sans-serif; font-size:32px;
+  color:var(--orange);
+  width:60px; height:60px; border-radius:50%;
+  background:white; border:2px solid var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 20px rgba(255,107,26,0.2);
+}
+@media (max-width:900px){ .comp-vs{ padding:16px 0; } }
+
+/* ============== SECTION 06 ・ TIERS ============== */
+.tiers{ background:var(--cream); color:var(--txt-dark); position:relative; }
+.tiers-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; margin-top:64px;
+}
+@media (max-width:1024px){ .tiers-grid{ grid-template-columns:repeat(2, 1fr); } }
+@media (max-width:540px){ .tiers-grid{ grid-template-columns:1fr; } }
+
+.tier{
+  padding:36px 24px; background:white;
+  border-radius:6px; position:relative;
+  border:1px solid var(--line-dark);
+  transition:all .4s var(--easing);
+  overflow:hidden;
+}
+.tier:hover{ transform:translateY(-8px); box-shadow:0 24px 48px rgba(0,0,0,0.1); }
+.tier .head{
+  display:flex; align-items:center; gap:14px; margin-bottom:24px;
+  padding-bottom:20px; border-bottom:1px solid var(--line-dark);
+}
+.tier .head-icon{
+  width:48px; height:48px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.tier-found .head-icon{ background:var(--black); color:white; }
+.tier-app .head-icon{ background:var(--orange); color:white; }
+.tier-mast .head-icon{ background:var(--black); color:white; }
+.tier-sprint .head-icon{ background:var(--orange); color:white; }
+.tier .head-icon svg{ width:24px; height:24px; }
+.tier .head h4{
+  font-family:'Noto Serif TC',serif;
+  font-size:20px; font-weight:700; line-height:1.2;
+}
+.tier .head .en{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.2em; color:var(--orange); margin-top:2px;
+}
+.tier .focus{
+  font-size:13px; color:var(--orange); font-weight:700;
+  letter-spacing:0.05em; margin-bottom:16px;
+}
+.tier .target{
+  font-size:14px; color:var(--txt-dark-mute); line-height:1.7; margin-bottom:20px;
+}
+.tier .duration{
+  font-size:12px; color:var(--txt-dark-mute);
+  padding-top:16px; border-top:1px dashed var(--line-dark);
+  display:flex; align-items:center; gap:8px;
+}
+.tier .duration svg{ width:14px; height:14px; }
+
+.tier-sprint{
+  background:linear-gradient(180deg, #FFF8F2 0%, white 100%);
+  border:1px solid var(--orange);
+}
+.tier-sprint .badge{
+  position:absolute; top:14px; right:14px;
+  background:var(--orange); color:white;
+  font-size:10px; font-weight:700; letter-spacing:0.15em;
+  padding:5px 10px; border-radius:100px;
+  font-family:'Bebas Neue',sans-serif;
+  animation:badgePulse 2s var(--easing) infinite;
+}
+@keyframes badgePulse{
+  0%,100%{ transform:scale(1); }
+  50%   { transform:scale(1.06); }
+}
+
+/* ============== SECTION 07 ・ CURRICULUM (light) ============== */
+.curriculum{
+  background:var(--cream); position:relative;
+  color:var(--txt-dark);
+}
+.curr-cap{
+  margin-top:48px; margin-bottom:48px;
+  padding:32px 36px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.1) 0%, rgba(255,107,26,0.04) 100%);
+  border:1px solid rgba(255,107,26,0.25);
+  border-left:4px solid var(--orange);
+  border-radius:6px;
+}
+.curr-cap h4{
+  font-family:'Noto Serif TC',serif;
+  font-size:22px; font-weight:700; color:var(--txt-dark); margin-bottom:8px;
+}
+.curr-cap p{ font-size:14.5px; color:var(--txt-dark-mute); line-height:1.8; }
+
+.curr-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+}
+@media (max-width:900px){ .curr-grid{ grid-template-columns:1fr; } }
+
+.curr-card{
+  padding:36px 32px; background:white;
+  border:1px solid var(--line-dark); border-radius:6px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.03);
+  transition:all .4s var(--easing);
+}
+.curr-card:hover{ box-shadow:0 16px 32px rgba(0,0,0,0.06); transform:translateY(-4px); }
+.curr-card .head{
+  display:flex; align-items:center; gap:14px; margin-bottom:28px;
+  padding-bottom:20px; border-bottom:1px solid var(--line-dark);
+}
+.curr-card .head-icon{
+  width:44px; height:44px; border-radius:8px;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+}
+.curr-card .head-icon svg{ width:22px; height:22px; }
+.curr-card .head h3{
+  font-family:'Noto Serif TC',serif; font-size:24px; font-weight:700;
+  color:var(--txt-dark);
+}
+.curr-card .head .en{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.2em; color:var(--orange);
+}
+.curr-card ol{
+  list-style:none; counter-reset:item;
+}
+.curr-card li{
+  counter-increment:item;
+  padding:14px 0 14px 44px;
+  border-bottom:1px solid var(--line-dark);
+  font-size:15px; line-height:1.6; color:var(--txt-dark);
+  position:relative;
+}
+.curr-card li:last-child{ border-bottom:none; }
+.curr-card li::before{
+  content:counter(item, upper-alpha);
+  position:absolute; left:0; top:14px;
+  width:30px; height:30px; border-radius:6px;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:14px;
+}
+.curr-card.eng li{ padding-left:44px; }
+.curr-card.eng li::before{ content:counter(item); }
+.curr-card li .sub{
+  display:block; font-size:12.5px; color:var(--txt-dark-mute);
+  margin-top:4px; font-family:'Space Grotesk',sans-serif;
+}
+
+.math-method{
+  margin-top:48px; padding:36px;
+  background:white; border:1px solid var(--line-dark); border-radius:6px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.04);
+}
+.math-method .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em;
+  color:var(--orange); margin-bottom:8px;
+}
+.math-method h4{
+  font-family:'Noto Serif TC',serif; font-size:24px; font-weight:700;
+  margin-bottom:32px; color:var(--txt-dark);
+}
+.math-method .formula{
+  display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;
+}
+.math-method .pill{
+  padding:14px 24px;
+  background:var(--orange-soft); color:var(--orange);
+  border:1px solid rgba(255,107,26,0.3);
+  border-radius:100px;
+  font-size:15px; font-weight:700;
+  display:flex; flex-direction:column; align-items:center; gap:2px;
+}
+.math-method .pill .en{
+  font-family:'Space Grotesk',sans-serif; font-size:11px;
+  font-weight:400; opacity:0.7; letter-spacing:0.05em;
+}
+.math-method .plus{
+  font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--orange);
+}
+.math-method .ftr{
+  margin-top:28px; font-size:14px; color:var(--txt-dark-mute); font-style:italic;
+}
+
+/* ============== SECTION 08 ・ FLOW ============== */
+.flow{ background:var(--cream); color:var(--txt-dark); }
+.flow-track{
+  margin-top:80px;
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
+  position:relative;
+}
+.flow-track::before{
+  content:''; position:absolute; top:48px; left:10%; right:10%; height:2px;
+  background:linear-gradient(to right, var(--orange) 0%, var(--orange) 100%);
+  background-size:8px 2px;
+  background-image:repeating-linear-gradient(to right, var(--orange) 0, var(--orange) 4px, transparent 4px, transparent 8px);
+  z-index:0;
+}
+@media (max-width:900px){
+  .flow-track{ grid-template-columns:1fr; gap:24px; }
+  .flow-track::before{ display:none; }
+}
+.flow-step{
+  position:relative; z-index:1; text-align:center;
+  padding:0 12px;
+}
+.flow-step .num{
+  width:96px; height:96px; border-radius:50%;
+  background:white; border:2px solid var(--orange);
+  margin:0 auto 24px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:42px;
+  color:var(--orange);
+  position:relative;
+  transition:all .4s var(--easing);
+}
+.flow-step:hover .num{ background:var(--orange); color:white; transform:scale(1.05); }
+.flow-step h4{
+  font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700;
+  margin-bottom:10px; line-height:1.4;
+}
+.flow-step p{ font-size:13px; color:var(--txt-dark-mute); line-height:1.7; }
+
+.flow-foot{
+  margin-top:64px; text-align:center;
+  font-size:14px; color:var(--txt-dark-mute); font-style:italic;
+}
+
+/* ============== SECTION 09 ・ ABOUT (light) ============== */
+.about{
+  background:var(--cream-3); position:relative;
+  color:var(--txt-dark);
+  padding:140px 0;
+}
+.about-card{
+  display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+  background:white; border-radius:8px; overflow:hidden;
+  border:1px solid var(--line-dark);
+  box-shadow:0 24px 60px rgba(0,0,0,0.06);
+}
+@media (max-width:900px){ .about-card{ grid-template-columns:1fr; } }
+
+.about-img{
+  position:relative;
+  background:#1F2937;
+  min-height:480px;
+  overflow:hidden;
+}
+.about-img img{
+  width:100%; height:100%; object-fit:cover; object-position:center top;
+}
+.about-img::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.6) 100%);
+}
+.about-img .tag{
+  position:absolute; bottom:24px; left:24px; z-index:2;
+  background:var(--orange); color:white;
+  padding:10px 16px; border-radius:4px;
+  font-family:'Bebas Neue',sans-serif; font-size:13px;
+  letter-spacing:0.25em;
+}
+
+.about-body{
+  padding:60px 56px;
+  display:flex; flex-direction:column; justify-content:center;
+  background:white;
+}
+@media (max-width:900px){ .about-body{ padding:40px 28px; } }
+
+.about-body h3{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(28px, 3.5vw, 40px); font-weight:900;
+  line-height:1.3; margin-bottom:24px;
+  color:var(--txt-dark);
+}
+.about-body h3 .hl{ color:var(--orange); }
+.about-body p{
+  font-size:15.5px; color:var(--txt-dark-mute); line-height:1.9; margin-bottom:32px;
+}
+
+.about-stats{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+  padding-top:32px; border-top:1px solid var(--line-dark);
+}
+@media (max-width:540px){ .about-stats{ grid-template-columns:1fr; } }
+.stat .num{
+  font-family:'Bebas Neue',sans-serif; font-size:44px; color:var(--orange); line-height:1;
+  margin-bottom:6px;
+}
+.stat .lbl{ font-size:12.5px; color:var(--txt-dark-mute); line-height:1.5; }
+
+/* ============== SECTION 10 ・ PRICING ============== */
+.pricing{ background:var(--cream); color:var(--txt-dark); }
+.pricing-anchor{
+  margin-top:48px; margin-bottom:48px;
+  padding:24px 28px;
+  background:white; border-radius:6px;
+  border-left:4px solid var(--orange);
+  display:flex; gap:24px; align-items:center; flex-wrap:wrap;
+}
+.pricing-anchor .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:13px;
+  letter-spacing:0.25em; color:var(--orange); flex-shrink:0;
+}
+.pricing-anchor .txt{ font-size:14.5px; color:var(--txt-dark-mute); line-height:1.7; flex:1; min-width:240px; }
+.pricing-anchor .txt strong{ color:var(--txt-dark); font-weight:700; }
+
+.price-block{ margin-bottom:48px; }
+.price-block:last-child{ margin-bottom:0; }
+.price-block-head{
+  display:flex; align-items:center; gap:16px; margin-bottom:24px;
+}
+.price-block-head .num{
+  font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.2em;
+  color:var(--orange);
+  width:32px; height:32px; border-radius:50%;
+  background:var(--orange-soft);
+  display:flex; align-items:center; justify-content:center;
+}
+.price-block-head h3{
+  font-family:'Noto Serif TC',serif; font-size:24px; font-weight:700;
+}
+.price-block-head .pill{
+  background:var(--orange); color:white;
+  padding:4px 12px; border-radius:100px;
+  font-size:11px; font-family:'Bebas Neue',sans-serif; letter-spacing:0.2em;
+}
+
+.price-grid{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;
+}
+@media (max-width:540px){ .price-grid{ grid-template-columns:1fr; } }
+
+.price-card{
+  background:white; padding:32px 28px;
+  border:1px solid var(--line-dark); border-radius:6px;
+  position:relative;
+  transition:all .4s var(--easing);
+}
+.price-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.08); }
+.price-card.featured{
+  border:2px solid var(--orange);
+  background:linear-gradient(180deg, #FFF8F2 0%, white 50%);
+}
+.price-card.dark-feat{
+  background:var(--black);
+  color:white;
+  border:none;
+  box-shadow:0 24px 48px rgba(0,0,0,0.2);
+}
+.price-card .pill-tag{
+  position:absolute; top:-12px; left:24px;
+  background:var(--orange); color:white;
+  padding:5px 14px; border-radius:100px;
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.2em;
+}
+.price-card.dark-feat .pill-tag{
+  background:white; color:var(--orange);
+}
+.price-card h4{
+  font-family:'Noto Serif TC',serif;
+  font-size:18px; font-weight:700; margin-bottom:6px;
+}
+.price-card .desc{
+  font-size:13px; color:var(--txt-dark-mute); margin-bottom:24px;
+}
+.price-card.dark-feat .desc{ color:rgba(255,255,255,0.65); }
+.price-card .amount{
+  display:flex; align-items:baseline; gap:6px; margin-bottom:8px;
+}
+.price-card .currency{
+  font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:500;
+  color:var(--txt-dark-mute);
+}
+.price-card.dark-feat .currency{ color:rgba(255,255,255,0.6); }
+.price-card .price{
+  font-family:'Bebas Neue',sans-serif; font-size:48px; line-height:1;
+  letter-spacing:0.02em;
+}
+.price-card.featured .price{ color:var(--orange); }
+.price-card.dark-feat .price{ color:var(--orange); }
+.price-card .save{
+  font-size:12px; color:var(--txt-dark-mute);
+}
+.price-card.dark-feat .save{ color:rgba(255,255,255,0.6); }
+.price-card .save .strike{ text-decoration:line-through; }
+.price-card .save .green{ color:#10b981; font-weight:700; }
+.price-card.dark-feat .save .green{ color:#34d399; }
+
+/* ============== SECTION 11 ・ TIME & PLACE (light) ============== */
+.tp{ background:var(--cream); color:var(--txt-dark); }
+.tp-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:48px;
+}
+@media (max-width:900px){ .tp-grid{ grid-template-columns:1fr; } }
+
+.tp-block{
+  padding:36px 32px; background:white;
+  border:1px solid var(--line-dark); border-radius:6px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.03);
+  transition:all .4s var(--easing);
+}
+.tp-block:hover{ box-shadow:0 16px 32px rgba(0,0,0,0.06); transform:translateY(-4px); }
+.tp-block .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em;
+  color:var(--orange); margin-bottom:12px;
+  display:flex; align-items:center; gap:10px;
+}
+.tp-block .lbl .line{ width:24px; height:1px; background:var(--orange); }
+.tp-block h3{
+  font-family:'Noto Serif TC',serif; font-size:24px; font-weight:700;
+  margin-bottom:24px; color:var(--txt-dark);
+}
+
+.tp-time-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 0; border-bottom:1px solid var(--line-dark);
+}
+.tp-time-row:last-child{ border-bottom:none; }
+.tp-time-row .day{
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:17px;
+  color:var(--txt-dark);
+}
+.tp-time-row .hours{
+  font-family:'Space Grotesk',sans-serif; font-size:15px;
+  color:var(--orange); letter-spacing:0.05em;
+}
+
+.tp-place-list{ list-style:none; }
+.tp-place-list li{
+  padding:14px 0 14px 36px;
+  border-bottom:1px solid var(--line-dark);
+  position:relative; font-size:14.5px; color:var(--txt-dark); line-height:1.6;
+}
+.tp-place-list li:last-child{ border-bottom:none; }
+.tp-place-list li::before{
+  content:counter(li); counter-increment:li;
+  position:absolute; left:0; top:14px;
+  width:24px; height:24px; border-radius:50%;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+}
+.tp-place-list{ counter-reset:li; }
+.tp-place-list li .sub{ display:block; font-size:12px; color:var(--txt-dark-mute); margin-top:2px; }
+
+.tp-foot{
+  margin-top:24px; padding:16px 20px;
+  background:var(--orange-soft); border-radius:4px;
+  border-left:3px solid var(--orange);
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.6;
+}
+
+/* ============== SECTION 12 ・ TESTIMONIALS ============== */
+.test{ background:var(--cream); color:var(--txt-dark); }
+.test-meta{
+  margin-top:32px; margin-bottom:48px;
+  display:inline-flex; align-items:center; gap:24px;
+  padding:14px 24px; background:white; border-radius:100px;
+  border:1px solid var(--line-dark);
+}
+.test-meta .num{
+  font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--orange); line-height:1;
+}
+.test-meta .lbl{ font-size:13px; color:var(--txt-dark-mute); letter-spacing:0.04em; }
+.test-meta .star{ color:var(--orange); font-size:14px; letter-spacing:2px; }
+
+.test-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+}
+@media (max-width:900px){ .test-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:640px){ .test-grid{ grid-template-columns:1fr; } }
+
+.test-card{
+  padding:32px 28px; background:white;
+  border-left:3px solid var(--orange);
+  border-radius:6px;
+  transition:all .4s var(--easing);
+  position:relative;
+}
+.test-card:hover{ transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,0.06); }
+.test-card .quote{
+  font-family:'Noto Serif TC',serif;
+  font-size:48px; line-height:1; color:var(--orange);
+  margin-bottom:8px; opacity:0.4;
+}
+.test-card .stars{
+  color:var(--orange); font-size:13px; letter-spacing:3px; margin-bottom:14px;
+}
+.test-card p{
+  font-size:14.5px; line-height:1.85; color:var(--txt-dark);
+  margin-bottom:24px;
+}
+.test-card .who{
+  display:flex; align-items:center; gap:12px;
+  padding-top:20px; border-top:1px solid var(--line-dark);
+}
+.test-card .avatar{
+  width:42px; height:42px; border-radius:50%;
+  background:linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-weight:700; font-size:14px;
+  font-family:'Noto Serif TC',serif;
+}
+.test-card .who-info .name{
+  font-size:14px; font-weight:700; line-height:1.3;
+}
+.test-card .who-info .meta{ font-size:11.5px; color:var(--txt-dark-mute); }
+
+/* ============== SECTION 13 ・ SPRINT URGENT ============== */
+.sprint{
+  background:linear-gradient(135deg, var(--orange) 0%, #E85A0E 100%);
+  color:white; position:relative; overflow:hidden;
+}
+.sprint::before{
+  content:''; position:absolute; inset:0; opacity:0.06;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' stroke='white' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+}
+.sprint .container{ position:relative; z-index:1; }
+.sprint .eyebrow{ color:white; }
+.sprint .eyebrow .line{ background:white; }
+.sprint .section-title{ color:white; }
+.sprint .section-sub{ color:rgba(255,255,255,0.85); }
+
+.sprint-date{
+  margin-top:48px; padding:32px 36px;
+  background:rgba(0,0,0,0.18); border-radius:6px;
+  display:flex; align-items:center; gap:32px; flex-wrap:wrap;
+  border:1px solid rgba(255,255,255,0.15);
+}
+.sprint-date .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em;
+}
+.sprint-date .range{
+  font-family:'Bebas Neue',sans-serif; font-size:32px; line-height:1;
+  letter-spacing:0.04em;
+}
+.sprint-date .note{
+  margin-left:auto; padding-left:24px; border-left:1px solid rgba(255,255,255,0.2);
+  font-size:13px; line-height:1.6;
+}
+@media (max-width:768px){
+  .sprint-date{ gap:16px; }
+  .sprint-date .note{ margin-left:0; padding-left:0; border-left:none; }
+}
+
+.sprint-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:32px;
+}
+@media (max-width:540px){ .sprint-grid{ grid-template-columns:1fr; } }
+.sprint-card{
+  background:white; color:var(--txt-dark);
+  padding:28px 24px; border-radius:6px;
+  position:relative;
+}
+.sprint-card h4{ font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700; margin-bottom:16px; }
+.sprint-card .price{
+  font-family:'Bebas Neue',sans-serif; font-size:42px; color:var(--orange); line-height:1;
+}
+.sprint-card .currency{ font-size:14px; color:var(--txt-dark-mute); margin-right:4px; }
+.sprint-card .save{ font-size:12px; color:var(--txt-dark-mute); margin-top:6px; }
+.sprint-card .save .strike{ text-decoration:line-through; }
+
+/* ============== SECTION 14 ・ FINAL CTA ============== */
+.cta{
+  background:linear-gradient(135deg, var(--warm-dark) 0%, #1A1108 100%);
+  position:relative; overflow:hidden;
+  padding:160px 0;
+  color:var(--txt-light);
+}
+.cta::before{
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,107,26,0.22), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,107,26,0.16), transparent 50%);
+}
+.cta-inner{ position:relative; z-index:1; text-align:center; max-width:900px; margin:0 auto; }
+.cta h2{
+  font-family:'Noto Serif TC',serif; font-weight:900;
+  font-size:clamp(38px, 6vw, 72px); line-height:1.15;
+  margin-bottom:24px;
+}
+.cta h2 .hl{ color:var(--orange); }
+.cta p{
+  font-size:17px; color:var(--txt-mute); line-height:1.9;
+  margin-bottom:48px;
+}
+.cta .actions{
+  display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;
+  margin-bottom:48px;
+}
+.cta-phone{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:20px; font-weight:500; color:white; letter-spacing:0.04em;
+}
+.cta-phone svg{ width:24px; height:24px; fill:var(--orange); }
+.cta-rules{
+  display:flex; justify-content:center; gap:32px; flex-wrap:wrap;
+  margin-top:32px; padding-top:32px;
+  border-top:1px solid var(--line);
+}
+.cta-rule{
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; color:var(--txt-mute);
+}
+.cta-rule svg{ width:16px; height:16px; stroke:var(--orange); fill:none; flex-shrink:0; }
+
+/* ============== FOOTER ============== */
+.footer{
+  background:var(--warm-dark); padding:48px 0 32px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  color:var(--txt-light);
+}
+.footer-top{
+  display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px;
+  padding-bottom:40px; border-bottom:1px solid var(--line);
+}
+@media (max-width:900px){ .footer-top{ grid-template-columns:1fr; gap:32px; } }
+.footer-brand .logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:32px; letter-spacing:0.1em; color:white; line-height:1; margin-bottom:14px;
+}
+.footer-brand .logo .accent{ color:var(--orange); }
+.footer-brand .tag{
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em;
+  color:var(--orange); margin-bottom:16px;
+}
+.footer-brand p{ font-size:13px; color:var(--txt-mute); line-height:1.7; max-width:340px; }
+
+.footer-col h5{
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.2em;
+  color:white; margin-bottom:18px;
+}
+.footer-col ul{ list-style:none; }
+.footer-col li{
+  font-size:13px; color:var(--txt-mute); line-height:2;
+}
+.footer-col a:hover{ color:var(--orange); }
+
+.footer-bottom{
+  padding-top:24px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; color:var(--txt-mute); flex-wrap:wrap; gap:14px;
+}
+.footer-bottom .vals{
+  display:flex; gap:14px; flex-wrap:wrap;
+}
+.footer-bottom .vals span{ color:var(--orange); }
+
+/* utility helpers */
+.section-head{ max-width:760px; }
+.section-head.center{ margin:0 auto; text-align:center; }
+
+/* small responsive tweaks */
+@media (max-width:540px){
+  .hero-title{ font-size:42px; }
+  .hero-portrait{ height:480px; }
+}
+</style>
+</head>
+<body>
+
+<!-- scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- nav dots (desktop only) -->
+<nav class="nav-dots" id="navDots">
+  <button data-target="hero" data-label="首頁" class="active"></button>
+  <button data-target="pain" data-label="為什麼停滯"></button>
+  <button data-target="loss" data-label="現在不解決"></button>
+  <button data-target="method" data-label="解法"></button>
+  <button data-target="comp" data-label="對比"></button>
+  <button data-target="tiers" data-label="班別"></button>
+  <button data-target="curriculum" data-label="P4 課程"></button>
+  <button data-target="flow" data-label="課堂結構"></button>
+  <button data-target="about" data-label="關於"></button>
+  <button data-target="pricing" data-label="收費"></button>
+  <button data-target="tp" data-label="時間地點"></button>
+  <button data-target="test" data-label="評價"></button>
+  <button data-target="sprint" data-label="急救班"></button>
+  <button data-target="cta" data-label="預約"></button>
+</nav>
+
+<!-- floating whatsapp -->
+<a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="WhatsApp 預約">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Zm0 29.158a13.13 13.13 0 0 1-6.681-1.83l-.479-.286-4.842 1.27 1.295-4.722-.313-.485a13.13 13.13 0 0 1-2.012-6.999c0-7.265 5.911-13.176 13.176-13.176 7.265 0 13.176 5.911 13.176 13.176 0 7.265-5.911 13.176-13.176 13.176Zm7.226-9.857c-.396-.198-2.34-1.155-2.703-1.287-.363-.132-.627-.198-.891.198-.264.396-1.022 1.287-1.254 1.551-.231.264-.462.297-.858.099-.396-.198-1.673-.617-3.186-1.967-1.178-1.05-1.974-2.349-2.205-2.745-.231-.396-.024-.61.174-.808.179-.178.396-.462.594-.694.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.694-.099-.198-.891-2.151-1.221-2.943-.321-.772-.648-.668-.891-.681-.231-.012-.495-.014-.759-.014a1.46 1.46 0 0 0-1.056.495c-.363.396-1.386 1.353-1.386 3.299s1.419 3.825 1.617 4.089c.198.264 2.793 4.265 6.769 5.984.946.408 1.683.652 2.258.834.948.302 1.811.259 2.494.157.761-.114 2.34-.957 2.671-1.881.33-.924.33-1.716.231-1.881-.099-.165-.363-.264-.759-.462Z"/></svg>
+</a>
+
+<!-- header -->
+<header class="site-header" id="siteHeader">
+  <div class="brand-mark">
+    <span class="bar"></span>
+    <span>SYMON <span class="accent">ACADEMY</span></span>
+  </div>
+  <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="header-cta">
+    <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+    <span>WhatsApp 預約</span>
+  </a>
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="container hero-inner">
+
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="line"></span>
+        <span>SYMON ACADEMY ・ EST. 2026</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="word" style="animation-delay:.1s">不</span><span class="word" style="animation-delay:.18s">是</span><span class="word" style="animation-delay:.26s">不</span><span class="word" style="animation-delay:.34s">努</span><span class="word" style="animation-delay:.42s">力</span><span class="word punct" style="animation-delay:.5s">。</span><br/>
+        <span class="word" style="animation-delay:.6s">而</span><span class="word" style="animation-delay:.68s">是</span><span class="word" style="animation-delay:.76s">從</span><span class="word" style="animation-delay:.84s">未</span><span class="word" style="animation-delay:.92s">真</span><span class="word" style="animation-delay:1s">正</span><br/>
+        <span class="word" style="animation-delay:1.08s">學</span><span class="word" style="animation-delay:1.16s">懂</span><span class="word quote" style="animation-delay:1.24s">理解</span><span class="word punct" style="animation-delay:1.32s">。</span>
+      </h1>
+
+      <p class="hero-sub">
+        Less drilling. More structure.<br/>
+        結構化分層教學體系 ・ 讓進步有跡可循 ・ 由 Symon Sir 親自把關
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-primary">
+          <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+          預約免費程度評估
+          <span class="arrow">→</span>
+        </a>
+        <a href="#method" class="btn-ghost">了解 Symon Method</a>
+        <span class="hero-phone"><span class="dot"></span>+852 9856 0191</span>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <div class="num" data-counter="50">0</div>
+          <div class="lbl">+ 高小家庭</div>
+        </div>
+        <div class="hero-metric">
+          <div class="num" data-counter="100">0</div>
+          <div class="lbl">% 五星好評</div>
+        </div>
+        <div class="hero-metric">
+          <div class="num">3-5</div>
+          <div class="lbl">人小班教學</div>
+        </div>
+        <div class="hero-metric">
+          <div class="num">4</div>
+          <div class="lbl">分層班別架構</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-portrait">
+      <div class="frame"></div>
+      <div class="deco-num">01</div>
+      <img src="assets/symon-orange.jpeg" alt="Symon Sir 主教老師" />
+      <div class="deco-tag">
+        <div class="lbl">FOUNDER</div>
+        <div class="nm">Symon Sir</div>
+        <div class="ed">理大應用數學與金融分析</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-cue">
+    <span>SCROLL</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ============== SECTION 02 ・ PAIN ============== -->
+<section class="section cream-light" id="pain">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>WHY MOST STUDENTS STOP IMPROVING</span></div>
+      <h2 class="section-title">為什麼大部分學生<br/>努力了仍<span class="hl">停滯不前</span>?</h2>
+      <p class="section-sub">不是孩子不努力,而是學習結構從一開始就出了問題。當知識沒有結構,操練只會放大混亂——做得越多,錯得越多,越來越無信心。</p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal delay-1">
+        <div class="x-mark">✕</div>
+        <div class="num">PAIN 01</div>
+        <h3>學校教學進度<br/>碎片化</h3>
+        <p>學校把一個簡單的概念拆成幾個學期慢慢教。例如英文 Tenses,小四教 Present、小五教 Past、小六先教 Future。學生永遠拼不到完整的時態圖。</p>
+      </div>
+      <div class="pain-card reveal delay-2">
+        <div class="x-mark">✕</div>
+        <div class="num">PAIN 02</div>
+        <h3>補習社靠操練<br/>填鴨</h3>
+        <p>大量重複做卷、強迫背題型、缺乏底層邏輯訓練。當題目換個包裝,學生立即卡住。一份接一份的卷海,換不到真正的理解。</p>
+      </div>
+      <div class="pain-card reveal delay-3">
+        <div class="x-mark">✕</div>
+        <div class="num">PAIN 03</div>
+        <h3>上堂聽得明白<br/>做卷一片空白</h3>
+        <p>這不是不努力,是學習結構出了問題。學生「聽懂」與「做到」之間,缺乏一個結構化的橋樑。沒有橋樑,聽再多堂都過不到河。</p>
+      </div>
+    </div>
+
+    <div class="pain-quote reveal">
+      <h3>真正危險的,不是孩子<span class="em">現在成績差</span>。<br/>而是他以為自己<span class="em">已經懂了</span>。</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 03 ・ LOSS ============== -->
+<section class="section loss" id="loss">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>THE COST OF DELAY</span></div>
+      <h2 class="section-title">如果現在不解決<br/><span class="hl">會損失什麼?</span></h2>
+      <p class="section-sub">每延遲一個月,等於放棄一個月的結構積累。而你的對手,已經在路上。呈分試不會等任何人,時間是這場戰役中最稀缺的資源。</p>
+    </div>
+
+    <div class="loss-list">
+      <div class="loss-item reveal">
+        <div class="idx">01</div>
+        <div>
+          <h4>呈分試倒數逼近 ・ 結構未建立 ・ 時間追不回</h4>
+          <p>由小四到小六的呈分試,每一階段都直接影響升中派位。錯失一個學期的結構建立期,後面要用三倍時間追。</p>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+      <div class="loss-item reveal">
+        <div class="idx">02</div>
+        <div>
+          <h4>操練越多 ・ 混亂越深 ・ 越做越無信心</h4>
+          <p>當知識沒有結構,做卷只會把混亂放大。學生開始質疑自己「點解咁努力都唔得」,信心崩潰才是最難修復的部分。</p>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+      <div class="loss-item reveal">
+        <div class="idx">03</div>
+        <div>
+          <h4>同班同學在建立結構 ・ 你的孩子還在重複做卷</h4>
+          <p>結構化的學生,一堂課還原一個完整 Topic。沒結構的學生,一個學期還在背題型。差距不是分數,是學習能力本身。</p>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 04 ・ METHOD (light) ============== -->
+<section class="section cream" id="method">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>OUR METHOD ・ THE SOLUTION</span></div>
+      <h2 class="section-title">Symon Method<br/><span class="hl">結構化分層教學</span></h2>
+      <p class="section-sub">我們不追求短期分數,我們追求孩子終身受用的學習能力。Symon Method 是一套經 50+ 學生實戰驗證的教學體系,從根本重組知識結構,還原完整學習圖像。</p>
+    </div>
+
+    <div class="method-grid">
+      <div class="method-card reveal delay-1">
+        <div class="method-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="en">STRUCTURE-FIRST</div>
+        <h3>結構化拆解</h3>
+        <p>將零散知識重新建立連結,還原完整學習圖像。一堂課還原整個 Topic,而不是六個零散的時態片段。</p>
+      </div>
+      <div class="method-card reveal delay-2">
+        <div class="method-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <div class="en">ONE-METHOD UNIVERSAL</div>
+        <h3>一法通解所有題型</h3>
+        <p>一種底層邏輯,套入任何題型都能解。例如分數應用題,只用「整體 / 部分 / 關係」三步邏輯,代替學校教的五至七種獨立方法。</p>
+      </div>
+      <div class="method-card reveal delay-3">
+        <div class="method-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="en">PERSONAL-LEVEL GROUP</div>
+        <h3>3-5 人小班</h3>
+        <p>接近一對一私補的關注度,但保留同儕競爭氛圍。每位學生的弱項可被即時發現、即時調整,沒有人會被淹沒。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 05 ・ COMPARISON ============== -->
+<section class="section comp" id="comp">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>SCHOOL/CRAM-SCHOOL VS SYMON METHOD</span></div>
+      <h2 class="section-title">學校 / 一般補習社<br/>vs <span class="hl">Symon Method</span></h2>
+      <p class="section-sub">同一個概念,不同教法,結果完全不同。家長最該對比的,不是價錢,是教學方式本身。</p>
+    </div>
+
+    <div class="comp-wrap">
+      <div class="comp-col bad reveal delay-1">
+        <div class="col-tag">TRADITIONAL</div>
+        <h3>學校 / 一般補習社做法</h3>
+        <ul>
+          <li><span class="mark">✕</span><span>一個概念分散到幾個學期慢慢教</span></li>
+          <li><span class="mark">✕</span><span>每個題型一套獨立方法,要分別記住</span></li>
+          <li><span class="mark">✕</span><span>大量重複操練,做得越多越混亂</span></li>
+          <li><span class="mark">✕</span><span>學生上堂明,做卷盲</span></li>
+          <li><span class="mark">✕</span><span>題目一變就卡住,缺乏遷移能力</span></li>
+        </ul>
+      </div>
+      <div class="comp-vs reveal delay-2"><span>VS</span></div>
+      <div class="comp-col good reveal delay-3">
+        <div class="col-tag">SYMON METHOD</div>
+        <h3>Symon Method 做法</h3>
+        <ul>
+          <li><span class="mark">✓</span><span>一堂課還原整個 Topic 完整圖像</span></li>
+          <li><span class="mark">✓</span><span>一種底層邏輯,通解所有題型變化</span></li>
+          <li><span class="mark">✓</span><span>結構化拆解,理解原理融會貫通</span></li>
+          <li><span class="mark">✓</span><span>學一次,終身會</span></li>
+          <li><span class="mark">✓</span><span>新題型也能自行拆解,有真正的遷移力</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 06 ・ TIERS ============== -->
+<section class="section tiers" id="tiers">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>SYMON METHOD ・ FOUR-TIER ARCHITECTURE</span></div>
+      <h2 class="section-title">四大班別架構<br/><span class="hl">配對你的實際程度</span></h2>
+      <p class="section-sub">不同程度,不同教法,才能真正進步。三層常規班遞進建立結構,第四層急救班限時加開作應試衝刺。</p>
+    </div>
+
+    <div class="tiers-grid">
+      <div class="tier tier-found reveal delay-1">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h4>打底班</h4>
+            <div class="en">FOUNDATION</div>
+          </div>
+        </div>
+        <div class="focus">概念建立 ・ 底層邏輯</div>
+        <p class="target">學科基礎未穩固的學生。從零拆解每個 Topic,建立紮實的概念地基,讓後續所有學習都有根可依。</p>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1.5 小時 / 堂</div>
+      </div>
+
+      <div class="tier tier-app reveal delay-2">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div>
+            <h4>實戰班</h4>
+            <div class="en">APPLICATION</div>
+          </div>
+        </div>
+        <div class="focus">答題框架 ・ 解題流程</div>
+        <p class="target">概念已掌握但分數未能反映的學生。建立解題流程,將理解轉化為穩定可重複的得分方式。</p>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1.5 小時 / 堂</div>
+      </div>
+
+      <div class="tier tier-mast reveal delay-3">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20l3-9 5 4 5-9 7 14"/></svg>
+          </div>
+          <div>
+            <h4>高級班</h4>
+            <div class="en">MASTERY</div>
+          </div>
+        </div>
+        <div class="focus">進階題型 ・ 思維提升</div>
+        <p class="target">由「考得好」邁向「考得頂尖」的學生。挑戰進階變題、強化邏輯思維、追求高分突破與全級頭排表現。</p>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1.0 小時 / 堂</div>
+      </div>
+
+      <div class="tier tier-sprint reveal delay-4">
+        <div class="badge">限時加開</div>
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <h4>考試急救班</h4>
+            <div class="en">SPRINT</div>
+          </div>
+        </div>
+        <div class="focus">操卷強化 ・ 應試衝刺</div>
+        <p class="target">應試前需要快速掌握概念、診斷失分點的學生。以做卷操練為主,結構為輔,在最短時間追回課程。</p>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2.0 小時 / 堂</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 07 ・ CURRICULUM ============== -->
+<section class="section curriculum" id="curriculum">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>P4 FULL-YEAR CURRICULUM</span></div>
+      <h2 class="section-title">P4 全年課程內容<br/><span class="hl">完全公開</span></h2>
+      <p class="section-sub">完整對應學校呈分試考核重點。所有 Topic 皆會以 Symon Method 結構化方式重組教學。</p>
+    </div>
+
+    <div class="curr-cap reveal">
+      <h4>四大班別 ・ 同一份課題清單</h4>
+      <p>以下課題涵蓋 P4 全年知識結構,四個班別皆會教授,差別在於「形式與作用」:打底班從零拆解概念、實戰班建立答題框架、高級班挑戰進階變題、急救班操卷強化應試。同一份課題,不同班別有不同切入點。</p>
+    </div>
+
+    <div class="curr-grid">
+      <div class="curr-card eng reveal delay-1">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div>
+            <h3>英文</h3>
+            <div class="en">ENGLISH ・ 8 MODULES</div>
+          </div>
+        </div>
+        <ol>
+          <li>Tenses(時態)<span class="sub">Present / Continuous / Past / Future</span></li>
+          <li>Adverbs of Frequency(副詞頻率)<span class="sub">Always / Often / Sometimes / Seldom / Never</span></li>
+          <li>Reflexive Pronouns(反身代名詞)<span class="sub">Himself / Myself / Herself</span></li>
+          <li>Comparative Adjectives(比較級)<span class="sub">er + than / more + than / the most</span></li>
+          <li>Direction Words(方向詞)<span class="sub">turn left/right、next to、opposite 等</span></li>
+          <li>Quantifiers(數量詞)<span class="sub">a lot of / a little / too much / fewer</span></li>
+          <li>Frequency Questions(頻率問句)<span class="sub">How often / once / twice / three times a ___</span></li>
+          <li>歷年累積文法整合<span class="sub">綜合溫故 ・ 銜接以往年級已學文法</span></li>
+        </ol>
+      </div>
+
+      <div class="curr-card reveal delay-2">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+          </div>
+          <div>
+            <h3>數學</h3>
+            <div class="en">MATHEMATICS ・ 10 TOPICS</div>
+          </div>
+        </div>
+        <ol>
+          <li>乘法 + 除法</li>
+          <li>方向</li>
+          <li>因數與倍數</li>
+          <li>圖形分割或拼砌</li>
+          <li>四則運算</li>
+          <li>周界</li>
+          <li>分數</li>
+          <li>面積</li>
+          <li>小數</li>
+          <li>棒形圖</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="math-method reveal">
+      <div class="lbl">ONE-METHOD UNIVERSAL APPLICATION</div>
+      <h4>數學核心教學法 ・ 一種邏輯,通解所有題型</h4>
+      <div class="formula">
+        <div class="pill">找出整體<span class="en">WHOLE</span></div>
+        <span class="plus">+</span>
+        <div class="pill">找出部分<span class="en">PART</span></div>
+        <span class="plus">+</span>
+        <div class="pill">找出關係<span class="en">RELATIONSHIP</span></div>
+      </div>
+      <p class="ftr">一種底層邏輯,通解所有題型 ・ 題目怎麼變,方法都不變</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 08 ・ FLOW ============== -->
+<section class="section flow" id="flow">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow" style="color:var(--orange);justify-content:center"><span class="line" style="background:var(--orange)"></span><span>EVERY LESSON ・ FOUR-STEP FLOW</span></div>
+      <h2 class="section-title">每堂課堂結構<br/><span class="hl">教學工程</span></h2>
+      <p class="section-sub" style="margin:0 auto">每堂課堂均按以下標準流程執行,確保教學深度、操練密度、回饋精準度三者兼備。</p>
+    </div>
+
+    <div class="flow-track">
+      <div class="flow-step reveal delay-1">
+        <div class="num">01</div>
+        <h4>Topic 細分講解</h4>
+        <p>將該堂主題按 Symon Method 結構化拆解,建立完整知識圖。</p>
+      </div>
+      <div class="flow-step reveal delay-2">
+        <div class="num">02</div>
+        <h4>By-Topic 題目練習</h4>
+        <p>針對該 Topic 出少量精選題目,即時鞏固理解。</p>
+      </div>
+      <div class="flow-step reveal delay-3">
+        <div class="num">03</div>
+        <h4>整份試卷操練</h4>
+        <p>以完整試卷形式進行綜合操練,模擬真實考試環境。</p>
+      </div>
+      <div class="flow-step reveal delay-4">
+        <div class="num">04</div>
+        <h4>配合小測 ・ 必要時加堂</h4>
+        <p>定期小測檢測掌握程度,精準診斷弱項並針對性補強。</p>
+      </div>
+    </div>
+
+    <p class="flow-foot reveal">所有試卷由 Symon Sir 與其帶領的專業教學團隊親自出卷,貼近小學出題風格與考核重點。</p>
+  </div>
+</section>
+
+<!-- ============== SECTION 09 ・ ABOUT SYMON SIR ============== -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom:48px">
+      <div class="eyebrow"><span class="line"></span><span>ABOUT THE FOUNDER</span></div>
+      <h2 class="section-title">由 Symon Sir<br/>與專業團隊<span class="hl">親自把關</span></h2>
+    </div>
+
+    <div class="about-card reveal">
+      <div class="about-img">
+        <img src="assets/symon-blue.png" alt="Symon Sir 創辦人" />
+        <div class="tag">FOUNDER ・ HEAD TUTOR</div>
+      </div>
+      <div class="about-body">
+        <h3>每一份試卷、每一節課堂<br/>皆由 <span class="hl">Symon Sir</span> 親自設計</h3>
+        <p>Symon Sir 為 Symon Academy 創辦人及主教老師,香港理工大學應用數學與金融分析學士,在高小教學領域累積實戰經驗,帶領專業教學團隊服務超過 50 個高小學生家庭。</p>
+        <p>每一份教材、每一節課堂、每一份試卷,皆由 Symon Sir 與團隊親自設計、親自把關。Symon Sir 親自授課。這不是概念,這是教學工程。</p>
+
+        <div class="about-stats">
+          <div class="stat">
+            <div class="num">50+</div>
+            <div class="lbl">高小學生家庭<br/>實戰教學經驗</div>
+          </div>
+          <div class="stat">
+            <div class="num">PolyU</div>
+            <div class="lbl">香港理工大學<br/>應用數學與金融分析</div>
+          </div>
+          <div class="stat">
+            <div class="num">100%</div>
+            <div class="lbl">親自設計試卷<br/>親自授課把關</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 10 ・ PRICING ============== -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>FULL PRICING STRUCTURE</span></div>
+      <h2 class="section-title">完整<span class="hl">收費結構</span><br/>透明 ・ 不綁約</h2>
+      <p class="section-sub">月費制,每月可重新評估。每班嚴格 3-5 人小班,額滿即止。場地費全數由 Symon Academy 承擔,家長無需另付。</p>
+    </div>
+
+    <div class="pricing-anchor reveal">
+      <div class="lbl">MARKET ANCHOR</div>
+      <div class="txt">區內<strong>一對一私補月費 HK$ 2,400 - 3,200</strong>,只能上一科。<strong>Symon Academy 雙科月費 HK$ 2,499</strong>,涵蓋兩個班別 + 3-5 人小班教學 ── 同等價錢,雙倍收穫。</div>
+    </div>
+
+    <div class="price-block reveal">
+      <div class="price-block-head">
+        <div class="num">01</div>
+        <h3>常規月費班</h3>
+        <span class="pill">不綁約 ・ 月費制</span>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h4>單科月費</h4>
+          <p class="desc">任選一個班別 ・ 適合單科加強</p>
+          <div class="amount"><span class="currency">HK$</span><span class="price">1,499</span></div>
+          <div class="save">每月 ・ 任選打底/實戰/高級任一層級</div>
+        </div>
+        <div class="price-card featured">
+          <div class="pill-tag">主推</div>
+          <h4>雙科月費</h4>
+          <p class="desc">任選兩個班別 ・ 不限層級 ・ 最具性價比</p>
+          <div class="amount"><span class="currency">HK$</span><span class="price">2,499</span></div>
+          <div class="save"><span class="strike">原價 HK$ 2,998</span> ・ <span class="green">省 HK$ 499</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-block reveal">
+      <div class="price-block-head">
+        <div class="num">02</div>
+        <h3>考試急救班 Sprint</h3>
+        <span class="pill">限時加開</span>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h4>單科急救班</h4>
+          <p class="desc">應試衝刺 ・ 操卷為主 ・ 獨立報讀</p>
+          <div class="amount"><span class="currency">HK$</span><span class="price">799</span></div>
+          <div class="save">一次性課程 ・ 不綁月費</div>
+        </div>
+        <div class="price-card featured">
+          <h4>雙科急救班</h4>
+          <p class="desc">英文 + 數學 ・ 全方位衝刺</p>
+          <div class="amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
+          <div class="save"><span class="strike">原價 HK$ 1,598</span> ・ <span class="green">省 HK$ 199</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-block reveal">
+      <div class="price-block-head">
+        <div class="num">03</div>
+        <h3>組合優惠 ・ 同期報讀更優惠</h3>
+        <span class="pill">最完整</span>
+      </div>
+      <div class="price-grid">
+        <div class="price-card">
+          <h4>月費 + 急救組合(單科)</h4>
+          <p class="desc">單科月費 + 單科急救班</p>
+          <div class="amount"><span class="currency">HK$</span><span class="price">2,099</span></div>
+          <div class="save"><span class="strike">原價 HK$ 2,298</span> ・ <span class="green">省 HK$ 199</span></div>
+        </div>
+        <div class="price-card dark-feat">
+          <div class="pill-tag">最完整</div>
+          <h4>雙科月費 + 雙科急救全包</h4>
+          <p class="desc">雙科月費 + 雙科急救班 ・ 一站式應試</p>
+          <div class="amount"><span class="currency">HK$</span><span class="price">3,499</span></div>
+          <div class="save"><span class="strike">原價 HK$ 3,898</span> ・ <span class="green">省 HK$ 399</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 11 ・ TIME & PLACE ============== -->
+<section class="section tp" id="tp">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>SCHEDULE & VENUE</span></div>
+      <h2 class="section-title">上課時間 + <span class="hl">指定地點</span></h2>
+      <p class="section-sub">首階段服務範圍以新界北區(粉嶺、上水)為主。家長可從指定地點清單中選擇上課場地。</p>
+    </div>
+
+    <div class="tp-grid">
+      <div class="tp-block reveal delay-1">
+        <div class="lbl"><span class="line"></span>SCHEDULE ・ 上課時間</div>
+        <h3>固定時段</h3>
+        <div class="tp-time-row"><span class="day">逢星期三</span><span class="hours">16:00 - 20:00</span></div>
+        <div class="tp-time-row"><span class="day">逢星期四</span><span class="hours">16:00 - 20:00</span></div>
+        <div class="tp-time-row"><span class="day">逢星期六</span><span class="hours">09:00 - 12:00</span></div>
+        <div class="tp-foot">具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。</div>
+      </div>
+
+      <div class="tp-block reveal delay-2">
+        <div class="lbl"><span class="line"></span>VENUE ・ 指定地點</div>
+        <h3>4 個指定場地</h3>
+        <ol class="tp-place-list">
+          <li>粉嶺和興體育館會議室</li>
+          <li>粉嶺聯和墟會議室</li>
+          <li>上水廣場</li>
+          <li>屋苑會所(例如牽晴間)<span class="sub">須報名學生中至少一位為該屋苑住客</span></li>
+        </ol>
+        <div class="tp-foot">所有場地皆為獨立會議室或私人空間。場地費全數由 Symon Academy 承擔,家長無需另付。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 12 ・ TESTIMONIALS ============== -->
+<section class="section test" id="test">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>PARENT TESTIMONIALS</span></div>
+      <h2 class="section-title">家長真實評價<br/><span class="hl">進步看得見</span></h2>
+      <div class="test-meta">
+        <span class="num">50+</span>
+        <span class="lbl">高小學生家庭</span>
+        <span class="star">★★★★★</span>
+        <span class="lbl">100% 五星好評</span>
+      </div>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card reveal delay-1">
+        <div class="quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p>個仔以前做數學題見到應用題就驚,Symon Sir 教咗一個方法之後,佢自己都話「原來咁簡單」。佢由不及格,做到第一次考第十名。</p>
+        <div class="who"><div class="avatar">陳</div><div class="who-info"><div class="name">Mrs. Chan</div><div class="meta">小四家長 ・ 2 個月前</div></div></div>
+      </div>
+      <div class="test-card reveal delay-2">
+        <div class="quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p>女女英文 Tenses 一直唔識,學校教咗成個學期都係模糊。Symon Sir 用一堂課就將所有 Tenses 一次過理清楚,真係好神奇。</p>
+        <div class="who"><div class="avatar">王</div><div class="who-info"><div class="name">Ms. Wong</div><div class="meta">小五家長 ・ 3 週前</div></div></div>
+      </div>
+      <div class="test-card reveal delay-3">
+        <div class="quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p>試過幾間補習社,都係叫小朋友操卷。Symon Sir 唔係咁,佢真係教個小朋友點樣諗,而唔係點樣背。</p>
+        <div class="who"><div class="avatar">李</div><div class="who-info"><div class="name">Mr. Lee</div><div class="meta">小四家長 ・ 1 個月前</div></div></div>
+      </div>
+      <div class="test-card reveal delay-1">
+        <div class="quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p>3-5 人小班真係唔同,Sir 真係識得每一個小朋友嘅弱項。我女做卷再唔會錯同一類題目。</p>
+        <div class="who"><div class="avatar">張</div><div class="who-info"><div class="name">Ms. Cheung</div><div class="meta">小六家長 ・ 6 週前</div></div></div>
+      </div>
+      <div class="test-card reveal delay-2">
+        <div class="quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p>Symon Sir 嘅試卷貼題到驚,呈分試嗰啲題型,佢早幾個月已經教過。價錢比一對一平一半,但效果差唔多。</p>
+        <div class="who"><div class="avatar">吳</div><div class="who-info"><div class="name">Mrs. Ng</div><div class="meta">小五家長 ・ 2 個月前</div></div></div>
+      </div>
+      <div class="test-card reveal delay-3">
+        <div class="quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p>兒子最後一次呈分試成績進步咗 22 分,英文同數學一齊上,Symon Sir 嘅雙科組合係正確選擇。</p>
+        <div class="who"><div class="avatar">劉</div><div class="who-info"><div class="name">Ms. Lau</div><div class="meta">小六家長 ・ 3 個月前</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 13 ・ SPRINT URGENCY ============== -->
+<section class="section sprint" id="sprint">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>EXAM SPRINT ・ LIMITED OPENING</span></div>
+      <h2 class="section-title">考試急救班 SPRINT<br/>限時加開</h2>
+      <p class="section-sub">專為應試衝刺學生而設。針對六月份呈分試與大考衝刺,以操卷為主、概念為輔,快速拿捏失分點、提升做題速度。</p>
+    </div>
+
+    <div class="sprint-date reveal">
+      <div>
+        <div class="lbl">OPENING PERIOD ・ 限時開放期</div>
+        <div class="range">2026.05.05 - 2026.06.15</div>
+      </div>
+      <div class="note">名額有限 ・ 額滿即止<br/>考試結束後即停止開設</div>
+    </div>
+
+    <div class="sprint-grid reveal">
+      <div class="sprint-card">
+        <h4>單科急救班</h4>
+        <div><span class="currency">HK$</span><span class="price">799</span></div>
+        <div class="save">一次性課程 ・ 可獨立報讀</div>
+      </div>
+      <div class="sprint-card">
+        <h4>雙科急救班</h4>
+        <div><span class="currency">HK$</span><span class="price">1,399</span></div>
+        <div class="save"><span class="strike">原價 HK$ 1,598</span> ・ 省 HK$ 199</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 14 ・ FINAL CTA ============== -->
+<section class="section cta" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="eyebrow reveal" style="justify-content:center"><span class="line"></span><span>BOOK YOUR FREE ASSESSMENT</span></div>
+      <h2 class="reveal">立即預約<br/><span class="hl">免費程度評估</span></h2>
+      <p class="reveal delay-1">了解孩子的學習狀況,診斷學習結構漏洞,制定最適合的進步計劃。<br/>無論最終是否報讀,評估報告完全免費。</p>
+
+      <div class="actions reveal delay-2">
+        <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-primary">
+          <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+          WhatsApp 即時預約
+          <span class="arrow">→</span>
+        </a>
+        <span class="cta-phone">
+          <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+          +852 9856 0191
+        </span>
+      </div>
+
+      <div class="cta-rules reveal delay-3">
+        <div class="cta-rule"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="currentColor" stroke-width="2"/></svg>免費評估</div>
+        <div class="cta-rule"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="currentColor" stroke-width="2"/></svg>3-5 人小班 ・ 額滿即止</div>
+        <div class="cta-rule"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="currentColor" stroke-width="2"/></svg>不綁約 ・ 月費制</div>
+        <div class="cta-rule"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="currentColor" stroke-width="2"/></svg>場地費全包</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">SYMON <span class="accent">ACADEMY</span></div>
+        <div class="tag">LESS DRILLING. MORE STRUCTURE.</div>
+        <p>結構化分層教學體系 ・ 高小呈分試備戰<br/>由 Symon Sir 與專業教學團隊親自把關。</p>
+      </div>
+      <div class="footer-col">
+        <h5>CONTACT</h5>
+        <ul>
+          <li><a href="https://wa.me/85298560191" target="_blank" rel="noopener">WhatsApp:+852 9856 0191</a></li>
+          <li>香港北區 ・ 粉嶺 / 上水</li>
+          <li>4 個指定場地任選</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>NAVIGATE</h5>
+        <ul>
+          <li><a href="#method">Symon Method</a></li>
+          <li><a href="#tiers">四大班別</a></li>
+          <li><a href="#curriculum">P4 課程</a></li>
+          <li><a href="#pricing">收費結構</a></li>
+          <li><a href="#test">家長評價</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Symon Academy. All rights reserved.</div>
+      <div class="vals">
+        結構為本 <span>・</span> 因材施教 <span>・</span> 親自把關 <span>・</span> 追求卓越
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============== SCROLL PROGRESS ==============
+const progress = document.getElementById('scrollProgress');
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = scrolled + '%';
+  if (h.scrollTop > 50) header.classList.add('scrolled');
+  else header.classList.remove('scrolled');
+});
+
+// ============== REVEAL ON SCROLL ==============
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ============== NUMBER COUNTERS ==============
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.counter, 10);
+      let cur = 0;
+      const step = Math.max(1, Math.ceil(target / 40));
+      const t = setInterval(() => {
+        cur += step;
+        if (cur >= target) { cur = target; clearInterval(t); }
+        el.textContent = cur;
+      }, 30);
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
+
+// ============== NAV DOTS ==============
+const dots = document.querySelectorAll('.nav-dots button');
+const sections = Array.from(dots).map(d => document.getElementById(d.dataset.target));
+dots.forEach(d => d.addEventListener('click', () => {
+  document.getElementById(d.dataset.target).scrollIntoView({ behavior:'smooth' });
+}));
+const dotObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      dots.forEach(d => d.classList.toggle('active', d.dataset.target === id));
+    }
+  });
+}, { threshold: 0.45 });
+sections.forEach(s => s && dotObs.observe(s));
+</script>
+
+</body>
+</html>

@@ -1289,6 +1289,399 @@ a{ color:inherit; text-decoration:none; }
   .hero-title{ font-size:42px; }
   .hero-portrait{ height:480px; }
 }
+
+/* ============== TAB SYSTEM (P4/P5/P6) ============== */
+.tab-nav{
+  display:flex; gap:8px; margin-bottom:32px;
+  background:white; padding:6px; border-radius:100px;
+  border:1px solid var(--line-dark);
+  max-width:fit-content;
+  box-shadow:0 4px 16px rgba(0,0,0,0.04);
+}
+.tab-btn{
+  padding:12px 28px; border-radius:100px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+  color:var(--txt-dark-mute); transition:all .3s var(--easing);
+  letter-spacing:0.05em;
+  display:flex; align-items:center; gap:8px;
+}
+.tab-btn .en{
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.2em;
+  opacity:0.6;
+}
+.tab-btn:hover{ color:var(--txt-dark); }
+.tab-btn.active{
+  background:var(--orange); color:white;
+  box-shadow:0 6px 16px rgba(255,107,26,0.3);
+}
+.tab-btn.active .en{ opacity:1; color:rgba(255,255,255,0.8); }
+.tab-pane{ display:none; }
+.tab-pane.active{ display:block; animation:tabFade .4s var(--easing); }
+@keyframes tabFade{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+@media (max-width:540px){
+  .tab-nav{ width:100%; }
+  .tab-btn{ flex:1; padding:10px 14px; font-size:14px; justify-content:center; }
+  .tab-btn .en{ display:none; }
+}
+
+/* ============== PREVIEW BUTTONS (試卷 / 報告) ============== */
+.preview-actions{
+  display:grid; grid-template-columns:1fr 1fr; gap:18px;
+  margin-bottom:48px;
+}
+@media (max-width:640px){ .preview-actions{ grid-template-columns:1fr; } }
+
+.preview-btn{
+  display:flex; align-items:center; gap:18px;
+  padding:24px 28px;
+  background:white; border:1px solid var(--line-dark); border-radius:8px;
+  text-align:left; cursor:pointer;
+  transition:all .35s var(--easing);
+  position:relative; overflow:hidden;
+  box-shadow:0 4px 16px rgba(0,0,0,0.03);
+  width:100%;
+}
+.preview-btn::before{
+  content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+  background:var(--orange); transform:scaleY(0); transform-origin:top;
+  transition:transform .4s var(--easing);
+}
+.preview-btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 32px rgba(0,0,0,0.08);
+  border-color:var(--orange);
+}
+.preview-btn:hover::before{ transform:scaleY(1); }
+.preview-btn .icon{
+  width:56px; height:56px; border-radius:10px;
+  background:linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 8px 16px rgba(255,107,26,0.25);
+}
+.preview-btn .icon svg{ width:26px; height:26px; fill:white; }
+.preview-btn .text{ flex:1; }
+.preview-btn .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.25em;
+  color:var(--orange); margin-bottom:6px;
+}
+.preview-btn h4{
+  font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700;
+  color:var(--txt-dark); margin-bottom:4px; line-height:1.3;
+}
+.preview-btn p{ font-size:13px; color:var(--txt-dark-mute); line-height:1.5; }
+.preview-btn .arrow{
+  flex-shrink:0; width:36px; height:36px; border-radius:50%;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; transition:all .3s var(--easing);
+}
+.preview-btn:hover .arrow{ background:var(--orange); color:white; transform:translateX(4px); }
+
+/* ============== LIGHTBOX MODAL ============== */
+.lightbox{
+  position:fixed; inset:0; z-index:200;
+  background:rgba(10,10,10,0.92); backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:none; align-items:center; justify-content:center;
+  padding:40px 20px;
+  animation:lbFade .3s var(--easing);
+}
+.lightbox.open{ display:flex; }
+@keyframes lbFade{ from{ opacity:0; } to{ opacity:1; } }
+.lightbox-inner{
+  position:relative; max-width:1100px; width:100%;
+  max-height:90vh;
+  display:flex; flex-direction:column;
+}
+.lightbox-head{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:20px; color:white;
+}
+.lightbox-head h3{
+  font-family:'Noto Serif TC',serif; font-size:22px; font-weight:700;
+  color:white; margin-bottom:4px;
+}
+.lightbox-head .meta{
+  font-size:13px; color:rgba(255,255,255,0.65);
+}
+.lightbox-close{
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(255,255,255,0.1); color:white;
+  border:1px solid rgba(255,255,255,0.18);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer;
+  transition:all .25s var(--easing);
+  flex-shrink:0;
+}
+.lightbox-close:hover{ background:var(--orange); border-color:var(--orange); transform:rotate(90deg); }
+
+.lightbox-body{
+  flex:1; overflow-y:auto;
+  background:white; border-radius:8px;
+  padding:24px;
+  max-height:calc(90vh - 80px);
+}
+.lightbox-body::-webkit-scrollbar{ width:8px; }
+.lightbox-body::-webkit-scrollbar-track{ background:transparent; }
+.lightbox-body::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.2); border-radius:4px; }
+
+.lb-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  gap:14px;
+}
+.lb-grid img{
+  width:100%; border-radius:6px;
+  border:1px solid var(--line-dark);
+  cursor:zoom-in;
+  transition:all .3s var(--easing);
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.lb-grid img:hover{ transform:scale(1.02); box-shadow:0 12px 24px rgba(0,0,0,0.15); }
+
+.lb-pages{
+  display:grid; grid-template-columns:1fr 1fr; gap:18px;
+}
+@media (max-width:640px){ .lb-pages{ grid-template-columns:1fr; } }
+.lb-pages img{
+  width:100%; border-radius:6px;
+  border:1px solid var(--line-dark);
+  cursor:zoom-in;
+  transition:all .3s var(--easing);
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+.lb-pages img:hover{ transform:scale(1.01); box-shadow:0 12px 24px rgba(0,0,0,0.15); }
+
+.lb-tab{
+  display:flex; gap:8px; margin-bottom:18px;
+  border-bottom:1px solid var(--line-dark);
+  padding-bottom:0;
+}
+.lb-tab button{
+  padding:12px 20px; font-family:'Noto Serif TC',serif;
+  font-weight:700; font-size:14px; color:var(--txt-dark-mute);
+  border-bottom:2px solid transparent; margin-bottom:-1px;
+  transition:all .25s var(--easing);
+}
+.lb-tab button.active{ color:var(--orange); border-color:var(--orange); }
+.lb-tab button:hover{ color:var(--txt-dark); }
+
+.lb-pane{ display:none; }
+.lb-pane.active{ display:block; }
+.lb-pane-desc{
+  margin-bottom:14px; padding:12px 16px;
+  background:var(--orange-soft); border-radius:6px;
+  font-size:13px; color:var(--txt-dark); line-height:1.6;
+  border-left:3px solid var(--orange);
+}
+
+/* zoomed single image overlay */
+.zoom-overlay{
+  position:fixed; inset:0; z-index:300;
+  background:rgba(0,0,0,0.95);
+  display:none; align-items:center; justify-content:center;
+  padding:40px;
+  cursor:zoom-out;
+}
+.zoom-overlay.open{ display:flex; }
+.zoom-overlay img{
+  max-width:100%; max-height:100%;
+  border-radius:6px;
+}
+
+/* ============== CURRICULUM TAB CONTENT ============== */
+.curr-tab-meta{
+  margin-bottom:24px; padding:16px 22px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.02) 100%);
+  border:1px solid rgba(255,107,26,0.2);
+  border-left:4px solid var(--orange);
+  border-radius:6px;
+  display:flex; gap:18px; align-items:center; flex-wrap:wrap;
+}
+.curr-tab-meta .grade-tag{
+  font-family:'Bebas Neue',sans-serif; font-size:14px;
+  letter-spacing:0.2em; color:var(--orange);
+  padding:6px 14px; background:white;
+  border-radius:100px; border:1px solid rgba(255,107,26,0.3);
+}
+.curr-tab-meta .info{ font-size:14px; color:var(--txt-dark-mute); line-height:1.6; flex:1; min-width:240px; }
+.curr-tab-meta .info strong{ color:var(--txt-dark); font-weight:700; }
+
+.single-subject-note{
+  margin-top:24px; padding:14px 18px;
+  background:white; border:1px dashed var(--line-dark-2); border-radius:6px;
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.6;
+}
+.single-subject-note strong{ color:var(--orange); }
+
+/* ============== INFO HUB SECTION ============== */
+.infohub{ background:var(--cream-3); color:var(--txt-dark); }
+
+.infohub-grid{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
+  margin-top:48px;
+}
+@media (max-width:900px){ .infohub-grid{ grid-template-columns:1fr; } }
+
+.info-card{
+  padding:32px 28px; background:white;
+  border:1px solid var(--line-dark); border-radius:8px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.03);
+  transition:all .35s var(--easing);
+}
+.info-card:hover{ box-shadow:0 16px 32px rgba(0,0,0,0.06); transform:translateY(-4px); }
+.info-card .head{
+  display:flex; align-items:center; gap:14px; margin-bottom:24px;
+  padding-bottom:18px; border-bottom:1px solid var(--line-dark);
+}
+.info-card .head-icon{
+  width:44px; height:44px; border-radius:8px;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.info-card .head-icon svg{ width:22px; height:22px; }
+.info-card .head h3{
+  font-family:'Noto Serif TC',serif; font-size:20px; font-weight:700;
+  color:var(--txt-dark); line-height:1.3;
+}
+.info-card .head .en{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.2em; color:var(--orange); margin-top:2px;
+}
+
+.info-row{
+  display:flex; gap:16px; padding:14px 0;
+  border-bottom:1px dashed var(--line-dark);
+  font-size:14.5px; line-height:1.6;
+}
+.info-row:last-child{ border-bottom:none; }
+.info-row .k{
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  color:var(--txt-dark); min-width:90px; flex-shrink:0;
+}
+.info-row .v{ color:var(--txt-dark-mute); flex:1; }
+.info-row .v strong{ color:var(--orange); font-weight:700; }
+.info-row .v .pill-mini{
+  display:inline-block; padding:3px 10px; margin:2px 4px 2px 0;
+  background:var(--orange-soft); color:var(--orange);
+  border-radius:100px; font-size:12.5px; font-weight:700;
+}
+
+.pkg-list{ list-style:none; }
+.pkg-list li{
+  padding:12px 0 12px 32px; position:relative;
+  font-size:14.5px; line-height:1.6; color:var(--txt-dark);
+  border-bottom:1px dashed var(--line-dark);
+}
+.pkg-list li:last-child{ border-bottom:none; }
+.pkg-list li::before{
+  content:'✓'; position:absolute; left:0; top:13px;
+  width:22px; height:22px; border-radius:50%;
+  background:var(--orange); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700;
+}
+
+.pkg-tab{
+  display:flex; gap:6px; margin-bottom:18px;
+  background:var(--cream-2); padding:4px; border-radius:8px;
+}
+.pkg-tab button{
+  flex:1; padding:10px 14px; border-radius:6px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:13.5px;
+  color:var(--txt-dark-mute); transition:all .3s var(--easing);
+}
+.pkg-tab button.active{
+  background:white; color:var(--orange);
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
+
+.pkg-pane{ display:none; }
+.pkg-pane.active{ display:block; }
+
+.pay-toggle{
+  margin-top:18px;
+  width:100%; padding:14px 18px;
+  background:var(--orange-soft); color:var(--orange);
+  border:1px dashed rgba(255,107,26,0.4); border-radius:6px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:14px;
+  display:flex; align-items:center; justify-content:space-between;
+  cursor:pointer; transition:all .25s var(--easing);
+}
+.pay-toggle:hover{ background:var(--orange); color:white; border-color:var(--orange); }
+.pay-toggle .arrow{ transition:transform .3s var(--easing); }
+.pay-toggle.open .arrow{ transform:rotate(180deg); }
+
+.pay-content{
+  max-height:0; overflow:hidden;
+  transition:max-height .4s var(--easing);
+}
+.pay-content.open{ max-height:400px; }
+.pay-content-inner{
+  margin-top:12px; padding:18px 20px;
+  background:var(--cream-2); border-radius:6px;
+  font-size:13.5px; color:var(--txt-dark-mute); line-height:1.9;
+}
+.pay-content-inner strong{ color:var(--txt-dark); }
+.pay-content-inner em{
+  font-style:normal; color:var(--orange); font-weight:700;
+  display:inline-block; margin-right:6px;
+}
+
+.served{
+  margin-top:28px; padding:24px 26px;
+  background:linear-gradient(135deg, var(--black) 0%, var(--warm-dark) 100%);
+  border-radius:8px; color:white;
+}
+.served .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.25em; color:var(--orange); margin-bottom:10px;
+}
+.served h4{
+  font-family:'Noto Serif TC',serif; font-size:17px;
+  font-weight:700; margin-bottom:16px; color:white;
+}
+.served .grades{ display:flex; flex-wrap:wrap; gap:8px; }
+.served .grade-pill{
+  padding:7px 14px; background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px; font-size:13px; font-family:'Space Grotesk',sans-serif;
+  letter-spacing:0.05em; color:white;
+}
+.served .grade-pill strong{ color:var(--orange); margin-right:6px; }
+
+/* ============== TIME UPDATE ・ FULL/AVAILABLE ============== */
+.tp-time-row.full{ opacity:0.55; }
+.tp-time-row.full .day,
+.tp-time-row.full .hours{ text-decoration:line-through; }
+.tp-time-row .full-tag{
+  display:inline-block; margin-left:8px;
+  padding:3px 10px; background:#dc2626; color:white;
+  border-radius:100px; font-size:11px;
+  font-family:'Bebas Neue',sans-serif; letter-spacing:0.15em;
+}
+.tp-time-row .open-tag{
+  display:inline-block; margin-left:8px;
+  padding:3px 10px; background:#10b981; color:white;
+  border-radius:100px; font-size:11px;
+  font-family:'Bebas Neue',sans-serif; letter-spacing:0.15em;
+}
+.tp-time-divider{
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.2em; color:var(--txt-dark-mute);
+  padding:18px 0 6px; border-bottom:1px solid var(--line-dark);
+  margin-top:8px;
+  display:flex; align-items:center; gap:10px;
+}
+.tp-time-divider .line{ flex:1; height:1px; background:var(--line-dark); }
+@media (max-width:540px){
+  .tp-time-row{ flex-wrap:wrap; gap:6px; }
+}
+
 </style>
 </head>
 <body>
@@ -1304,10 +1697,11 @@ a{ color:inherit; text-decoration:none; }
   <button data-target="method" data-label="解法"></button>
   <button data-target="comp" data-label="對比"></button>
   <button data-target="tiers" data-label="班別"></button>
-  <button data-target="curriculum" data-label="P4 課程"></button>
+  <button data-target="curriculum" data-label="課程內容"></button>
   <button data-target="flow" data-label="課堂結構"></button>
   <button data-target="about" data-label="關於"></button>
   <button data-target="pricing" data-label="收費"></button>
+  <button data-target="infohub" data-label="完整資訊"></button>
   <button data-target="tp" data-label="時間地點"></button>
   <button data-target="test" data-label="評價"></button>
   <button data-target="sprint" data-label="急救班"></button>
@@ -1626,65 +2020,181 @@ a{ color:inherit; text-decoration:none; }
   </div>
 </section>
 
-<!-- ============== SECTION 07 ・ CURRICULUM ============== -->
+<!-- ============== SECTION 07 ・ CURRICULUM (P4/P5/P6 + Templates) ============== -->
 <section class="section curriculum" id="curriculum">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow"><span class="line"></span><span>P4 FULL-YEAR CURRICULUM</span></div>
-      <h2 class="section-title">P4 全年課程內容<br/><span class="hl">完全公開</span></h2>
-      <p class="section-sub">完整對應學校呈分試考核重點。所有 Topic 皆會以 Symon Method 結構化方式重組教學。</p>
+      <div class="eyebrow"><span class="line"></span><span>FULL CURRICULUM ・ TEMPLATES</span></div>
+      <h2 class="section-title">教學內容 + 試卷 + 報告<br/><span class="hl">完全公開</span></h2>
+      <p class="section-sub">所有試卷、進度報告、教學課題,皆由 Symon Sir 與專業教學團隊親自設計、親自把關。家長可即時預覽教材樣本,所見即所得。</p>
+    </div>
+
+    <!-- 預覽按鈕 ・ 試卷 + 報告 -->
+    <div class="preview-actions reveal">
+      <button class="preview-btn" type="button" data-modal="modal-papers">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        </span>
+        <span class="text">
+          <div class="lbl">SAMPLE PAPERS</div>
+          <h4>預覽自家試卷樣本</h4>
+          <p>11 份試卷頁面 ・ 親自出卷 ・ 貼近呈分試題型</p>
+        </span>
+        <span class="arrow">→</span>
+      </button>
+
+      <button class="preview-btn" type="button" data-modal="modal-reports">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </span>
+        <span class="text">
+          <div class="lbl">PROGRESS REPORTS</div>
+          <h4>預覽進度報告模板</h4>
+          <p>每週進度報告 + 每月學習總結 ・ 進步有跡可循</p>
+        </span>
+        <span class="arrow">→</span>
+      </button>
     </div>
 
     <div class="curr-cap reveal">
       <h4>四大班別 ・ 同一份課題清單</h4>
-      <p>以下課題涵蓋 P4 全年知識結構,四個班別皆會教授,差別在於「形式與作用」:打底班從零拆解概念、實戰班建立答題框架、高級班挑戰進階變題、急救班操卷強化應試。同一份課題,不同班別有不同切入點。</p>
+      <p>以下課題涵蓋全年知識結構,四個班別皆會教授,差別在於「形式與作用」:打底班從零拆解概念、實戰班建立答題框架、高級班挑戰進階變題、急救班操卷強化應試。同一份課題,不同班別有不同切入點。</p>
     </div>
 
-    <div class="curr-grid">
-      <div class="curr-card eng reveal delay-1">
-        <div class="head">
-          <div class="head-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          </div>
-          <div>
-            <h3>英文</h3>
-            <div class="en">ENGLISH ・ 8 MODULES</div>
-          </div>
-        </div>
-        <ol>
-          <li>Tenses(時態)<span class="sub">Present / Continuous / Past / Future</span></li>
-          <li>Adverbs of Frequency(副詞頻率)<span class="sub">Always / Often / Sometimes / Seldom / Never</span></li>
-          <li>Reflexive Pronouns(反身代名詞)<span class="sub">Himself / Myself / Herself</span></li>
-          <li>Comparative Adjectives(比較級)<span class="sub">er + than / more + than / the most</span></li>
-          <li>Direction Words(方向詞)<span class="sub">turn left/right、next to、opposite 等</span></li>
-          <li>Quantifiers(數量詞)<span class="sub">a lot of / a little / too much / fewer</span></li>
-          <li>Frequency Questions(頻率問句)<span class="sub">How often / once / twice / three times a ___</span></li>
-          <li>歷年累積文法整合<span class="sub">綜合溫故 ・ 銜接以往年級已學文法</span></li>
-        </ol>
+    <!-- 年級 Tab 切換 -->
+    <div class="tab-nav reveal" role="tablist">
+      <button class="tab-btn active" data-tab="grade-p4" role="tab"><span>小四</span><span class="en">P4</span></button>
+      <button class="tab-btn" data-tab="grade-p5" role="tab"><span>小五</span><span class="en">P5</span></button>
+      <button class="tab-btn" data-tab="grade-p6" role="tab"><span>小六</span><span class="en">P6</span></button>
+    </div>
+
+    <!-- P4 -->
+    <div class="tab-pane active" id="grade-p4">
+      <div class="curr-tab-meta reveal">
+        <span class="grade-tag">P4 ・ 小四</span>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小四全年呈分試考核重點 ・ 對應四大班別架構</div>
       </div>
 
-      <div class="curr-card reveal delay-2">
-        <div class="head">
-          <div class="head-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+      <div class="curr-grid">
+        <div class="curr-card eng reveal delay-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div>
+              <h3>P4 英文</h3>
+              <div class="en">ENGLISH ・ 8 MODULES</div>
+            </div>
           </div>
-          <div>
-            <h3>數學</h3>
-            <div class="en">MATHEMATICS ・ 10 TOPICS</div>
-          </div>
+          <ol>
+            <li>Tenses(時態)<span class="sub">Present / Continuous / Past / Future</span></li>
+            <li>Adverbs of Frequency(副詞頻率)<span class="sub">Always / Often / Sometimes / Seldom / Never</span></li>
+            <li>Reflexive Pronouns(反身代名詞)<span class="sub">Himself / Myself / Herself</span></li>
+            <li>Comparative Adjectives(比較級)<span class="sub">er + than / more + than / the most</span></li>
+            <li>Direction Words(方向詞)<span class="sub">turn left/right、next to、opposite 等</span></li>
+            <li>Quantifiers(數量詞)<span class="sub">a lot of / a little / too much / fewer</span></li>
+            <li>Frequency Questions(頻率問句)<span class="sub">How often / once / twice / three times a ___</span></li>
+            <li>歷年累積文法整合<span class="sub">綜合溫故 ・ 銜接以往年級已學文法</span></li>
+          </ol>
         </div>
-        <ol>
-          <li>乘法 + 除法</li>
-          <li>方向</li>
-          <li>因數與倍數</li>
-          <li>圖形分割或拼砌</li>
-          <li>四則運算</li>
-          <li>周界</li>
-          <li>分數</li>
-          <li>面積</li>
-          <li>小數</li>
-          <li>棒形圖</li>
-        </ol>
+
+        <div class="curr-card reveal delay-2">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+            </div>
+            <div>
+              <h3>P4 數學</h3>
+              <div class="en">MATHEMATICS ・ 10 TOPICS</div>
+            </div>
+          </div>
+          <ol>
+            <li>乘法 + 除法</li>
+            <li>方向</li>
+            <li>因數與倍數</li>
+            <li>圖形分割或拼砌</li>
+            <li>四則運算</li>
+            <li>周界</li>
+            <li>分數</li>
+            <li>面積</li>
+            <li>小數</li>
+            <li>棒形圖</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="tab-pane" id="grade-p5">
+      <div class="curr-tab-meta reveal">
+        <span class="grade-tag">P5 ・ 小五</span>
+        <div class="info"><strong>數學科現已開放報名</strong> ・ 涵蓋小五全年呈分試考核重點 ・ 多位數運算 / 分數四則 / 立體與體積 / 代數方程</div>
+      </div>
+
+      <div class="curr-grid">
+        <div class="curr-card reveal delay-1" style="grid-column:1/-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+            </div>
+            <div>
+              <h3>P5 數學</h3>
+              <div class="en">MATHEMATICS ・ 8 TOPICS</div>
+            </div>
+          </div>
+          <ol>
+            <li>多位數<span class="sub">大數讀寫 ・ 多位數四則運算</span></li>
+            <li>分數加減乘除<span class="sub">異分母加減 ・ 分數乘除應用 ・ 分數四則運算</span></li>
+            <li>面積<span class="sub">三角形 ・ 梯形 ・ 多邊形</span></li>
+            <li>立體概念<span class="sub">正方體 ・ 長方體 ・ 圓柱 ・ 球</span></li>
+            <li>體積<span class="sub">體積量度方法 ・ 長方體 / 正方體 / 立體體積</span></li>
+            <li>小數乘法<span class="sub">小數基本概念 ・ 小數應用題</span></li>
+            <li>代數<span class="sub">代數基本概念 ・ 代數的應用</span></li>
+            <li>方程<span class="sub">方程基本概念 ・ 方程的應用</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="single-subject-note reveal">
+        <strong>備註</strong>:P5 英文科將於後續階段視乎反應陸續延伸開設,首階段先行專注數學科。
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="tab-pane" id="grade-p6">
+      <div class="curr-tab-meta reveal">
+        <span class="grade-tag">P6 ・ 小六</span>
+        <div class="info"><strong>數學科現已開放報名</strong> ・ 升中前最後一年衝刺階段 ・ 完整覆蓋呈分試十大考核範疇</div>
+      </div>
+
+      <div class="curr-grid">
+        <div class="curr-card reveal delay-1" style="grid-column:1/-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+            </div>
+            <div>
+              <h3>P6 數學</h3>
+              <div class="en">MATHEMATICS ・ 10 TOPICS</div>
+            </div>
+          </div>
+          <ol>
+            <li>小數<span class="sub">小數除法 ・ 小數四則運算 ・ 小數分數轉換</span></li>
+            <li>平均數<span class="sub">平均數基本概念與應用</span></li>
+            <li>百分數<span class="sub">基本概念 ・ 百分數與小數 / 分數轉換 ・ 百分數應用</span></li>
+            <li>容量與體積<span class="sub">基本概念 ・ 不規則體積</span></li>
+            <li>圓周與圓面積<span class="sub">圓周認識與應用 ・ 圓面積認識與應用</span></li>
+            <li>角與度<span class="sub">角度量度與應用</span></li>
+            <li>時間與速率<span class="sub">基本概念 ・ 時間與速率應用</span></li>
+            <li>方程<span class="sub">簡易方程基本概念 ・ 簡易方程應用</span></li>
+            <li>對稱<span class="sub">對稱圖形與基本規則</span></li>
+            <li>進制單位<span class="sub">進制單位基本概念</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="single-subject-note reveal">
+        <strong>備註</strong>:P6 英文科將於後續階段視乎反應陸續延伸開設,首階段先行專注數學科。
       </div>
     </div>
 
@@ -1860,6 +2370,131 @@ a{ color:inherit; text-decoration:none; }
   </div>
 </section>
 
+<!-- ============== SECTION 10.5 ・ INFO HUB (完整上課資訊) ============== -->
+<section class="section infohub" id="infohub">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>SERVICE DETAILS</span></div>
+      <h2 class="section-title">完整上課資訊<br/><span class="hl">一目了然</span></h2>
+      <p class="section-sub">科目選擇、課程配套、人數規定、付款方式 ── 每一項細節皆透明公開,讓家長報名前掌握完整資訊。</p>
+    </div>
+
+    <div class="infohub-grid">
+
+      <!-- 卡 1 ・ 科目 + 年級 + 人數 -->
+      <div class="info-card reveal delay-1">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h3>科目 ・ 年級 ・ 人數</h3>
+            <div class="en">SUBJECTS ・ GRADES ・ CLASS SIZE</div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="k">科目選擇</span>
+          <span class="v">
+            <span class="pill-mini">英文</span><span class="pill-mini">數學</span>
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="k">開放年級</span>
+          <span class="v">
+            <span class="pill-mini">P4</span><span class="pill-mini">P5</span><span class="pill-mini">P6</span>
+            <div style="font-size:12.5px;margin-top:6px;">P4 開設數學 + 英文 ・ P5 / P6 首階段開設數學科</div>
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="k">常規班人數</span>
+          <span class="v"><strong>3 - 5 人</strong> ・ 嚴格限額 ・ 額滿即止</span>
+        </div>
+        <div class="info-row">
+          <span class="k">急救班人數</span>
+          <span class="v"><strong>3 - 10 人</strong> ・ 應試衝刺彈性編配</span>
+        </div>
+        <div class="info-row">
+          <span class="k">組團報名</span>
+          <span class="v">家長可自行組團 ・ 先到先得 ・ 若無法成團可編排到其他組別</span>
+        </div>
+
+        <div class="served">
+          <div class="lbl">SERVICE TRACK RECORD</div>
+          <h4>已服務 50+ 學生家庭</h4>
+          <div class="grades">
+            <span class="grade-pill"><strong>中學</strong>S3 / S4 / S5 / S6</span>
+            <span class="grade-pill"><strong>小學</strong>P2 / P3 / P4 / P5 / P6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡 2 ・ 課程配套 + 付款方式 -->
+      <div class="info-card reveal delay-2">
+        <div class="head">
+          <div class="head-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div>
+            <h3>課程配套 ・ 付款方式</h3>
+            <div class="en">PACKAGE ・ PAYMENT</div>
+          </div>
+        </div>
+
+        <!-- 配套切換 Tab -->
+        <div class="pkg-tab">
+          <button class="active" data-pkg="pkg-regular" type="button">常規課程</button>
+          <button data-pkg="pkg-sprint" type="button">考試急救班</button>
+        </div>
+
+        <div class="pkg-pane active" id="pkg-regular">
+          <ul class="pkg-list">
+            <li>結構化筆記教材</li>
+            <li>各課題針對性練習</li>
+            <li>完整考試試卷操練</li>
+            <li>每週進度報告 + 每月學習總結(共兩份)</li>
+            <li>必要時加堂補強</li>
+          </ul>
+          <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
+            <strong style="color:var(--orange);">課時:</strong> 打底班 90mins ・ 實戰班 90mins ・ 高級班 60mins ・ 每星期固定時間
+          </div>
+        </div>
+
+        <div class="pkg-pane" id="pkg-sprint">
+          <ul class="pkg-list">
+            <li>堂上考試模式做卷</li>
+            <li>即場批改 + 詳細講解</li>
+            <li>額外試卷自主操練</li>
+            <li>進度報告兩份(短期診斷)</li>
+            <li>應試前任意一日靈活編排</li>
+          </ul>
+          <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
+            <strong style="color:var(--orange);">課時:</strong> 120mins / 堂 ・ 一次性課程 ・ 限時加開
+          </div>
+        </div>
+
+        <!-- 付款方式 ・ 摺疊 -->
+        <button class="pay-toggle" type="button" id="payToggle">
+          <span>💳 查看付款方式</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div class="pay-content" id="payContent">
+          <div class="pay-content-inner">
+            <strong>付款說明</strong><br/>
+            這是月份學費,家長收到後便可。就您方便,什麼時候給都可以。<br/><br/>
+            <strong>付款渠道(由 Symon Sir 個別發送收款資料)</strong><br/>
+            <em>・</em> Alipay HK<br/>
+            <em>・</em> PayMe<br/>
+            <em>・</em> FPS 轉數快<br/><br/>
+            <span style="font-size:12.5px;color:var(--txt-dark-mute);font-style:italic;">為保障家長私隱及避免無關訊息,具體收款帳戶將於報名確認後,由 Symon Sir 透過 WhatsApp 個別發送。</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ============== SECTION 11 ・ TIME & PLACE ============== -->
 <section class="section tp" id="tp">
   <div class="container">
@@ -1872,12 +2507,20 @@ a{ color:inherit; text-decoration:none; }
     <div class="tp-grid">
       <div class="tp-block reveal delay-1">
         <div class="lbl"><span class="line"></span>SCHEDULE ・ 上課時間</div>
-        <h3>固定時段</h3>
-        <div class="tp-time-row"><span class="day">逢星期三</span><span class="hours">16:00 - 20:00</span></div>
-        <div class="tp-time-row"><span class="day">逢星期四</span><span class="hours">16:00 - 20:00</span></div>
-        <div class="tp-time-row"><span class="day">逢星期六</span><span class="hours">09:00 - 12:00</span></div>
-        <div class="tp-foot">具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。</div>
+        <h3>可預約時段</h3>
+        <div class="tp-time-row"><span class="day">逢星期三</span><span class="hours">16:00 - 20:30 <span class="open-tag">尚有名額</span></span></div>
+        <div class="tp-time-row"><span class="day">逢星期四</span><span class="hours">16:00 - 20:30 <span class="open-tag">尚有名額</span></span></div>
+        <div class="tp-time-row"><span class="day">逢星期六</span><span class="hours">09:00 - 12:00 <span class="open-tag">尚有名額</span></span></div>
+
+        <div class="tp-time-divider"><span class="line"></span><span>FULLY BOOKED ・ 已額滿時段</span><span class="line"></span></div>
+
+        <div class="tp-time-row full"><span class="day">逢星期五</span><span class="hours">16:00 - 20:30 <span class="full-tag">已滿</span></span></div>
+        <div class="tp-time-row full"><span class="day">逢星期六</span><span class="hours">13:00 - 18:30 <span class="full-tag">已滿</span></span></div>
+        <div class="tp-time-row full"><span class="day">逢星期日</span><span class="hours">10:00 - 18:30 <span class="full-tag">已滿</span></span></div>
+
+        <div class="tp-foot">具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。已滿時段已預留予現有學生,有名額時將由 Symon Sir 主動通知候補家長。</div>
       </div>
+
 
       <div class="tp-block reveal delay-2">
         <div class="lbl"><span class="line"></span>VENUE ・ 指定地點</div>
@@ -2033,8 +2676,9 @@ a{ color:inherit; text-decoration:none; }
         <ul>
           <li><a href="#method">Symon Method</a></li>
           <li><a href="#tiers">四大班別</a></li>
-          <li><a href="#curriculum">P4 課程</a></li>
+          <li><a href="#curriculum">課程內容</a></li>
           <li><a href="#pricing">收費結構</a></li>
+          <li><a href="#infohub">完整上課資訊</a></li>
           <li><a href="#test">家長評價</a></li>
         </ul>
       </div>
@@ -2047,6 +2691,85 @@ a{ color:inherit; text-decoration:none; }
     </div>
   </div>
 </footer>
+
+<!-- ============== LIGHTBOX MODALS ============== -->
+
+<!-- Modal 1: 試卷樣本 -->
+<div class="lightbox" id="modal-papers" role="dialog" aria-modal="true" aria-labelledby="papersTitle">
+  <div class="lightbox-inner">
+    <div class="lightbox-head">
+      <div>
+        <h3 id="papersTitle">📄 自家試卷樣本預覽</h3>
+        <div class="meta">由 Symon Sir 與專業教學團隊親自出卷 ・ 貼近呈分試題型 ・ 點擊圖片可放大查看</div>
+      </div>
+      <button class="lightbox-close" data-close-modal aria-label="關閉">✕</button>
+    </div>
+    <div class="lightbox-body">
+      <div class="lb-pane-desc">
+        以下為部分試卷樣本(共 11 頁),每一份試卷皆按 Symon Method 結構化邏輯設計,涵蓋呈分試各大常見題型,確保學生在堂上操練的就是考試會出現的題型。
+      </div>
+      <div class="lb-grid">
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901589/WhatsApp_Image_2026-05-04_at_21.28.55_1_bzvycd.jpg" alt="試卷樣本 1" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901589/WhatsApp_Image_2026-05-04_at_21.28.56_xbh5gl.jpg" alt="試卷樣本 2" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901589/WhatsApp_Image_2026-05-04_at_21.28.56_1_cdiqj8.jpg" alt="試卷樣本 3" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901588/WhatsApp_Image_2026-05-04_at_21.28.56_2_tb36c2.jpg" alt="試卷樣本 4" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901578/WhatsApp_Image_2026-05-04_at_21.28.56_3_bh7djj.jpg" alt="試卷樣本 5" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901578/WhatsApp_Image_2026-05-04_at_21.28.57_1_sqyymz.jpg" alt="試卷樣本 6" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901578/WhatsApp_Image_2026-05-04_at_21.28.57_k4lgay.jpg" alt="試卷樣本 7" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901577/WhatsApp_Image_2026-05-04_at_21.28.58_cl6g99.jpg" alt="試卷樣本 8" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901576/WhatsApp_Image_2026-05-04_at_21.28.57_2_sni5rz.jpg" alt="試卷樣本 9" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901576/WhatsApp_Image_2026-05-04_at_21.28.58_1_qohzym.jpg" alt="試卷樣本 10" loading="lazy" />
+        <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901576/WhatsApp_Image_2026-05-04_at_21.28.58_2_fjykrr.jpg" alt="試卷樣本 11" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2: 進度報告模板 -->
+<div class="lightbox" id="modal-reports" role="dialog" aria-modal="true" aria-labelledby="reportsTitle">
+  <div class="lightbox-inner">
+    <div class="lightbox-head">
+      <div>
+        <h3 id="reportsTitle">📊 進度報告模板預覽</h3>
+        <div class="meta">雙週期進度追蹤系統 ・ 進步有跡可循 ・ 點擊圖片可放大查看</div>
+      </div>
+      <button class="lightbox-close" data-close-modal aria-label="關閉">✕</button>
+    </div>
+    <div class="lightbox-body">
+      <div class="lb-tab">
+        <button class="active" data-lbtab="rpt-weekly" type="button">每週進度報告</button>
+        <button data-lbtab="rpt-monthly" type="button">每月學習總結</button>
+      </div>
+
+      <div class="lb-pane active" id="rpt-weekly">
+        <div class="lb-pane-desc">
+          <strong>每週進度報告 ・ Weekly Progress Report</strong><br/>
+          記錄學生本週打卡完成率、整體正確率、出席紀錄、Subtopic 掌握度分佈、錯題模式分析、重點錯題建議,並附老師評語及下週學習計劃。
+        </div>
+        <div class="lb-pages">
+          <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777825170/WhatsApp_Image_2026-05-04_at_00.17.49_o3au1z.jpg" alt="周期報告 第一頁" loading="lazy" />
+          <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777825169/WhatsApp_Image_2026-05-04_at_00.17.49_1_jz7wx2.jpg" alt="周期報告 第二頁" loading="lazy" />
+        </div>
+      </div>
+
+      <div class="lb-pane" id="rpt-monthly">
+        <div class="lb-pane-desc">
+          <strong>每月學習總結報告 ・ Monthly Summary Report</strong><br/>
+          綜合本月每週表現趨勢、Topic 掌握度一覽、錯題模式總結、與上月進步對比(平均正確率 / 完成率 / 出席率 / 需加強 Topic 數量),配合老師月度評語及下月學習計劃。
+        </div>
+        <div class="lb-pages">
+          <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777825170/WhatsApp_Image_2026-05-04_at_00.17.49_2_t8mb2n.jpg" alt="月度報告 第一頁" loading="lazy" />
+          <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777825169/WhatsApp_Image_2026-05-04_at_00.17.50_p9cltd.jpg" alt="月度報告 第二頁" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Zoom overlay (single image fullscreen) -->
+<div class="zoom-overlay" id="zoomOverlay">
+  <img id="zoomImg" src="" alt="" />
+</div>
 
 <script>
 // ============== SCROLL PROGRESS ==============
@@ -2105,6 +2828,104 @@ const dotObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.45 });
 sections.forEach(s => s && dotObs.observe(s));
+
+// ============== CURRICULUM TABS (P4/P5/P6) ==============
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanes = document.querySelectorAll('.tab-pane');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabBtns.forEach(b => b.classList.toggle('active', b === btn));
+    tabPanes.forEach(p => p.classList.toggle('active', p.id === target));
+    // re-trigger reveal animation for newly visible content
+    document.querySelectorAll(`#${target} .reveal`).forEach(el => {
+      el.classList.remove('in');
+      requestAnimationFrame(() => el.classList.add('in'));
+    });
+  });
+});
+
+// ============== PACKAGE TABS (Regular / Sprint) ==============
+const pkgBtns = document.querySelectorAll('.pkg-tab button');
+const pkgPanes = document.querySelectorAll('.pkg-pane');
+pkgBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.pkg;
+    pkgBtns.forEach(b => b.classList.toggle('active', b === btn));
+    pkgPanes.forEach(p => p.classList.toggle('active', p.id === target));
+  });
+});
+
+// ============== PAYMENT TOGGLE ==============
+const payToggle = document.getElementById('payToggle');
+const payContent = document.getElementById('payContent');
+if (payToggle && payContent) {
+  payToggle.addEventListener('click', () => {
+    payToggle.classList.toggle('open');
+    payContent.classList.toggle('open');
+    payToggle.querySelector('span:first-child').textContent =
+      payContent.classList.contains('open') ? '💳 收起付款方式' : '💳 查看付款方式';
+  });
+}
+
+// ============== LIGHTBOX MODALS ==============
+const modalTriggers = document.querySelectorAll('[data-modal]');
+const modalCloses = document.querySelectorAll('[data-close-modal]');
+const modals = document.querySelectorAll('.lightbox');
+
+function openModal(id){
+  const m = document.getElementById(id);
+  if(!m) return;
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAllModals(){
+  modals.forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
+}
+
+modalTriggers.forEach(t => {
+  t.addEventListener('click', () => openModal(t.dataset.modal));
+});
+modalCloses.forEach(c => {
+  c.addEventListener('click', closeAllModals);
+});
+modals.forEach(m => {
+  m.addEventListener('click', (e) => {
+    if (e.target === m) closeAllModals();
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAllModals();
+    document.getElementById('zoomOverlay').classList.remove('open');
+  }
+});
+
+// ============== LIGHTBOX INNER TABS (Weekly/Monthly) ==============
+const lbTabBtns = document.querySelectorAll('.lb-tab button');
+lbTabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.lbtab;
+    const wrapper = btn.closest('.lightbox-body');
+    wrapper.querySelectorAll('.lb-tab button').forEach(b => b.classList.toggle('active', b === btn));
+    wrapper.querySelectorAll('.lb-pane').forEach(p => p.classList.toggle('active', p.id === target));
+  });
+});
+
+// ============== ZOOM ON IMAGE CLICK ==============
+const zoomOverlay = document.getElementById('zoomOverlay');
+const zoomImg = document.getElementById('zoomImg');
+document.querySelectorAll('.lb-grid img, .lb-pages img').forEach(img => {
+  img.addEventListener('click', () => {
+    zoomImg.src = img.src;
+    zoomImg.alt = img.alt || '';
+    zoomOverlay.classList.add('open');
+  });
+});
+zoomOverlay.addEventListener('click', () => {
+  zoomOverlay.classList.remove('open');
+});
 </script>
 
 </body>

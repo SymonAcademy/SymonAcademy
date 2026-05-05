@@ -195,7 +195,9 @@ a{ color:inherit; text-decoration:none; }
 
 /* ============== HERO ============== */
 .hero{
-  min-height:100vh; position:relative;
+  min-height:100vh;
+  min-height:100dvh;
+  position:relative;
   display:flex; align-items:center;
   background:linear-gradient(135deg, #1A1410 0%, #0F0A06 100%);
   color:var(--txt-light);
@@ -226,6 +228,8 @@ a{ color:inherit; text-decoration:none; }
 }
 @media (max-width:1024px){
   .hero-inner{ grid-template-columns:1fr; gap:40px; }
+  .hero-text{ order:2; }
+  .hero-portrait{ order:1; }
 }
 
 .hero-eyebrow{
@@ -1287,8 +1291,20 @@ a{ color:inherit; text-decoration:none; }
 /* small responsive tweaks */
 @media (max-width:540px){
   .hero-title{ font-size:42px; }
-  .hero-portrait{ height:480px; }
+  .hero-portrait{ height:380px; max-width:340px; }
+  .hero-portrait .frame{
+    background:linear-gradient(135deg, var(--orange) 0%, var(--orange) 35%, var(--warm-dark) 35%, var(--warm-dark) 100%);
+    clip-path:none;
+  }
+  .hero-portrait .deco-num{ font-size:48px; top:14px; right:14px; }
+  .hero-portrait .deco-tag{ bottom:18px; left:18px; padding:10px 14px; max-width:200px; }
+  .hero-portrait .deco-tag .nm{ font-size:15px; }
+  .hero-portrait .deco-tag .ed{ font-size:10px; }
+  .hero{ padding:100px 0 60px; }
 }
+
+/* hero portrait safety: prevent invisible image on weak browsers */
+.hero-portrait img{ background:var(--warm-dark); }
 
 /* ============== TAB SYSTEM (P4/P5/P6) ============== */
 .tab-nav{
@@ -1682,6 +1698,384 @@ a{ color:inherit; text-decoration:none; }
   .tp-time-row{ flex-wrap:wrap; gap:6px; }
 }
 
+/* ============== PRACTICE PAPER PRODUCT SECTION ============== */
+.papers-product{
+  background:linear-gradient(180deg, var(--cream) 0%, var(--cream-3) 100%);
+  color:var(--txt-dark); position:relative;
+}
+.papers-product::before{
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:0.4;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255,107,26,0.06), transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(255,107,26,0.04), transparent 50%);
+}
+.papers-product .container{ position:relative; z-index:1; }
+
+.product-banner{
+  margin-top:48px; margin-bottom:48px;
+  display:grid; grid-template-columns:1.2fr 1fr; gap:32px; align-items:stretch;
+}
+@media (max-width:900px){ .product-banner{ grid-template-columns:1fr; } }
+
+.product-hero{
+  padding:48px 44px;
+  background:linear-gradient(135deg, var(--black) 0%, var(--warm-dark) 100%);
+  border-radius:12px; color:white;
+  position:relative; overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.18);
+}
+.product-hero::before{
+  content:''; position:absolute; right:-40px; top:-40px;
+  width:240px; height:240px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,107,26,0.18), transparent 70%);
+}
+.product-hero .pp-tag{
+  display:inline-block; padding:6px 14px;
+  background:var(--orange); color:white;
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.25em; border-radius:100px;
+  margin-bottom:20px;
+}
+.product-hero h3{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(24px, 3vw, 32px); font-weight:900;
+  line-height:1.4; margin-bottom:14px; color:white;
+}
+.product-hero h3 .hl{ color:var(--orange); }
+.product-hero p{
+  font-size:14.5px; color:rgba(255,255,255,0.75);
+  line-height:1.85; margin-bottom:28px;
+}
+.product-hero .pp-pricing{
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+  padding:24px 0; border-top:1px solid rgba(255,255,255,0.12);
+  border-bottom:1px solid rgba(255,255,255,0.12);
+  margin-bottom:24px;
+}
+.product-hero .pp-pricing .currency{
+  font-family:'Space Grotesk',sans-serif; font-size:18px;
+  color:rgba(255,255,255,0.6);
+}
+.product-hero .pp-pricing .price-now{
+  font-family:'Bebas Neue',sans-serif; font-size:64px;
+  color:var(--orange); line-height:1; letter-spacing:0.02em;
+}
+.product-hero .pp-pricing .price-old{
+  font-size:18px; text-decoration:line-through;
+  color:rgba(255,255,255,0.4);
+}
+.product-hero .pp-pricing .save-badge{
+  margin-left:auto; padding:6px 14px;
+  background:rgba(255,107,26,0.15); border:1px solid var(--orange);
+  border-radius:6px; font-size:12px; color:var(--orange);
+  font-family:'Bebas Neue',sans-serif; letter-spacing:0.15em;
+}
+.product-hero .pp-promo{
+  padding:14px 18px;
+  background:rgba(255,107,26,0.12); border:1px dashed rgba(255,107,26,0.4);
+  border-radius:6px;
+  display:flex; align-items:center; gap:12px;
+}
+.product-hero .pp-promo .gift-icon{
+  font-size:24px;
+}
+.product-hero .pp-promo .promo-txt{
+  flex:1;
+  font-family:'Noto Serif TC',serif; font-size:14.5px;
+  color:white; line-height:1.5;
+}
+.product-hero .pp-promo .promo-txt strong{ color:var(--orange); font-weight:900; }
+
+/* Product details list */
+.product-feat{
+  background:white; padding:36px 32px;
+  border-radius:12px; border:1px solid var(--line-dark);
+  box-shadow:0 8px 24px rgba(0,0,0,0.04);
+}
+.product-feat h4{
+  font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700;
+  color:var(--txt-dark); margin-bottom:18px;
+  padding-bottom:12px; border-bottom:1px solid var(--line-dark);
+  display:flex; align-items:center; gap:10px;
+}
+.product-feat h4::before{
+  content:''; display:inline-block;
+  width:4px; height:16px; background:var(--orange); border-radius:2px;
+}
+.product-feat ul{ list-style:none; }
+.product-feat li{
+  padding:10px 0 10px 30px; position:relative;
+  font-size:14px; color:var(--txt-dark); line-height:1.6;
+}
+.product-feat li::before{
+  content:'✓'; position:absolute; left:0; top:10px;
+  width:20px; height:20px; border-radius:50%;
+  background:var(--orange); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700;
+}
+.product-feat li strong{ color:var(--txt-dark); font-weight:700; }
+
+/* Selector grid */
+.selector-grid{
+  display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:32px;
+}
+@media (max-width:900px){ .selector-grid{ grid-template-columns:1fr; } }
+
+.selector-card{
+  padding:28px 26px; background:white;
+  border:1px solid var(--line-dark); border-radius:10px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.03);
+}
+.selector-card .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.25em; color:var(--orange); margin-bottom:8px;
+}
+.selector-card h5{
+  font-family:'Noto Serif TC',serif; font-size:18px; font-weight:700;
+  margin-bottom:18px; color:var(--txt-dark);
+}
+.selector-pills{
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.selector-pill{
+  padding:10px 18px; border-radius:100px;
+  background:white; color:var(--txt-dark);
+  border:1.5px solid var(--line-dark-2);
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:14px;
+  transition:all .25s var(--easing);
+  cursor:pointer; user-select:none;
+}
+.selector-pill:hover{
+  border-color:var(--orange); color:var(--orange);
+  transform:translateY(-2px);
+}
+.selector-pill.selected{
+  background:var(--orange); color:white; border-color:var(--orange);
+  box-shadow:0 6px 16px rgba(255,107,26,0.3);
+}
+
+/* Delivery options */
+.delivery-grid{
+  margin-top:32px;
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+}
+@media (max-width:900px){ .delivery-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:640px){ .delivery-grid{ grid-template-columns:1fr; } }
+
+.delivery-card{
+  padding:22px 24px; background:white;
+  border:1px solid var(--line-dark); border-radius:8px;
+  display:flex; align-items:center; gap:16px;
+  transition:all .25s var(--easing);
+}
+.delivery-card:hover{ border-color:var(--orange); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.05); }
+.delivery-card .d-icon{
+  width:44px; height:44px; border-radius:8px;
+  background:var(--orange-soft); color:var(--orange);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.delivery-card .d-icon svg{ width:22px; height:22px; }
+.delivery-card .d-info{ flex:1; }
+.delivery-card h6{
+  font-family:'Noto Serif TC',serif; font-size:15px; font-weight:700;
+  color:var(--txt-dark); margin-bottom:2px;
+}
+.delivery-card .d-info p{
+  font-size:12.5px; color:var(--txt-dark-mute); margin:0;
+}
+.delivery-card .d-fee{
+  font-family:'Bebas Neue',sans-serif; font-size:15px;
+  color:var(--orange); letter-spacing:0.05em;
+}
+.delivery-card .d-fee.free{ color:#10b981; }
+
+/* CTA action */
+.product-cta{
+  margin-top:36px; padding:32px 36px;
+  background:linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+  border-radius:12px;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:24px; flex-wrap:wrap;
+  box-shadow:0 16px 40px rgba(255,107,26,0.25);
+}
+.product-cta .cta-text{
+  flex:1; min-width:200px;
+}
+.product-cta .cta-text h4{
+  font-family:'Noto Serif TC',serif; font-size:20px; font-weight:900;
+  color:white; margin-bottom:6px; line-height:1.3;
+}
+.product-cta .cta-text p{
+  font-size:13.5px; color:rgba(255,255,255,0.85); line-height:1.5;
+}
+.product-cta .btn-buy{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:18px 32px;
+  background:white; color:var(--orange);
+  font-family:'Noto Serif TC',serif; font-weight:900; font-size:16px;
+  border-radius:100px;
+  transition:all .3s var(--easing);
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  letter-spacing:0.04em;
+  flex-shrink:0;
+}
+.product-cta .btn-buy:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 16px 32px rgba(0,0,0,0.18);
+}
+.product-cta .btn-buy svg{ width:18px; height:18px; fill:var(--orange); }
+
+/* Disclaimer */
+.product-disclaimer{
+  margin-top:24px; padding:16px 22px;
+  background:rgba(0,0,0,0.04); border-left:3px solid var(--txt-dark-mute);
+  border-radius:6px;
+  font-size:12.5px; color:var(--txt-dark-mute); line-height:1.7;
+}
+.product-disclaimer strong{ color:var(--txt-dark); }
+
+/* Preview button (separate) */
+.product-preview-btn{
+  margin-top:18px;
+  display:inline-flex; align-items:center; gap:10px;
+  padding:12px 20px;
+  background:transparent; color:var(--txt-light);
+  border:1px solid rgba(255,255,255,0.25); border-radius:100px;
+  font-size:13px; letter-spacing:0.04em;
+  transition:all .25s var(--easing);
+  cursor:pointer;
+}
+.product-preview-btn:hover{
+  border-color:var(--orange); color:var(--orange);
+}
+/* ============== 8折 PROMOTION SYSTEM ============== */
+
+/* Promo banner above pricing block */
+.promo-banner{
+  margin-bottom:32px; padding:24px 32px;
+  background:linear-gradient(135deg, #dc2626 0%, #f43f5e 100%);
+  border-radius:12px;
+  display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+  box-shadow:0 16px 40px rgba(220,38,38,0.25);
+  position:relative; overflow:hidden;
+}
+.promo-banner::before{
+  content:''; position:absolute; right:-30px; top:-30px;
+  width:200px; height:200px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  pointer-events:none;
+}
+.promo-banner .promo-icon{
+  width:64px; height:64px; border-radius:50%;
+  background:rgba(255,255,255,0.18); border:2px solid rgba(255,255,255,0.3);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; position:relative; z-index:1;
+}
+.promo-banner .promo-icon span{
+  font-family:'Bebas Neue',sans-serif; font-size:22px;
+  color:white; letter-spacing:0.05em;
+}
+.promo-banner .promo-text{ flex:1; min-width:240px; position:relative; z-index:1; }
+.promo-banner .promo-tag{
+  display:inline-block; padding:4px 12px; margin-bottom:8px;
+  background:white; color:#dc2626;
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.25em;
+  border-radius:100px;
+}
+.promo-banner h4{
+  font-family:'Noto Serif TC',serif; font-size:22px; font-weight:900;
+  color:white; margin-bottom:6px; line-height:1.3;
+}
+.promo-banner h4 strong{ color:#fef08a; }
+.promo-banner p{
+  font-size:13.5px; color:rgba(255,255,255,0.92); line-height:1.6;
+}
+.promo-banner .promo-cond{
+  display:flex; gap:14px; flex-wrap:wrap; margin-top:12px;
+}
+.promo-banner .cond-pill{
+  padding:6px 14px;
+  background:rgba(0,0,0,0.25); color:white;
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:100px;
+  font-size:12.5px;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.promo-banner .cond-pill svg{ width:14px; height:14px; opacity:0.9; }
+
+@media (max-width:640px){
+  .promo-banner{ padding:20px 22px; }
+  .promo-banner h4{ font-size:18px; }
+}
+
+/* Discount tag on price card (top-right, red) */
+.price-card .discount-tag{
+  position:absolute; top:18px; right:18px;
+  padding:5px 12px;
+  background:linear-gradient(135deg, #dc2626 0%, #f43f5e 100%);
+  color:white; border-radius:100px;
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.2em; z-index:2;
+  box-shadow:0 4px 12px rgba(220,38,38,0.35);
+}
+.price-card.featured .discount-tag{
+  top:18px; right:auto; left:50%; transform:translateX(-50%);
+}
+.price-card.featured .pill-tag + .discount-tag,
+.price-card.featured.has-discount .pill-tag{
+  top:-12px;
+}
+/* When card has both 主推 pill and discount tag, push 主推 to side */
+.price-card.featured.has-discount .pill-tag{
+  left:18px; transform:translateY(-50%);
+}
+.price-card.featured.has-discount .discount-tag{
+  right:18px; left:auto; transform:none;
+  top:-12px;
+}
+
+/* Original price strikethrough above main price */
+.price-card .orig-price{
+  font-size:15px; color:var(--txt-dark-mute);
+  text-decoration:line-through;
+  text-decoration-color:rgba(220,38,38,0.5);
+  margin-bottom:4px;
+  display:flex; align-items:center; gap:6px;
+}
+.price-card .orig-price .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:10px;
+  letter-spacing:0.2em; color:var(--txt-dark-mute);
+  text-decoration:none; padding:2px 8px;
+  background:rgba(0,0,0,0.05); border-radius:100px;
+}
+
+/* Promo price (replaces .price) - bigger, red emphasis */
+.price-card .amount.promo .price{
+  color:#dc2626;
+}
+.price-card.featured .amount.promo .price{
+  color:#fef08a;
+}
+
+/* Save callout for promo */
+.price-card .save.promo{
+  padding:8px 14px;
+  background:linear-gradient(135deg, rgba(220,38,38,0.08) 0%, rgba(244,63,94,0.08) 100%);
+  border:1px dashed rgba(220,38,38,0.3);
+  border-radius:6px;
+  font-size:13px; color:#dc2626;
+  font-weight:700;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.price-card.featured .save.promo{
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(254,240,138,0.4);
+  color:#fef08a;
+}
+.price-card .save.promo strong{ color:inherit; font-weight:900; }
+
 </style>
 </head>
 <body>
@@ -1701,6 +2095,7 @@ a{ color:inherit; text-decoration:none; }
   <button data-target="flow" data-label="課堂結構"></button>
   <button data-target="about" data-label="關於"></button>
   <button data-target="pricing" data-label="收費"></button>
+  <button data-target="papers-product" data-label="練習卷"></button>
   <button data-target="infohub" data-label="完整資訊"></button>
   <button data-target="tp" data-label="時間地點"></button>
   <button data-target="test" data-label="評價"></button>
@@ -2297,7 +2692,31 @@ a{ color:inherit; text-decoration:none; }
 
     <div class="pricing-anchor reveal">
       <div class="lbl">MARKET ANCHOR</div>
-      <div class="txt">區內<strong>一對一私補月費 HK$ 2,400 - 3,200</strong>,只能上一科。<strong>Symon Academy 雙科月費 HK$ 2,499</strong>,涵蓋兩個班別 + 3-5 人小班教學 ── 同等價錢,雙倍收穫。</div>
+      <div class="txt">區內<strong>一對一私補月費 HK$ 2,400 - 3,200</strong>,只能上一科。<strong>Symon Academy 雙科月費限時 8 折 HK$ 1,999</strong>,涵蓋兩個班別 + 3-5 人小班教學 ── 比私補平一半,雙科齊上。</div>
+    </div>
+
+    <!-- 8 折限時優惠 Banner -->
+    <div class="promo-banner reveal">
+      <div class="promo-icon"><span>20% OFF</span></div>
+      <div class="promo-text">
+        <span class="promo-tag">LIMITED TIME PROMOTION</span>
+        <h4>常規月費班 ・ <strong>限時 8 折優惠</strong></h4>
+        <p>5 月底前報名嘅學生,享受常規月費班 8 折優惠 ・ 報名後每月持續享 8 折,直至續報結束 ・ 鎖定優惠價,長期受惠。</p>
+        <div class="promo-cond">
+          <span class="cond-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 月 31 日截止
+          </span>
+          <span class="cond-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            限首 10 名
+          </span>
+          <span class="cond-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            續報持續享優惠
+          </span>
+        </div>
+      </div>
     </div>
 
     <div class="price-block reveal">
@@ -2307,18 +2726,22 @@ a{ color:inherit; text-decoration:none; }
         <span class="pill">不綁約 ・ 月費制</span>
       </div>
       <div class="price-grid">
-        <div class="price-card">
+        <div class="price-card has-discount">
+          <div class="discount-tag">8 折優惠</div>
           <h4>單科月費</h4>
           <p class="desc">任選一個班別 ・ 適合單科加強</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">1,499</span></div>
-          <div class="save">每月 ・ 任選打底/實戰/高級任一層級</div>
+          <div class="orig-price"><span class="lbl">原價</span>HK$ 1,499</div>
+          <div class="amount promo"><span class="currency">HK$</span><span class="price">1,199</span></div>
+          <div class="save promo">🎉 限時優惠 ・ <strong>省 HK$ 300 / 月</strong></div>
         </div>
-        <div class="price-card featured">
+        <div class="price-card featured has-discount">
           <div class="pill-tag">主推</div>
+          <div class="discount-tag">8 折優惠</div>
           <h4>雙科月費</h4>
           <p class="desc">任選兩個班別 ・ 不限層級 ・ 最具性價比</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">2,499</span></div>
-          <div class="save"><span class="strike">原價 HK$ 2,998</span> ・ <span class="green">省 HK$ 499</span></div>
+          <div class="orig-price"><span class="lbl">原價</span>HK$ 2,499</div>
+          <div class="amount promo"><span class="currency">HK$</span><span class="price">1,999</span></div>
+          <div class="save promo">🎉 限時優惠 ・ <strong>省 HK$ 500 / 月</strong></div>
         </div>
       </div>
     </div>
@@ -2366,6 +2789,133 @@ a{ color:inherit; text-decoration:none; }
           <div class="save"><span class="strike">原價 HK$ 3,898</span> ・ <span class="green">省 HK$ 399</span></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SECTION 10.4 ・ PRACTICE PAPER PRODUCT ============== -->
+<section class="section papers-product" id="papers-product">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="line"></span><span>STANDALONE PRODUCT ・ NO ENROLLMENT NEEDED</span></div>
+      <h2 class="section-title">專項練習卷<br/><span class="hl">弱項擊破工具</span></h2>
+      <p class="section-sub">無需報名任何補習計劃,直接購買即可。覆蓋全年級中英數三大主科,按學校真實考試風格出題,精準針對孩子嘅弱項範圍。</p>
+    </div>
+
+    <!-- 上半 ・ 產品 Hero -->
+    <div class="product-banner reveal">
+      <div class="product-hero">
+        <span class="pp-tag">SYMON ACADEMY ・ PAPER SET</span>
+        <h3>全年級中英數<br/><span class="hl">專項練習卷</span></h3>
+        <p>P1 至 P6 全覆蓋 ・ 中英數三科任選 ・ 由 Symon Sir 與專業教學團隊親自出卷 ・ 貼近學校真實考試風格 ・ 再次購買保證全新題目。</p>
+
+        <div class="pp-pricing">
+          <span class="currency">HK$</span>
+          <span class="price-now">99</span>
+          <span class="price-old">HK$ 129</span>
+          <span class="save-badge">省 HK$ 30</span>
+        </div>
+
+        <div class="pp-promo">
+          <span class="gift-icon">🎁</span>
+          <span class="promo-txt">限時優惠 ・ <strong>買 2 份送 1 份</strong> ・ 即俾 HK$ 198 拿 3 份</span>
+        </div>
+
+        <button class="product-preview-btn" type="button" data-modal="modal-papers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          預覽試卷風格樣本
+        </button>
+      </div>
+
+      <div class="product-feat">
+        <h4>每份產品包含</h4>
+        <ul>
+          <li><strong>實體練習卷 3 份</strong> ・ 同一主題不同題目</li>
+          <li><strong>完整答案及解題思路 PDF</strong> ・ 可自行對答案學習</li>
+          <li><strong>有限度答疑支援</strong> ・ 不明白可向客服提問</li>
+          <li><strong>學校真實考試風格出題</strong> ・ 貼近呈分試題型</li>
+          <li><strong>再次購買保證全新題目</strong> ・ 不重複出題</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 下半 ・ 選擇科目 + 年級 -->
+    <div class="selector-grid reveal">
+      <div class="selector-card">
+        <div class="lbl">SELECT SUBJECT</div>
+        <h5>選擇科目</h5>
+        <div class="selector-pills" id="papers-subj">
+          <button class="selector-pill" type="button" data-val="中文">中文</button>
+          <button class="selector-pill" type="button" data-val="英文">英文</button>
+          <button class="selector-pill" type="button" data-val="數學">數學</button>
+        </div>
+      </div>
+
+      <div class="selector-card">
+        <div class="lbl">SELECT GRADE</div>
+        <h5>選擇年級</h5>
+        <div class="selector-pills" id="papers-grade">
+          <button class="selector-pill" type="button" data-val="P1">P1</button>
+          <button class="selector-pill" type="button" data-val="P2">P2</button>
+          <button class="selector-pill" type="button" data-val="P3">P3</button>
+          <button class="selector-pill" type="button" data-val="P4">P4</button>
+          <button class="selector-pill" type="button" data-val="P5">P5</button>
+          <button class="selector-pill" type="button" data-val="P6">P6</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 交付方式 -->
+    <div class="delivery-grid reveal">
+      <div class="delivery-card">
+        <div class="d-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Zm0 29.158a13.13 13.13 0 0 1-6.681-1.83l-.479-.286-4.842 1.27 1.295-4.722-.313-.485a13.13 13.13 0 0 1-2.012-6.999c0-7.265 5.911-13.176 13.176-13.176 7.265 0 13.176 5.911 13.176 13.176 0 7.265-5.911 13.176-13.176 13.176Z"/></svg>
+        </div>
+        <div class="d-info">
+          <h6>① WhatsApp 直接發送</h6>
+          <p>最方便快捷 ・ 即時收到</p>
+        </div>
+        <span class="d-fee free">免運</span>
+      </div>
+
+      <div class="delivery-card">
+        <div class="d-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="d-info">
+          <h6>② Google Drive 雲端</h6>
+          <p>下載即用 ・ 永久保存</p>
+        </div>
+        <span class="d-fee free">免運</span>
+      </div>
+
+      <div class="delivery-card">
+        <div class="d-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="d-info">
+          <h6>③ 順豐到站郵寄</h6>
+          <p>實體紙本 ・ 即收即用</p>
+        </div>
+        <span class="d-fee">+HK$ 20</span>
+      </div>
+    </div>
+
+    <!-- 主 CTA -->
+    <div class="product-cta reveal">
+      <div class="cta-text">
+        <h4>選好年級同科目 ・ 立即向客服落單</h4>
+        <p>WhatsApp 即時回覆 ・ 由 Symon Sir 親自跟進你嘅訂單</p>
+      </div>
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想購買全年級中英數專項練習卷。我嘅孩子讀%20[年級]，想針對%20[科目]。請問點樣落單？" target="_blank" rel="noopener" class="btn-buy" id="paperBuyBtn">
+        <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+        立即購買 ・ WhatsApp 落單
+      </a>
+    </div>
+
+    <!-- 重要說明 -->
+    <div class="product-disclaimer reveal">
+      <strong>重要說明</strong>:本產品不包含批改服務。練習卷附完整答案 PDF,學生可自行核對。如需導師批改、限時提交監督及全方位跟進,建議選擇上方常規補習計劃或考試急救班。
     </div>
   </div>
 </section>
@@ -2501,7 +3051,7 @@ a{ color:inherit; text-decoration:none; }
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SCHEDULE & VENUE</span></div>
       <h2 class="section-title">上課時間 + <span class="hl">指定地點</span></h2>
-      <p class="section-sub">首階段服務範圍以新界北區(粉嶺、上水)為主。家長可從指定地點清單中選擇上課場地。</p>
+      <p class="section-sub">服務範圍涵蓋新界北區(粉嶺、上水)及大埔。家長可從指定地點清單中選擇上課場地。</p>
     </div>
 
     <div class="tp-grid">
@@ -2524,14 +3074,12 @@ a{ color:inherit; text-decoration:none; }
 
       <div class="tp-block reveal delay-2">
         <div class="lbl"><span class="line"></span>VENUE ・ 指定地點</div>
-        <h3>4 個指定場地</h3>
+        <h3>指定上課場地</h3>
         <ol class="tp-place-list">
-          <li>粉嶺和興體育館會議室</li>
-          <li>粉嶺聯和墟會議室</li>
-          <li>上水廣場</li>
-          <li>屋苑會所(例如牽晴間)<span class="sub">須報名學生中至少一位為該屋苑住客</span></li>
+          <li>上水廣場單獨會議室或活動室</li>
+          <li>各大屋苑會所<span class="sub">須報名學生中至少一位為該屋苑住客</span></li>
         </ol>
-        <div class="tp-foot">所有場地皆為獨立會議室或私人空間。場地費全數由 Symon Academy 承擔,家長無需另付。</div>
+        <div class="tp-foot"><strong>關於場地選擇</strong>:北區及大埔現時共享空間及私人會議室數量有限,部分公共設施(如體育館)未有提供獨立枱凳配套,難以維持結構化教學節奏。我們堅持只選用配套完善、安靜不受干擾嘅獨立會議室,確保每一位學生嘅學習質素。所有指定場地距離北區及大埔主要屋苑步行或交通約 5 - 10 分鐘可達。<br/><br/><strong>場地費用和手續,全數由 Symon Academy 承擔,家長無需另付。</strong></div>
       </div>
     </div>
   </div>
@@ -2667,8 +3215,8 @@ a{ color:inherit; text-decoration:none; }
         <h5>CONTACT</h5>
         <ul>
           <li><a href="https://wa.me/85298560191" target="_blank" rel="noopener">WhatsApp:+852 9856 0191</a></li>
-          <li>香港北區 ・ 粉嶺 / 上水</li>
-          <li>4 個指定場地任選</li>
+          <li>新界北區 ・ 粉嶺 / 上水 / 大埔</li>
+          <li>多個指定場地任選</li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2678,6 +3226,7 @@ a{ color:inherit; text-decoration:none; }
           <li><a href="#tiers">四大班別</a></li>
           <li><a href="#curriculum">課程內容</a></li>
           <li><a href="#pricing">收費結構</a></li>
+          <li><a href="#papers-product">專項練習卷</a></li>
           <li><a href="#infohub">完整上課資訊</a></li>
           <li><a href="#test">家長評價</a></li>
         </ul>
@@ -2925,6 +3474,35 @@ document.querySelectorAll('.lb-grid img, .lb-pages img').forEach(img => {
 });
 zoomOverlay.addEventListener('click', () => {
   zoomOverlay.classList.remove('open');
+});
+
+// ============== PAPER PRODUCT PICKER (Subject + Grade) ==============
+const paperState = { subject: null, grade: null };
+const paperBuyBtn = document.getElementById('paperBuyBtn');
+const baseWhatsapp = 'https://wa.me/85298560191?text=';
+
+function updateBuyLink(){
+  const sub = paperState.subject || '[科目]';
+  const grade = paperState.grade || '[年級]';
+  const msg = `你好 Symon Sir，我想購買全年級中英數專項練習卷。我嘅孩子讀 ${grade}，想針對 ${sub}。請問點樣落單？`;
+  paperBuyBtn.href = baseWhatsapp + encodeURIComponent(msg);
+}
+
+document.querySelectorAll('#papers-subj .selector-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('#papers-subj .selector-pill').forEach(p => p.classList.remove('selected'));
+    pill.classList.add('selected');
+    paperState.subject = pill.dataset.val;
+    updateBuyLink();
+  });
+});
+document.querySelectorAll('#papers-grade .selector-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('#papers-grade .selector-pill').forEach(p => p.classList.remove('selected'));
+    pill.classList.add('selected');
+    paperState.grade = pill.dataset.val;
+    updateBuyLink();
+  });
 });
 </script>
 

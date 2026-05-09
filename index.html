@@ -1950,6 +1950,124 @@ a{ color:inherit; text-decoration:none; }
 .product-preview-btn:hover{
   border-color:var(--orange); color:var(--orange);
 }
+/* ============== SPRINT NOTE (組團建議) ============== */
+.sprint-note{
+  margin-top:32px; padding:24px 28px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-left:4px solid var(--orange);
+  border-radius:8px;
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+.sprint-note .note-head{
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:10px;
+  color:var(--orange);
+}
+.sprint-note .note-head svg{ width:20px; height:20px; }
+.sprint-note .note-head strong{
+  font-family:'Noto Serif TC',serif; font-size:16px; font-weight:700;
+  color:white;
+}
+.sprint-note p{
+  font-size:14px; color:rgba(255,255,255,0.85); line-height:1.7;
+}
+.sprint-note p strong{ color:#fef08a; font-weight:700; }
+@media (max-width:540px){
+  .sprint-note{ padding:20px 22px; }
+}
+
+/* ============== GROUP DISCOUNT (PRICING CARD HINT + SPRINT COMPARISON) ============== */
+
+/* 細小版 ・ 用喺 PRICING 急救卡片內 */
+.price-card .group-hint{
+  margin-top:14px; padding:10px 14px;
+  background:rgba(34,197,94,0.08);
+  border:1px dashed rgba(34,197,94,0.4);
+  border-radius:6px;
+  font-size:12.5px; color:#16a34a; line-height:1.5;
+  font-family:'Noto Serif TC',serif;
+}
+.price-card .group-hint strong{
+  color:#15803d; font-weight:900;
+}
+.price-card .group-hint.dark{
+  background:rgba(34,197,94,0.15);
+  border-color:rgba(74,222,128,0.5);
+  color:#bbf7d0;
+}
+.price-card .group-hint.dark strong{
+  color:#86efac;
+}
+
+/* 大版 ・ 用喺 SPRINT 獨立區嘅比較圖 */
+.group-comparison{
+  margin-top:18px; padding:18px 20px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;
+  display:grid; grid-template-columns:1fr auto 1fr; gap:16px;
+  align-items:center;
+}
+.group-comparison + .group-comparison{
+  margin-top:14px;
+}
+@media (max-width:640px){
+  .group-comparison{ grid-template-columns:1fr; gap:12px; }
+}
+.group-comparison .gc-item{
+  text-align:center;
+  padding:14px 10px;
+}
+.group-comparison .gc-item.highlight{
+  background:rgba(255,107,26,0.1);
+  border:1px solid rgba(255,107,26,0.3);
+  border-radius:6px;
+  position:relative;
+}
+.group-comparison .gc-lbl{
+  font-size:12px; color:rgba(255,255,255,0.65);
+  margin-bottom:6px;
+  font-family:'Noto Serif TC',serif;
+}
+.group-comparison .gc-price{
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  color:white; line-height:1; letter-spacing:0.02em;
+}
+.group-comparison .gc-item.highlight .gc-price{
+  color:var(--orange);
+}
+.group-comparison .gc-price .per{
+  font-size:13px; color:rgba(255,255,255,0.5);
+  font-family:'Space Grotesk',sans-serif; letter-spacing:0;
+  margin-left:4px;
+}
+.group-comparison .gc-item.highlight .gc-price .per{
+  color:rgba(255,107,26,0.7);
+}
+.group-comparison .gc-save{
+  margin-top:6px; padding:3px 10px;
+  display:inline-block;
+  background:#10b981; color:white;
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.15em; border-radius:100px;
+}
+.group-comparison .gc-arrow{
+  font-size:24px; color:var(--orange);
+  font-weight:700;
+}
+@media (max-width:640px){
+  .group-comparison .gc-arrow{ transform:rotate(90deg); }
+}
+
+.sprint-note .note-foot{
+  margin-top:18px; padding-top:14px;
+  border-top:1px dashed rgba(255,255,255,0.15);
+  font-size:12.5px; color:rgba(255,255,255,0.6);
+  line-height:1.7;
+}
+
 /* ============== 8折 PROMOTION SYSTEM ============== */
 
 /* Promo banner above pricing block */
@@ -2409,7 +2527,7 @@ a{ color:inherit; text-decoration:none; }
         </div>
         <div class="focus">操卷強化 ・ 應試衝刺</div>
         <p class="target">應試前需要快速掌握概念、診斷失分點的學生。以做卷操練為主,結構為輔,在最短時間追回課程。</p>
-        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2.0 小時 / 堂</div>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>單科 2 日 × 2 小時 ・ 雙科 4 日 × 2 小時</div>
       </div>
     </div>
   </div>
@@ -2755,15 +2873,17 @@ a{ color:inherit; text-decoration:none; }
       <div class="price-grid">
         <div class="price-card">
           <h4>單科急救班</h4>
-          <p class="desc">應試衝刺 ・ 操卷為主 ・ 獨立報讀</p>
+          <p class="desc">2 日 × 2 小時 ・ 共 4 小時操卷強化</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">799</span></div>
-          <div class="save">一次性課程 ・ 不綁月費</div>
+          <div class="save">一次性課程 ・ 不綁月費 ・ 1 - 10 人彈性編配</div>
+          <div class="group-hint">👥 2 人或以上組團 ・ 每人享 9 折 = <strong>HK$ 719 / 人</strong></div>
         </div>
         <div class="price-card featured">
           <h4>雙科急救班</h4>
-          <p class="desc">英文 + 數學 ・ 全方位衝刺</p>
+          <p class="desc">每科 2 日 × 2 小時 ・ 共 8 小時雙科衝刺</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
           <div class="save"><span class="strike">原價 HK$ 1,598</span> ・ <span class="green">省 HK$ 199</span></div>
+          <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折 = <strong>HK$ 1,259 / 人</strong></div>
         </div>
       </div>
     </div>
@@ -2962,7 +3082,7 @@ a{ color:inherit; text-decoration:none; }
         </div>
         <div class="info-row">
           <span class="k">急救班人數</span>
-          <span class="v"><strong>3 - 10 人</strong> ・ 應試衝刺彈性編配</span>
+          <span class="v"><strong>1 - 10 人</strong> ・ 小組優先 ・ 接受個人課靈活處理</span>
         </div>
         <div class="info-row">
           <span class="k">組團報名</span>
@@ -3012,14 +3132,14 @@ a{ color:inherit; text-decoration:none; }
 
         <div class="pkg-pane" id="pkg-sprint">
           <ul class="pkg-list">
-            <li>堂上考試模式做卷</li>
+            <li>3 份完整試卷 ・ 堂上考試模式做卷</li>
             <li>即場批改 + 詳細講解</li>
             <li>額外試卷自主操練</li>
             <li>進度報告兩份(短期診斷)</li>
-            <li>應試前任意一日靈活編排</li>
+            <li>應試前彈性編排日期</li>
           </ul>
           <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
-            <strong style="color:var(--orange);">課時:</strong> 120mins / 堂 ・ 一次性課程 ・ 限時加開
+            <strong style="color:var(--orange);">課時:</strong> 單科 2 日 × 2 小時 = 4 小時 ・ 雙科每科 2 日 × 2 小時 = 共 8 小時 ・ 限時加開
           </div>
         </div>
 
@@ -3161,13 +3281,46 @@ a{ color:inherit; text-decoration:none; }
       <div class="sprint-card">
         <h4>單科急救班</h4>
         <div><span class="currency">HK$</span><span class="price">799</span></div>
-        <div class="save">一次性課程 ・ 可獨立報讀</div>
+        <div class="save">2 日 × 2 小時 ・ 共 4 小時操卷 ・ 一次性課程</div>
       </div>
       <div class="sprint-card">
         <h4>雙科急救班</h4>
         <div><span class="currency">HK$</span><span class="price">1,399</span></div>
-        <div class="save"><span class="strike">原價 HK$ 1,598</span> ・ 省 HK$ 199</div>
+        <div class="save">每科 2 日 × 2 小時 ・ 共 8 小時雙科衝刺<br/><span class="strike">原價 HK$ 1,598</span> ・ 省 HK$ 199</div>
       </div>
+    </div>
+
+    <div class="sprint-note reveal">
+      <div class="note-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <strong>組團報讀 ・ 每人 9 折優惠</strong>
+      </div>
+      <p><strong>2 人或以上組團報讀,每人即享 9 折優惠</strong> ・ 強烈建議組團,既享同等優質教學,又可分擔成本、互相鼓勵 ・ 效果同步提升。</p>
+      <div class="group-comparison">
+        <div class="gc-item">
+          <div class="gc-lbl">單科 ・ 個人課</div>
+          <div class="gc-price">HK$ 799 <span class="per">/ 人</span></div>
+        </div>
+        <div class="gc-arrow">→</div>
+        <div class="gc-item highlight">
+          <div class="gc-lbl">單科 ・ 2 人或以上組團</div>
+          <div class="gc-price">HK$ 719 <span class="per">/ 人</span></div>
+          <div class="gc-save">每人省 HK$ 80</div>
+        </div>
+      </div>
+      <div class="group-comparison">
+        <div class="gc-item">
+          <div class="gc-lbl">雙科 ・ 個人課</div>
+          <div class="gc-price">HK$ 1,399 <span class="per">/ 人</span></div>
+        </div>
+        <div class="gc-arrow">→</div>
+        <div class="gc-item highlight">
+          <div class="gc-lbl">雙科 ・ 2 人或以上組團</div>
+          <div class="gc-price">HK$ 1,259 <span class="per">/ 人</span></div>
+          <div class="gc-save">每人省 HK$ 140</div>
+        </div>
+      </div>
+      <p class="note-foot">每班彈性 1 - 10 人 ・ 家長可自行組團報名 ・ 個人報名或不足 3 人組別,將視場地及老師時間安排彈性處理 ・ 最終人數以開班時實際出席為準。</p>
     </div>
   </div>
 </section>

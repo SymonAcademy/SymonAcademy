@@ -1291,16 +1291,39 @@ a{ color:inherit; text-decoration:none; }
 /* small responsive tweaks */
 @media (max-width:540px){
   .hero-title{ font-size:42px; }
-  .hero-portrait{ height:380px; max-width:340px; }
+  .hero-portrait{ height:420px; max-width:340px; min-height:420px; }
   .hero-portrait .frame{
-    background:linear-gradient(135deg, var(--orange) 0%, var(--orange) 35%, var(--warm-dark) 35%, var(--warm-dark) 100%);
-    clip-path:none;
+    background:linear-gradient(135deg, var(--orange) 0%, var(--orange) 40%, var(--black-2) 40%, var(--black-2) 100%) !important;
+    clip-path:none !important;
+  }
+  .hero-portrait .frame::before{
+    display:none !important;
+  }
+  .hero-portrait img{
+    animation:none !important;
+    opacity:1 !important;
   }
   .hero-portrait .deco-num{ font-size:48px; top:14px; right:14px; }
   .hero-portrait .deco-tag{ bottom:18px; left:18px; padding:10px 14px; max-width:200px; }
   .hero-portrait .deco-tag .nm{ font-size:15px; }
   .hero-portrait .deco-tag .ed{ font-size:10px; }
   .hero{ padding:100px 0 60px; }
+}
+
+/* === ANIMATION FAIL-SAFE: ensure all hero animated elements visible if animation fails === */
+@media (max-width:1024px){
+  .hero-title .word{ opacity:1 !important; transform:none !important; animation:none !important; }
+  .hero-sub{ opacity:1 !important; transform:none !important; animation:none !important; }
+  .hero-actions{ opacity:1 !important; transform:none !important; animation:none !important; }
+  .hero-metrics{ opacity:1 !important; transform:none !important; animation:none !important; }
+}
+
+/* respect reduced-motion preference globally */
+@media (prefers-reduced-motion: reduce){
+  .hero-title .word, .hero-sub, .hero-actions, .hero-metrics{
+    opacity:1 !important; transform:none !important; animation:none !important;
+  }
+  .hero-portrait img{ animation:none !important; }
 }
 
 /* hero portrait safety: prevent invisible image on weak browsers */
@@ -1533,6 +1556,43 @@ a{ color:inherit; text-decoration:none; }
 }
 .single-subject-note strong{ color:var(--orange); }
 
+/* ============== BONUS BOX (CURRICULUM CARD 配套贈品) ============== */
+.bonus-box{
+  margin-top:18px; padding:16px 18px 14px;
+  background:linear-gradient(135deg, rgba(253,224,71,0.12) 0%, rgba(251,191,36,0.08) 100%);
+  border:1px solid rgba(251,191,36,0.35);
+  border-left:3px solid #f59e0b;
+  border-radius:8px;
+}
+.bonus-box .bonus-head{
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:10px;
+  font-family:'Noto Serif TC',serif; font-size:14px; font-weight:700;
+  color:#92400e;
+}
+.bonus-box .bonus-head .gift{ font-size:18px; }
+.bonus-box .bonus-head .label{
+  font-family:'Bebas Neue',sans-serif; font-size:10px;
+  letter-spacing:0.25em; color:#92400e;
+  padding:2px 8px; background:rgba(251,191,36,0.2);
+  border-radius:100px; margin-left:auto;
+}
+.bonus-box ul{
+  list-style:none; margin:0;
+}
+.bonus-box li{
+  padding:5px 0 5px 22px; position:relative;
+  font-size:12.5px; color:var(--txt-dark); line-height:1.6;
+}
+.bonus-box li::before{
+  content:'✓'; position:absolute; left:0; top:6px;
+  width:14px; height:14px; border-radius:50%;
+  background:#f59e0b; color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-size:9px; font-weight:700;
+}
+.bonus-box li strong{ color:#78350f; font-weight:700; }
+
 /* ============== INFO HUB SECTION ============== */
 .infohub{ background:var(--cream-3); color:var(--txt-dark); }
 
@@ -1696,6 +1756,32 @@ a{ color:inherit; text-decoration:none; }
 .tp-time-divider .line{ flex:1; height:1px; background:var(--line-dark); }
 @media (max-width:540px){
   .tp-time-row{ flex-wrap:wrap; gap:6px; }
+}
+
+/* TP intro line + Sprint time callout */
+.tp-intro{
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.6;
+  margin-bottom:14px; padding-bottom:14px;
+  border-bottom:1px dashed var(--line-dark);
+}
+.sprint-time-callout{
+  margin-top:20px; padding:18px 20px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.06) 0%, rgba(255,107,26,0.02) 100%);
+  border:1px solid rgba(255,107,26,0.25);
+  border-left:3px solid var(--orange);
+  border-radius:8px;
+  display:flex; gap:14px; align-items:flex-start;
+}
+.sprint-time-callout .bolt{
+  font-size:22px; line-height:1.2; flex-shrink:0;
+}
+.sprint-time-callout strong{
+  display:block;
+  font-family:'Noto Serif TC',serif; font-size:15px; font-weight:700;
+  color:var(--orange); margin-bottom:4px;
+}
+.sprint-time-callout p{
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.7;
 }
 
 /* ============== PRACTICE PAPER PRODUCT SECTION ============== */
@@ -2024,21 +2110,22 @@ a{ color:inherit; text-decoration:none; }
   border-radius:8px;
 }
 .group-comparison .gc-item.highlight{
-  background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  border:2px solid #fde68a;
+  background:linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border:2px solid #fde047;
   border-radius:8px;
   position:relative;
-  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4), 0 0 0 4px rgba(253,224,71,0.15);
 }
 .group-comparison .gc-item.highlight::before{
   content:'BEST DEAL';
-  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
-  padding:3px 12px;
+  position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+  padding:4px 14px;
   background:#dc2626; color:white;
-  font-family:'Bebas Neue',sans-serif; font-size:10px; letter-spacing:0.2em;
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.2em;
   border-radius:100px;
   white-space:nowrap;
-  box-shadow:0 4px 8px rgba(220,38,38,0.4);
+  box-shadow:0 4px 10px rgba(220,38,38,0.5);
+  z-index:2;
 }
 .group-comparison .gc-lbl{
   font-size:12px; color:rgba(255,255,255,0.75);
@@ -2047,7 +2134,7 @@ a{ color:inherit; text-decoration:none; }
   font-weight:700;
 }
 .group-comparison .gc-item.highlight .gc-lbl{
-  color:#1c1917;
+  color:#fde047;
 }
 .group-comparison .gc-price{
   font-family:'Bebas Neue',sans-serif; font-size:32px;
@@ -2055,9 +2142,9 @@ a{ color:inherit; text-decoration:none; }
   font-weight:700;
 }
 .group-comparison .gc-item.highlight .gc-price{
-  color:#1c1917;
+  color:#fde047;
   font-size:36px;
-  text-shadow:0 1px 0 rgba(255,255,255,0.3);
+  text-shadow:none;
 }
 .group-comparison .gc-price .per{
   font-size:13px; color:rgba(255,255,255,0.6);
@@ -2066,7 +2153,7 @@ a{ color:inherit; text-decoration:none; }
   font-weight:400;
 }
 .group-comparison .gc-item.highlight .gc-price .per{
-  color:rgba(28,25,23,0.7);
+  color:rgba(253,224,71,0.7);
 }
 .group-comparison .gc-save{
   margin-top:8px; padding:4px 12px;
@@ -2090,6 +2177,107 @@ a{ color:inherit; text-decoration:none; }
   border-top:1px dashed rgba(255,255,255,0.15);
   font-size:12.5px; color:rgba(255,255,255,0.6);
   line-height:1.7;
+}
+
+/* ============== VALUE STACK (SPRINT 效果承諾 + 配套堆疊) ============== */
+.hl-yellow{
+  color:#fde047;
+  text-shadow:0 2px 12px rgba(253,224,71,0.3);
+}
+
+.value-stack{
+  margin-top:32px; margin-bottom:32px;
+  padding:36px 36px 32px;
+  background:rgba(0,0,0,0.3);
+  border:1px solid rgba(253,224,71,0.25);
+  border-radius:12px;
+  position:relative;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.value-stack::before{
+  content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+  background:linear-gradient(180deg, #fde047 0%, #f59e0b 100%);
+  border-radius:12px 0 0 12px;
+}
+@media (max-width:540px){
+  .value-stack{ padding:28px 22px; }
+}
+
+.vs-header{ margin-bottom:28px; }
+.vs-tag{
+  display:inline-block; padding:6px 14px; margin-bottom:12px;
+  background:linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+  color:#1c1917;
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.2em; border-radius:100px;
+  font-weight:700;
+}
+.value-stack h3{
+  font-family:'Noto Serif TC',serif; font-size:clamp(22px, 2.6vw, 28px);
+  font-weight:900; color:white; line-height:1.4;
+}
+
+.vs-outcomes{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+  margin-bottom:28px;
+}
+@media (max-width:900px){ .vs-outcomes{ grid-template-columns:1fr; gap:14px; } }
+
+.vs-outcome{
+  padding:22px 22px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;
+  position:relative;
+  transition:all .35s var(--easing);
+}
+.vs-outcome:hover{
+  background:rgba(253,224,71,0.06);
+  border-color:rgba(253,224,71,0.35);
+  transform:translateY(-3px);
+}
+.vs-num{
+  display:inline-block;
+  font-family:'Bebas Neue',sans-serif; font-size:32px;
+  color:#fde047; line-height:1; letter-spacing:0.05em;
+  margin-bottom:10px;
+}
+.vs-outcome h4{
+  font-family:'Noto Serif TC',serif; font-size:17px; font-weight:700;
+  color:white; margin-bottom:8px; line-height:1.4;
+}
+.vs-outcome p{
+  font-size:13.5px; color:rgba(255,255,255,0.75); line-height:1.7;
+}
+
+.vs-includes{
+  padding-top:24px;
+  border-top:1px dashed rgba(255,255,255,0.18);
+}
+.vs-includes-head{
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+  color:#fde047; margin-bottom:14px;
+}
+.vs-pills{
+  display:flex; flex-wrap:wrap; gap:10px;
+}
+.vs-pill{
+  padding:9px 16px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;
+  font-size:13px; color:rgba(255,255,255,0.9);
+  line-height:1.4;
+  transition:all .25s var(--easing);
+}
+.vs-pill:hover{
+  background:rgba(253,224,71,0.1);
+  border-color:rgba(253,224,71,0.4);
+}
+.vs-pill strong{
+  color:#fde047; font-weight:900; font-family:'Space Grotesk',sans-serif;
+  margin-right:4px;
 }
 
 /* ============== 8折 PROMOTION SYSTEM ============== */
@@ -2551,7 +2739,7 @@ a{ color:inherit; text-decoration:none; }
         </div>
         <div class="focus">操卷強化 ・ 應試衝刺</div>
         <p class="target">應試前需要快速掌握概念、診斷失分點的學生。以做卷操練為主,結構為輔,在最短時間追回課程。</p>
-        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>單科 2 日 × 2 小時 ・ 雙科 4 日 × 2 小時</div>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>單科 2 節 ・ 共 3 小時 ・ 雙科 共 6 小時</div>
       </div>
     </div>
   </div>
@@ -2600,9 +2788,164 @@ a{ color:inherit; text-decoration:none; }
 
     <!-- 年級 Tab 切換 -->
     <div class="tab-nav reveal" role="tablist">
+      <button class="tab-btn" data-tab="grade-p2" role="tab"><span>小二</span><span class="en">P2</span></button>
+      <button class="tab-btn" data-tab="grade-p3" role="tab"><span>小三</span><span class="en">P3</span></button>
       <button class="tab-btn active" data-tab="grade-p4" role="tab"><span>小四</span><span class="en">P4</span></button>
       <button class="tab-btn" data-tab="grade-p5" role="tab"><span>小五</span><span class="en">P5</span></button>
       <button class="tab-btn" data-tab="grade-p6" role="tab"><span>小六</span><span class="en">P6</span></button>
+    </div>
+
+    <!-- P2 -->
+    <div class="tab-pane" id="grade-p2">
+      <div class="curr-tab-meta reveal">
+        <span class="grade-tag">P2 ・ 小二</span>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小二全年學校考核重點 ・ 對應四大班別架構</div>
+      </div>
+
+      <div class="curr-grid">
+        <div class="curr-card eng reveal delay-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div>
+              <h3>P2 英文</h3>
+              <div class="en">ENGLISH ・ 7 MODULES</div>
+            </div>
+          </div>
+          <ol>
+            <li>Parts of Speech 入門<span class="sub">名詞單複數 ・ 代名詞 ・ 形容詞 ・ 動詞基本概念</span></li>
+            <li>Be 動詞系統<span class="sub">am / is / are ・ was / were ・ 用法區分 ・ 完整句型</span></li>
+            <li>Simple Present Tense 完整教學<span class="sub">第三人稱單數 -s/-es ・ Yes/No 問句 ・ Wh 問句 ・ 否定句</span></li>
+            <li>Present Continuous Tense<span class="sub">be + V-ing ・ 拼寫規則 ・ 應用情境</span></li>
+            <li>Articles(冠詞)<span class="sub">a / an / the ・ 何時用 ・ 何時不用</span></li>
+            <li>Prepositions 入門<span class="sub">in / on / at / under / next to ・ 地點與時間用法</span></li>
+            <li>Question Words<span class="sub">What / Who / Where / When / How ・ 完整問句結構</span></li>
+          </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>英文限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>Tenses 總結表</strong> ・ 一張表搞掂晒所有試卷時態題,結構化套入即拎滿分</li>
+              <li><strong>Tenses 轉換表</strong> ・ 過去式 / 現在完成式 / 完成進行式變化規則一覽</li>
+              <li><strong>核心單詞表</strong> ・ 涵蓋該年級閱讀理解所需詞彙量</li>
+              <li><strong>文法速查卡</strong> ・ 隨堂派發 ・ 應試即拎即用</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="curr-card reveal delay-2">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+            </div>
+            <div>
+              <h3>P2 數學</h3>
+              <div class="en">MATHEMATICS ・ 14 TOPICS</div>
+            </div>
+          </div>
+          <ol>
+            <li>三位數(認識 ・ 數數活動)</li>
+            <li>加法和減法(基本運算 ・ 加減應用題)</li>
+            <li>角和垂直線(角 ・ 直角 ・ 銳角 ・ 鈍角)</li>
+            <li>米(認識 ・ 量度 ・ 比較)</li>
+            <li>基本乘法(2/3/4/5/6/7/8/9/10/0/1 完整乘法表)</li>
+            <li>時間(報時 ・ 活動時間 ・ 年和月)</li>
+            <li>立體圖形(角柱 ・ 圓柱 ・ 角錐 ・ 圓錐 ・ 球)</li>
+            <li>四位數(認識 ・ 數數活動)</li>
+            <li>香港的貨幣(認識 ・ 購物應用)</li>
+            <li>減法及加減混合(混合運算 ・ 應用題)</li>
+            <li>象形圖</li>
+            <li>基本除法(分物 ・ 乘除關係 ・ 除法 ・ 應用題)</li>
+            <li>方向</li>
+            <li>四邊形(線段 ・ 正方形 ・ 長方形)</li>
+          </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
+              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
+              <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="tab-pane" id="grade-p3">
+      <div class="curr-tab-meta reveal">
+        <span class="grade-tag">P3 ・ 小三</span>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小三全年學校考核重點 ・ 對應四大班別架構</div>
+      </div>
+
+      <div class="curr-grid">
+        <div class="curr-card eng reveal delay-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div>
+              <h3>P3 英文</h3>
+              <div class="en">ENGLISH ・ 7 MODULES</div>
+            </div>
+          </div>
+          <ol>
+            <li>Tenses(時態三大基礎)<span class="sub">Simple Present ・ Present Continuous ・ Simple Past 完整對比</span></li>
+            <li>Past Tense 深化<span class="sub">規則動詞 -ed ・ 不規則動詞 ・ Yes/No 問句 ・ 否定句</span></li>
+            <li>Pronouns 系統<span class="sub">主格 / 受格 / 所有格 ・ I/me/my ・ Reflexive 入門</span></li>
+            <li>Conjunctions(連接詞)<span class="sub">and / but / or / so / because ・ 完整句型結構</span></li>
+            <li>Prepositions 進階<span class="sub">時間介詞 in/on/at ・ 移動介詞 to/from/into ・ 完整對照</span></li>
+            <li>Plurals(複數變化)<span class="sub">規則複數 ・ -es / -ies ・ 不規則複數 ・ 不可數名詞</span></li>
+            <li>Sentence Types(句式類型)<span class="sub">直述句 ・ 疑問句 ・ 否定句 ・ 感嘆句 ・ 完整句型套裝</span></li>
+          </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>英文限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>Tenses 總結表</strong> ・ 一張表搞掂晒所有試卷時態題,結構化套入即拎滿分</li>
+              <li><strong>Tenses 轉換表</strong> ・ 過去式 / 現在完成式 / 完成進行式變化規則一覽</li>
+              <li><strong>核心單詞表</strong> ・ 涵蓋該年級閱讀理解所需詞彙量</li>
+              <li><strong>文法速查卡</strong> ・ 隨堂派發 ・ 應試即拎即用</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="curr-card reveal delay-2">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
+            </div>
+            <div>
+              <h3>P3 數學</h3>
+              <div class="en">MATHEMATICS ・ 13 TOPICS</div>
+            </div>
+          </div>
+          <ol>
+            <li>五位數(認識 ・ 比較數的大小)</li>
+            <li>乘法(三位數乘一位數 ・ 應用題)</li>
+            <li>毫米和公里(認識 ・ 量度 ・ 應用)</li>
+            <li>秒和 24 小時報時制(時間量度 ・ 時間應用)</li>
+            <li>除法(基本除法 ・ 三位數除以一位數 ・ 乘除應用題)</li>
+            <li>平行線和四邊形(平行線 ・ 平行四邊形 ・ 梯形)</li>
+            <li>重量(重量認識 ・ 克 ・ 公斤)</li>
+            <li>加減混合運算(圓括號 ・ 混合應用題)</li>
+            <li>四則運算(乘加 ・ 乘減 ・ 混合運算)</li>
+            <li>三角形(分類 ・ 製作三角形)</li>
+            <li>分數(認識 ・ 比較 ・ 同分母加減法)</li>
+            <li>容量(認識 ・ 升和毫升 ・ 量度活動)</li>
+            <li>棒形圖(讀圖 ・ 製圖 ・ 數據分析)</li>
+          </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
+              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
+              <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- P4 -->
@@ -2633,6 +2976,15 @@ a{ color:inherit; text-decoration:none; }
             <li>Frequency Questions(頻率問句)<span class="sub">How often / once / twice / three times a ___</span></li>
             <li>歷年累積文法整合<span class="sub">綜合溫故 ・ 銜接以往年級已學文法</span></li>
           </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>英文限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>Tenses 總結表</strong> ・ 一張表搞掂晒所有試卷時態題,結構化套入即拎滿分</li>
+              <li><strong>Tenses 轉換表</strong> ・ 過去式 / 現在完成式 / 完成進行式變化規則一覽</li>
+              <li><strong>核心單詞表</strong> ・ 涵蓋該年級閱讀理解所需詞彙量</li>
+              <li><strong>文法速查卡</strong> ・ 隨堂派發 ・ 應試即拎即用</li>
+            </ul>
+          </div>
         </div>
 
         <div class="curr-card reveal delay-2">
@@ -2657,6 +3009,15 @@ a{ color:inherit; text-decoration:none; }
             <li>小數</li>
             <li>棒形圖</li>
           </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
+              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
+              <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -2665,11 +3026,41 @@ a{ color:inherit; text-decoration:none; }
     <div class="tab-pane" id="grade-p5">
       <div class="curr-tab-meta reveal">
         <span class="grade-tag">P5 ・ 小五</span>
-        <div class="info"><strong>數學科現已開放報名</strong> ・ 涵蓋小五全年呈分試考核重點 ・ 多位數運算 / 分數四則 / 立體與體積 / 代數方程</div>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小五全年呈分試考核重點 ・ 升中前關鍵備戰階段</div>
       </div>
 
       <div class="curr-grid">
-        <div class="curr-card reveal delay-1" style="grid-column:1/-1">
+        <div class="curr-card eng reveal delay-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div>
+              <h3>P5 英文</h3>
+              <div class="en">ENGLISH ・ 7 MODULES</div>
+            </div>
+          </div>
+          <ol>
+            <li>Tenses 完整整合<span class="sub">Present / Past / Future + Continuous / Perfect 完整對比矩陣</span></li>
+            <li>Passive Voice(被動句)入門<span class="sub">主動轉被動 ・ 三種時態完整教學 ・ by 介詞應用</span></li>
+            <li>Reported Speech(轉述句)入門<span class="sub">直接引語 ・ 間接引語 ・ 時態變化規則</span></li>
+            <li>Modal Verbs(情態動詞)<span class="sub">can / could / may / might / must / should / would 用法區分</span></li>
+            <li>Adverbs(副詞系統)<span class="sub">頻率 / 程度 / 方式 / 地點 / 時間副詞 ・ 位置規則</span></li>
+            <li>Conjunctions 進階<span class="sub">although / unless / while / when / before / after 完整句型</span></li>
+            <li>Relative Clauses(關係子句)入門<span class="sub">who / which / that ・ 定語從句結構</span></li>
+          </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>英文限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>Tenses 總結表</strong> ・ 一張表搞掂晒所有試卷時態題,結構化套入即拎滿分</li>
+              <li><strong>Tenses 轉換表</strong> ・ 過去式 / 現在完成式 / 完成進行式變化規則一覽</li>
+              <li><strong>核心單詞表</strong> ・ 涵蓋該年級閱讀理解所需詞彙量</li>
+              <li><strong>文法速查卡</strong> ・ 隨堂派發 ・ 應試即拎即用</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="curr-card reveal delay-2">
           <div class="head">
             <div class="head-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
@@ -2689,11 +3080,16 @@ a{ color:inherit; text-decoration:none; }
             <li>代數<span class="sub">代數基本概念 ・ 代數的應用</span></li>
             <li>方程<span class="sub">方程基本概念 ・ 方程的應用</span></li>
           </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
+              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
+              <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
+            </ul>
+          </div>
         </div>
-      </div>
-
-      <div class="single-subject-note reveal">
-        <strong>備註</strong>:P5 英文科將於後續階段視乎反應陸續延伸開設,首階段先行專注數學科。
       </div>
     </div>
 
@@ -2701,11 +3097,42 @@ a{ color:inherit; text-decoration:none; }
     <div class="tab-pane" id="grade-p6">
       <div class="curr-tab-meta reveal">
         <span class="grade-tag">P6 ・ 小六</span>
-        <div class="info"><strong>數學科現已開放報名</strong> ・ 升中前最後一年衝刺階段 ・ 完整覆蓋呈分試十大考核範疇</div>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 升中前最後一年衝刺階段 ・ 完整覆蓋呈分試考核範疇</div>
       </div>
 
       <div class="curr-grid">
-        <div class="curr-card reveal delay-1" style="grid-column:1/-1">
+        <div class="curr-card eng reveal delay-1">
+          <div class="head">
+            <div class="head-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div>
+              <h3>P6 英文</h3>
+              <div class="en">ENGLISH ・ 8 MODULES</div>
+            </div>
+          </div>
+          <ol>
+            <li>Tenses 完整系統<span class="sub">12 大時態整合 ・ Perfect Continuous 系列 ・ 完整時態切換訓練</span></li>
+            <li>Passive Voice 完整系統<span class="sub">所有時態被動句 ・ 雙賓語被動 ・ 主動轉被動萬用公式</span></li>
+            <li>Reported Speech 完整系統<span class="sub">陳述句 / 疑問句 / 命令句轉述 ・ 時態人稱代詞時間地點完整變化</span></li>
+            <li>Conditionals(條件句)<span class="sub">Zero / First / Second / Third Conditional 完整四式</span></li>
+            <li>Relative Clauses 進階<span class="sub">who / whom / which / that / whose / where ・ 定語從句完整應用</span></li>
+            <li>Modal Verbs 進階<span class="sub">情態動詞 + Perfect ・ 推測 / 義務 / 建議 / 過去用法</span></li>
+            <li>Question Tags(附加問句)<span class="sub">正反規則 ・ 完整句尾問句結構 ・ 升中常考點</span></li>
+            <li>歷年文法整合 + 升中銜接<span class="sub">所有時態結合應用 ・ 寫作高分句型 ・ 升中銜接重點</span></li>
+          </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>英文限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>Tenses 總結表</strong> ・ 一張表搞掂晒所有試卷時態題,結構化套入即拎滿分</li>
+              <li><strong>Tenses 轉換表</strong> ・ 過去式 / 現在完成式 / 完成進行式變化規則一覽</li>
+              <li><strong>核心單詞表</strong> ・ 涵蓋該年級閱讀理解所需詞彙量</li>
+              <li><strong>文法速查卡</strong> ・ 隨堂派發 ・ 應試即拎即用</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="curr-card reveal delay-2">
           <div class="head">
             <div class="head-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg>
@@ -2727,11 +3154,16 @@ a{ color:inherit; text-decoration:none; }
             <li>對稱<span class="sub">對稱圖形與基本規則</span></li>
             <li>進制單位<span class="sub">進制單位基本概念</span></li>
           </ol>
+          <div class="bonus-box">
+            <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
+              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
+              <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
+            </ul>
+          </div>
         </div>
-      </div>
-
-      <div class="single-subject-note reveal">
-        <strong>備註</strong>:P6 英文科將於後續階段視乎反應陸續延伸開設,首階段先行專注數學科。
       </div>
     </div>
 
@@ -2897,14 +3329,14 @@ a{ color:inherit; text-decoration:none; }
       <div class="price-grid">
         <div class="price-card">
           <h4>單科急救班</h4>
-          <p class="desc">2 日 × 2 小時 ・ 共 4 小時操卷強化</p>
+          <p class="desc">2 節課堂 ・ 共 3 小時操卷強化(120mins + 60mins)</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">799</span></div>
           <div class="save">一次性課程 ・ 不綁月費 ・ 1 - 10 人彈性編配</div>
           <div class="group-hint">👥 2 人或以上組團 ・ 每人享 9 折 = <strong>HK$ 719 / 人</strong></div>
         </div>
         <div class="price-card featured">
           <h4>雙科急救班</h4>
-          <p class="desc">每科 2 日 × 2 小時 ・ 共 8 小時雙科衝刺</p>
+          <p class="desc">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
           <div class="save"><span class="strike">原價 HK$ 1,598</span> ・ <span class="green">省 HK$ 199</span></div>
           <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折 = <strong>HK$ 1,259 / 人</strong></div>
@@ -3096,8 +3528,8 @@ a{ color:inherit; text-decoration:none; }
         <div class="info-row">
           <span class="k">開放年級</span>
           <span class="v">
-            <span class="pill-mini">P4</span><span class="pill-mini">P5</span><span class="pill-mini">P6</span>
-            <div style="font-size:12.5px;margin-top:6px;">P4 開設數學 + 英文 ・ P5 / P6 首階段開設數學科</div>
+            <span class="pill-mini">P2</span><span class="pill-mini">P3</span><span class="pill-mini">P4</span><span class="pill-mini">P5</span><span class="pill-mini">P6</span>
+            <div style="font-size:12.5px;margin-top:6px;">P2 至 P6 全年級開設 ・ 中英數三科任選</div>
           </span>
         </div>
         <div class="info-row">
@@ -3149,6 +3581,13 @@ a{ color:inherit; text-decoration:none; }
             <li>每週進度報告 + 每月學習總結(共兩份)</li>
             <li>必要時加堂補強</li>
           </ul>
+          <div class="bonus-box" style="margin-top:16px;">
+            <div class="bonus-head"><span class="gift">🎁</span><span>專屬學習工具贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>英文</strong>:Tenses 總結表 + 轉換表 + 核心單詞表 + 文法速查卡</li>
+              <li><strong>數學</strong>:核心公式速查表 + 解題框架圖 + 易錯題型對照表 + 心算口訣表</li>
+            </ul>
+          </div>
           <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
             <strong style="color:var(--orange);">課時:</strong> 打底班 90mins ・ 實戰班 90mins ・ 高級班 60mins ・ 每星期固定時間
           </div>
@@ -3160,10 +3599,17 @@ a{ color:inherit; text-decoration:none; }
             <li>即場批改 + 詳細講解</li>
             <li>額外試卷自主操練</li>
             <li>進度報告兩份(短期診斷)</li>
-            <li>應試前彈性編排日期</li>
+            <li>應試前任何日期靈活編排 ・ WhatsApp 個別查詢</li>
           </ul>
+          <div class="bonus-box" style="margin-top:16px;">
+            <div class="bonus-head"><span class="gift">🎁</span><span>應試工具贈品</span><span class="label">FREE BONUS</span></div>
+            <ul>
+              <li><strong>英文</strong>:Tenses 總結表 + 轉換表 + 核心單詞表 + 文法速查卡</li>
+              <li><strong>數學</strong>:核心公式速查表 + 解題框架圖 + 易錯題型對照表 + 心算口訣表</li>
+            </ul>
+          </div>
           <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
-            <strong style="color:var(--orange);">課時:</strong> 單科 2 日 × 2 小時 = 4 小時 ・ 雙科每科 2 日 × 2 小時 = 共 8 小時 ・ 限時加開
+            <strong style="color:var(--orange);">課時:</strong> 單科 2 節(第 1 節 120mins + 第 2 節 60mins)= 共 3 小時 ・ 雙科每科 2 節 = 共 6 小時 ・ 限時加開
           </div>
         </div>
 
@@ -3201,7 +3647,8 @@ a{ color:inherit; text-decoration:none; }
     <div class="tp-grid">
       <div class="tp-block reveal delay-1">
         <div class="lbl"><span class="line"></span>SCHEDULE ・ 上課時間</div>
-        <h3>可預約時段</h3>
+        <h3>常規課程 ・ 可預約時段</h3>
+        <p class="tp-intro">以下時段適用於常規月費班(每星期固定上課)。</p>
         <div class="tp-time-row"><span class="day">逢星期三</span><span class="hours">16:00 - 20:30 <span class="open-tag">尚有名額</span></span></div>
         <div class="tp-time-row"><span class="day">逢星期四</span><span class="hours">16:00 - 20:30 <span class="open-tag">尚有名額</span></span></div>
         <div class="tp-time-row"><span class="day">逢星期六</span><span class="hours">09:00 - 12:00 <span class="open-tag">尚有名額</span></span></div>
@@ -3212,7 +3659,15 @@ a{ color:inherit; text-decoration:none; }
         <div class="tp-time-row full"><span class="day">逢星期六</span><span class="hours">13:00 - 18:30 <span class="full-tag">已滿</span></span></div>
         <div class="tp-time-row full"><span class="day">逢星期日</span><span class="hours">10:00 - 18:30 <span class="full-tag">已滿</span></span></div>
 
-        <div class="tp-foot">具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。已滿時段已預留予現有學生,有名額時將由 Symon Sir 主動通知候補家長。</div>
+        <div class="sprint-time-callout">
+          <span class="bolt">⚡</span>
+          <div>
+            <strong>急救班時段超靈活</strong>
+            <p>急救班係一次性課程,唔受常規時間表限制 ・ 可按家長同學生時間個別編排,任何日期、任何時段,WhatsApp 查詢即可確認可用日期。</p>
+          </div>
+        </div>
+
+        <div class="tp-foot">常規課程具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。已滿時段已預留予現有學生,有名額時將由 Symon Sir 主動通知候補家長。</div>
       </div>
 
 
@@ -3221,7 +3676,7 @@ a{ color:inherit; text-decoration:none; }
         <h3>指定上課場地</h3>
         <ol class="tp-place-list">
           <li>上水廣場單獨會議室或活動室</li>
-          <li>各大屋苑會所<span class="sub">須報名學生中至少一位為該屋苑住客 ・ 同組學生須為同一學校同一年級</span></li>
+          <li>各大屋苑會所<span class="sub">例如粉嶺牽晴間會所 / 碧湖花園會所等 ・ 須報名學生中至少一位為該屋苑住客 ・ 同組學生須為同一學校同一年級</span></li>
         </ol>
         <div class="tp-foot"><strong>關於場地選擇</strong>:北區及大埔現時共享空間及私人會議室數量有限,部分公共設施(如體育館)未有提供獨立枱凳配套,難以維持結構化教學節奏。我們堅持只選用配套完善、安靜不受干擾嘅獨立會議室,確保每一位學生嘅學習質素。所有指定場地距離北區及大埔主要屋苑步行或交通約 5 - 10 分鐘可達。<br/><br/><strong>場地費用和手續,全數由 Symon Academy 承擔,家長無需另付。</strong></div>
       </div>
@@ -3289,8 +3744,8 @@ a{ color:inherit; text-decoration:none; }
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>EXAM SPRINT ・ LIMITED OPENING</span></div>
-      <h2 class="section-title">考試急救班 SPRINT<br/>限時加開</h2>
-      <p class="section-sub">專為應試衝刺學生而設。針對六月份呈分試與大考衝刺,以操卷為主、概念為輔,快速拿捏失分點、提升做題速度。</p>
+      <h2 class="section-title">考試急救班 SPRINT<br/>限時加開 ・ <span class="hl-yellow">3 小時改寫整次考試</span></h2>
+      <p class="section-sub"><strong>專為臨時抱佛腳嘅學生而設。</strong>用最濃縮嘅時間,幫學生快速追回成個學期嘅考試重點 ・ 重新建立做卷手感 ・ 一次過解決「概念明、做卷散」嘅應試漏洞。</p>
     </div>
 
     <div class="sprint-date reveal">
@@ -3298,19 +3753,60 @@ a{ color:inherit; text-decoration:none; }
         <div class="lbl">OPENING PERIOD ・ 限時開放期</div>
         <div class="range">2026.05.05 - 2026.06.15</div>
       </div>
-      <div class="note">名額有限 ・ 額滿即止<br/>考試結束後即停止開設</div>
+      <div class="note">⚡ 時段超靈活 ・ 可按學生時間個別編排<br/>WhatsApp 查詢可用日期</div>
+    </div>
+
+    <!-- VALUE STACK ・ 效果承諾 + 配套堆疊 -->
+    <div class="value-stack reveal">
+      <div class="vs-header">
+        <span class="vs-tag">⚡ INTENSIVE OUTCOME</span>
+        <h3>3 小時內 ・ 你嘅孩子會得到</h3>
+      </div>
+
+      <div class="vs-outcomes">
+        <div class="vs-outcome">
+          <div class="vs-num">01</div>
+          <h4>追回整學期考試內容</h4>
+          <p>由 Symon Sir 用結構化方式,用最濃縮嘅時間覆蓋成個學期嘅核心考點 ・ 唔再「乜都唔識溫邊度」</p>
+        </div>
+        <div class="vs-outcome">
+          <div class="vs-num">02</div>
+          <h4>重新建立做卷手感</h4>
+          <p>3 份完整試卷實戰操練 ・ 即場批改 ・ 老師親自講解錯題模式 ・ 重拾應試節奏</p>
+        </div>
+        <div class="vs-outcome">
+          <div class="vs-num">03</div>
+          <h4>精準診斷失分弱項</h4>
+          <p>2 份個人化進度報告 ・ 找出真正嘅丟分原因 ・ 將剩餘時間花喺最有效嘅地方</p>
+        </div>
+      </div>
+
+      <div class="vs-includes">
+        <div class="vs-includes-head">✓ 每位學員都會獲得</div>
+        <div class="vs-pills">
+          <span class="vs-pill"><strong>3 份</strong>完整真題模擬試卷</span>
+          <span class="vs-pill"><strong>即場批改</strong>+ 詳細講解</span>
+          <span class="vs-pill"><strong>額外試卷</strong>自主操練(帶返屋企)</span>
+          <span class="vs-pill"><strong>2 份</strong>個人化進度報告</span>
+          <span class="vs-pill"><strong>有限度</strong>課後答疑支援</span>
+          <span class="vs-pill"><strong>應試心理</strong>狀態調整建議</span>
+          <span class="vs-pill"><strong>⚡ 時段超靈活</strong>WhatsApp 個別編排</span>
+          <span class="vs-pill"><strong>🎁 英文</strong>Tenses 總結表 + 轉換表 + 單詞表</span>
+          <span class="vs-pill"><strong>🎁 數學</strong>公式速查表 + 解題框架圖 + 易錯題型對照</span>
+        </div>
+      </div>
     </div>
 
     <div class="sprint-grid reveal">
       <div class="sprint-card">
         <h4>單科急救班</h4>
         <div><span class="currency">HK$</span><span class="price">799</span></div>
-        <div class="save">2 日 × 2 小時 ・ 共 4 小時操卷 ・ 一次性課程</div>
+        <div class="save">2 節課堂 ・ 共 3 小時操卷(120mins + 60mins)・ 一次性課程</div>
       </div>
       <div class="sprint-card">
         <h4>雙科急救班</h4>
         <div><span class="currency">HK$</span><span class="price">1,399</span></div>
-        <div class="save">每科 2 日 × 2 小時 ・ 共 8 小時雙科衝刺<br/><span class="strike">原價 HK$ 1,598</span> ・ 省 HK$ 199</div>
+        <div class="save">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺<br/><span class="strike">原價 HK$ 1,598</span> ・ 省 HK$ 199</div>
       </div>
     </div>
 

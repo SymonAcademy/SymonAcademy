@@ -377,29 +377,30 @@ a{ color:inherit; text-decoration:none; }
 }
 .hero-brand-cut{
   position:absolute; inset:0;
-  background:linear-gradient(125deg, var(--black-2) 0%, var(--black-2) 52%, var(--orange) 52%, var(--orange-2) 100%);
+  background:linear-gradient(125deg, var(--black-2) 0%, var(--black-2) 68%, var(--orange) 68%, var(--orange-2) 100%);
   opacity:0.96;
 }
 .hero-brand-cut::after{
   content:''; position:absolute; inset:0;
-  background:radial-gradient(circle at 75% 35%, rgba(255,255,255,0.12), transparent 55%);
+  background:radial-gradient(circle at 82% 30%, rgba(255,255,255,0.1), transparent 55%);
 }
 .hero-brand-inner{
   position:relative; z-index:2;
   text-align:left; padding:0 8%;
-  width:100%;
+  width:100%; max-width:88%;
 }
 .hero-brand .hb-line{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(56px, 8vw, 104px); line-height:0.92;
+  font-size:clamp(52px, 7.5vw, 96px); line-height:0.92;
   color:white; letter-spacing:0.02em;
+  text-shadow:0 2px 16px rgba(10,10,10,0.6);
   opacity:0; transform:translateY(30px);
   animation:hbReveal .9s var(--easing) forwards;
 }
 .hero-brand .hb-line.accent{
   color:var(--orange);
   animation-delay:.15s;
-  text-shadow:0 4px 40px rgba(255,107,26,0.4);
+  text-shadow:0 2px 16px rgba(10,10,10,0.75), 0 0 1px rgba(10,10,10,0.9);
 }
 @keyframes hbReveal{
   to{ opacity:1; transform:translateY(0); }

@@ -1667,6 +1667,20 @@ a{ color:inherit; text-decoration:none; }
 }
 .bonus-box li.group-gift strong{ color:#b45309; }
 
+/* 客製化跟進說明 */
+.custom-care{
+  margin-top:16px; padding:16px 18px;
+  background:var(--cream-2); border-radius:8px;
+  border-left:3px solid var(--orange);
+}
+.custom-care .cc-head{
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:14px;
+  color:var(--orange); margin-bottom:8px;
+}
+.custom-care p{
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.75; margin:0;
+}
+
 /* ============== INFO HUB SECTION ============== */
 .infohub{ background:var(--cream-3); color:var(--txt-dark); }
 
@@ -2356,6 +2370,30 @@ a{ color:inherit; text-decoration:none; }
 
 /* ============== 8折 PROMOTION SYSTEM ============== */
 
+/* 新生首月優惠輕量橫額 */
+.newbie-banner{
+  margin-bottom:32px; margin-top:-8px;
+  padding:14px 22px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.1) 0%, rgba(255,107,26,0.04) 100%);
+  border:1px solid rgba(255,107,26,0.35);
+  border-radius:10px;
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+}
+.newbie-banner .nb-tag{
+  flex-shrink:0; padding:6px 14px;
+  background:var(--orange); color:white;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:13px;
+  border-radius:100px;
+}
+.newbie-banner .nb-text{
+  flex:1; min-width:240px;
+  font-size:14px; color:var(--txt-dark); line-height:1.6;
+}
+.newbie-banner .nb-text strong{ color:var(--orange); font-weight:900; }
+.newbie-banner .nb-note{
+  font-size:12.5px; color:var(--txt-dark-mute);
+}
+
 /* Promo banner above pricing block */
 .promo-banner{
   margin-bottom:32px; padding:24px 32px;
@@ -2797,7 +2835,7 @@ a{ color:inherit; text-decoration:none; }
         </div>
         <div class="focus">進階題型 ・ 思維提升</div>
         <p class="target">由「考得好」邁向「考得頂尖」的學生。挑戰進階變題、強化邏輯思維、追求高分突破與全級頭排表現。</p>
-        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1.0 小時 / 堂</div>
+        <div class="duration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1.5 小時 / 堂</div>
       </div>
 
       <div class="tier tier-sprint reveal delay-4">
@@ -3377,6 +3415,13 @@ a{ color:inherit; text-decoration:none; }
       </div>
     </div>
 
+    <div class="newbie-banner reveal">
+      <span class="nb-tag">新生限定</span>
+      <div class="nb-text">
+        <strong>所有新生首月 85 折</strong> ── 一對一 / 小組均適用,可於現有價格(原價或組團 9 折)基礎上再享 85 折體驗 ・ <span class="nb-note">次月起恢復標準收費</span>
+      </div>
+    </div>
+
     <div class="price-block reveal">
       <div class="price-block-head">
         <div class="num">01</div>
@@ -3396,7 +3441,7 @@ a{ color:inherit; text-decoration:none; }
           <h4>雙科月費</h4>
           <p class="desc">任選兩個班別 ・ 不限層級 ・ 最具性價比</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">2,499</span></div>
-          <div class="save"><span class="strike">原價 HK$ 2,998</span> ・ <span class="green">已慳 HK$ 499</span></div>
+          <div class="save">每月 ・ 任選兩個班別,不限層級</div>
           <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折</div>
         </div>
       </div>
@@ -3420,7 +3465,7 @@ a{ color:inherit; text-decoration:none; }
           <h4>雙科急救班</h4>
           <p class="desc">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
-          <div class="save"><span class="strike">原價 HK$ 1,598</span> ・ <span class="green">省 HK$ 199</span></div>
+          <div class="save">一次性課程 ・ 不綁月費 ・ 1 - 10 人彈性編配</div>
           <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折</div>
         </div>
       </div>
@@ -3437,7 +3482,7 @@ a{ color:inherit; text-decoration:none; }
           <h4>月費 + 急救組合(單科)</h4>
           <p class="desc">單科月費 + 單科急救班</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">2,099</span></div>
-          <div class="save"><span class="strike">原價 HK$ 2,298</span> ・ <span class="green">省 HK$ 199</span></div>
+          <div class="save">單科常規 + 單科急救 ・ 一次過報讀</div>
           <div class="group-hint">👥 2 人或以上組團 ・ 每人享 9 折</div>
         </div>
         <div class="price-card dark-feat">
@@ -3445,7 +3490,7 @@ a{ color:inherit; text-decoration:none; }
           <h4>雙科月費 + 雙科急救全包</h4>
           <p class="desc">雙科月費 + 雙科急救班 ・ 一站式應試</p>
           <div class="amount"><span class="currency">HK$</span><span class="price">3,499</span></div>
-          <div class="save"><span class="strike">原價 HK$ 3,898</span> ・ <span class="green">省 HK$ 399</span></div>
+          <div class="save">雙科常規 + 雙科急救 ・ 一站式應試全包</div>
           <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折</div>
         </div>
       </div>
@@ -3674,7 +3719,11 @@ a{ color:inherit; text-decoration:none; }
             </ul>
           </div>
           <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
-            <strong style="color:var(--orange);">課時:</strong> 打底班 90mins ・ 實戰班 90mins ・ 高級班 60mins ・ 每星期固定時間
+            <strong style="color:var(--orange);">課時:</strong> 打底班 90mins ・ 實戰班 90mins ・ 高級班 90mins ・ 每星期固定時間
+          </div>
+          <div class="custom-care">
+            <div class="cc-head">客製化跟進 ・ 物有所值</div>
+            <p>我們追求嘅唔係最平,而係真正客製化嘅教學服務。除咗英文 / 數學各自嘅完整配套,每位學生另有每堂及每月系統化跟進報告,並設定期家長通話,深度了解孩子嘅學習狀況 ── 每一分學費,都對應實在嘅跟進與成果。</p>
           </div>
         </div>
 
@@ -3894,7 +3943,7 @@ a{ color:inherit; text-decoration:none; }
       <div class="sprint-card">
         <h4>雙科急救班</h4>
         <div><span class="currency">HK$</span><span class="price">1,399</span></div>
-        <div class="save">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺<br/><span class="strike">原價 HK$ 1,598</span> ・ 省 HK$ 199</div>
+        <div class="save">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺</div>
       </div>
     </div>
 

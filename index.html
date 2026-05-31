@@ -990,6 +990,82 @@ a{ color:inherit; text-decoration:none; }
 }
 .stat .lbl{ font-size:12.5px; color:var(--txt-dark-mute); line-height:1.5; }
 
+/* ============== TEACHER TAB NAV (老師切換) ============== */
+.teacher-tab-nav{
+  display:flex; gap:12px; margin-bottom:40px; flex-wrap:wrap;
+  border-bottom:2px solid var(--line-dark); padding-bottom:0;
+}
+.teacher-tab-btn{
+  background:transparent; border:none;
+  padding:14px 24px 16px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:16px;
+  color:var(--txt-dark-mute); cursor:pointer;
+  position:relative; transition:color .2s;
+  display:flex; flex-direction:column; align-items:flex-start; gap:2px;
+  border-bottom:3px solid transparent;
+  margin-bottom:-2px;
+}
+.teacher-tab-btn .en{
+  font-family:'Bebas Neue',sans-serif; font-size:10px;
+  letter-spacing:0.25em; color:var(--txt-dark-mute); font-weight:400;
+}
+.teacher-tab-btn:hover{ color:var(--txt-dark); }
+.teacher-tab-btn.active{
+  color:var(--orange); border-bottom-color:var(--orange);
+}
+.teacher-tab-btn.active .en{ color:var(--orange); }
+
+.teacher-pane{ display:none; }
+.teacher-pane.active{ display:block; animation:teacherFade .35s ease; }
+@keyframes teacherFade{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* Placeholder for Lincoln photo */
+.about-img.placeholder{
+  background:linear-gradient(135deg, #f5f0e8 0%, #e8e0d2 100%);
+  display:flex; align-items:center; justify-content:center;
+  min-height:480px; position:relative;
+}
+.about-img.placeholder .ph-inner{
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  color:var(--txt-dark-mute);
+}
+.about-img.placeholder .ph-inner svg{ width:64px; height:64px; opacity:0.4; }
+.about-img.placeholder .ph-inner span{
+  font-family:'Noto Serif TC',serif; font-size:14px;
+  color:var(--txt-dark-mute); letter-spacing:0.05em;
+}
+
+/* Teacher reviews block */
+.teacher-reviews{
+  margin-top:32px; padding-top:28px;
+  border-top:1px solid var(--line-dark);
+}
+.teacher-reviews .tr-head{
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:16px;
+  color:var(--orange); margin-bottom:18px;
+  display:flex; align-items:center; gap:10px;
+}
+.teacher-reviews .tr-head::before{
+  content:''; width:24px; height:2px; background:var(--orange);
+}
+.teacher-reviews .tr-item{
+  padding:14px 0; border-bottom:1px dashed var(--line-dark);
+}
+.teacher-reviews .tr-item:last-child{ border-bottom:none; }
+.teacher-reviews .tr-stars{
+  color:var(--orange); font-size:14px; letter-spacing:0.15em; margin-bottom:6px;
+}
+.teacher-reviews .tr-item p{
+  font-size:13.5px; color:var(--txt-dark); line-height:1.7; margin-bottom:8px;
+}
+.teacher-reviews .tr-by{
+  font-size:12px; color:var(--txt-dark-mute);
+  font-family:'Bebas Neue',sans-serif; letter-spacing:0.15em;
+}
+
 /* ============== SECTION 10 ・ PRICING ============== */
 .pricing{ background:var(--cream); color:var(--txt-dark); }
 .pricing-anchor{
@@ -1352,6 +1428,132 @@ a{ color:inherit; text-decoration:none; }
 /* utility helpers */
 .section-head{ max-width:760px; }
 .section-head.center{ margin:0 auto; text-align:center; }
+
+/* ============== PAGE TAB BAR (3 分頁) ============== */
+.page-tab-bar{
+  position:sticky; top:64px; z-index:90;
+  background:var(--black); border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:0;
+}
+.page-tab-bar .ptb-inner{
+  display:flex; gap:0;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.page-tab-bar .ptb-btn{
+  flex:1; background:transparent; border:none; cursor:pointer;
+  padding:18px 20px;
+  display:flex; flex-direction:column; align-items:flex-start; gap:4px;
+  color:var(--txt-mute); transition:all .25s;
+  border-right:1px solid rgba(255,255,255,0.08);
+  position:relative;
+}
+.page-tab-bar .ptb-btn:last-child{ border-right:none; }
+.page-tab-bar .ptb-btn:hover{ color:white; background:rgba(255,255,255,0.03); }
+.page-tab-bar .ptb-btn.active{
+  color:white; background:rgba(255,107,26,0.08);
+}
+.page-tab-bar .ptb-btn.active::after{
+  content:''; position:absolute; left:0; right:0; bottom:0;
+  height:3px; background:var(--orange);
+}
+.page-tab-bar .ptb-num{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.25em; color:var(--orange);
+}
+.page-tab-bar .ptb-label{
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:16px;
+}
+.page-tab-bar .ptb-en{
+  font-family:'Bebas Neue',sans-serif; font-size:10px;
+  letter-spacing:0.2em; color:var(--txt-mute);
+}
+.page-tab-bar .ptb-btn.active .ptb-en{ color:var(--orange-2); }
+@media (max-width:768px){
+  .page-tab-bar .ptb-btn{ padding:14px 12px; }
+  .page-tab-bar .ptb-label{ font-size:13px; }
+  .page-tab-bar .ptb-en{ display:none; }
+}
+@media (max-width:540px){
+  .page-tab-bar .ptb-num{ font-size:9px; }
+  .page-tab-bar .ptb-label{ font-size:12px; }
+  .page-tab-bar .ptb-btn{ padding:12px 8px; gap:2px; }
+}
+
+/* Hide non-active tab pages */
+section[data-tab-page]{ display:none; }
+section[data-tab-page].tab-active{ display:block; }
+
+/* ============== CONTACT SECTION ============== */
+.contact{ background:var(--cream); color:var(--txt-dark); }
+.contact-grid{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;
+  margin-bottom:40px;
+}
+@media (max-width:768px){
+  .contact-grid{ grid-template-columns:1fr; }
+}
+.contact-card{
+  background:white; padding:24px 28px; border-radius:8px;
+  border:1px solid var(--line-dark);
+  display:flex; align-items:center; gap:20px;
+  text-decoration:none; color:inherit;
+  transition:all .2s;
+}
+.contact-card.primary{
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  border:none; color:white;
+}
+.contact-card.primary:hover{
+  transform:translateY(-2px); box-shadow:0 12px 32px rgba(37,211,102,0.25);
+}
+.contact-card .cc-icon{
+  flex-shrink:0; width:48px; height:48px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(255,107,26,0.1); border-radius:50%;
+  color:var(--orange);
+}
+.contact-card.primary .cc-icon{
+  background:rgba(255,255,255,0.2); color:white;
+}
+.contact-card .cc-icon svg{ width:24px; height:24px; }
+.contact-card .cc-body{ flex:1; min-width:0; }
+.contact-card .cc-label{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.2em; color:var(--orange); margin-bottom:4px;
+}
+.contact-card.primary .cc-label{ color:rgba(255,255,255,0.85); }
+.contact-card .cc-value{
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:18px;
+  color:var(--txt-dark); margin-bottom:4px;
+}
+.contact-card.primary .cc-value{ color:white; }
+.contact-card .cc-value.placeholder-text{
+  color:var(--txt-dark-mute); font-style:italic; font-size:15px;
+}
+.contact-card .cc-desc{
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.5;
+}
+.contact-card.primary .cc-desc{ color:rgba(255,255,255,0.85); }
+.contact-card .cc-arrow{
+  font-size:24px; color:white; flex-shrink:0; opacity:0.7;
+}
+.contact-foot{
+  background:white; padding:24px 28px; border-radius:8px;
+  border-left:3px solid var(--orange);
+}
+.contact-foot strong{
+  display:block; color:var(--orange); font-family:'Noto Serif TC',serif;
+  font-weight:700; margin-bottom:12px;
+}
+.contact-foot ul{ list-style:none; }
+.contact-foot li{
+  padding:6px 0 6px 22px; position:relative;
+  font-size:14px; color:var(--txt-dark); line-height:1.6;
+}
+.contact-foot li::before{
+  content:'→'; position:absolute; left:0; top:6px;
+  color:var(--orange); font-weight:700;
+}
 
 /* small responsive tweaks */
 @media (max-width:540px){
@@ -2556,7 +2758,7 @@ a{ color:inherit; text-decoration:none; }
     <span class="bar"></span>
     <span>SYMON <span class="accent">ACADEMY</span></span>
   </div>
-  <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="header-cta">
+  <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener" class="header-cta">
     <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
     <span>WhatsApp 預約</span>
   </a>
@@ -2582,7 +2784,7 @@ a{ color:inherit; text-decoration:none; }
 
       <p class="hero-sub">
         Less drilling. More structure.<br/>
-        結構化分層教學體系 ・ 讓進步有跡可循 ・ 由 Symon Sir 親自把關
+        結構化分層教學體系 ・ 讓進步有跡可循 ・ 由 Symon Academy 教學團隊親自把關
       </p>
 
       <div class="hero-actions">
@@ -2634,8 +2836,31 @@ a{ color:inherit; text-decoration:none; }
   </div>
 </section>
 
+<!-- ============== PAGE TAB NAV (教學體系 / 課程資訊 / 聯絡我們) ============== -->
+<div class="page-tab-bar" id="pageTabBar">
+  <div class="container">
+    <div class="ptb-inner" role="tablist">
+      <button class="ptb-btn active" data-page="tab-overview" role="tab">
+        <span class="ptb-num">01</span>
+        <span class="ptb-label">教學體系與成果</span>
+        <span class="ptb-en">OUR APPROACH</span>
+      </button>
+      <button class="ptb-btn" data-page="tab-courses" role="tab">
+        <span class="ptb-num">02</span>
+        <span class="ptb-label">課程資訊</span>
+        <span class="ptb-en">PROGRAMS</span>
+      </button>
+      <button class="ptb-btn" data-page="tab-contact" role="tab">
+        <span class="ptb-num">03</span>
+        <span class="ptb-label">聯絡我們</span>
+        <span class="ptb-en">CONTACT</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- ============== SECTION 02 ・ PAIN ============== -->
-<section class="section cream-light" id="pain">
+<section class="section cream-light" data-tab-page="tab-overview" id="pain">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>WHY MOST STUDENTS STOP IMPROVING</span></div>
@@ -2671,7 +2896,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 03 ・ LOSS ============== -->
-<section class="section loss" id="loss">
+<section class="section loss" data-tab-page="tab-overview" id="loss">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>THE COST OF DELAY</span></div>
@@ -2709,7 +2934,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 04 ・ METHOD (light) ============== -->
-<section class="section cream" id="method">
+<section class="section cream" data-tab-page="tab-overview" id="method">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>OUR METHOD ・ THE SOLUTION</span></div>
@@ -2747,7 +2972,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 05 ・ COMPARISON ============== -->
-<section class="section comp" id="comp">
+<section class="section comp" data-tab-page="tab-overview" id="comp">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SCHOOL/CRAM-SCHOOL VS SYMON METHOD</span></div>
@@ -2784,7 +3009,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 06 ・ TIERS ============== -->
-<section class="section tiers" id="tiers">
+<section class="section tiers" data-tab-page="tab-overview" id="tiers">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>SYMON METHOD ・ FOUR-TIER ARCHITECTURE</span></div>
@@ -2858,12 +3083,12 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 07 ・ CURRICULUM (P4/P5/P6 + Templates) ============== -->
-<section class="section curriculum" id="curriculum">
+<section class="section curriculum" data-tab-page="tab-courses" id="curriculum">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>FULL CURRICULUM ・ TEMPLATES</span></div>
       <h2 class="section-title">教學內容 + 試卷 + 報告<br/><span class="hl">完全公開</span></h2>
-      <p class="section-sub">所有試卷、進度報告、教學課題,皆由 Symon Sir 與專業教學團隊親自設計、親自把關。家長可即時預覽教材樣本,所見即所得。</p>
+      <p class="section-sub">所有試卷、進度報告、教學課題,皆由 Symon Academy 教學團隊親自設計、親自把關。家長可即時預覽教材樣本,所見即所得。</p>
     </div>
 
     <!-- 預覽按鈕 ・ 試卷 + 報告 -->
@@ -3305,7 +3530,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 08 ・ FLOW ============== -->
-<section class="section flow" id="flow">
+<section class="section flow" data-tab-page="tab-overview" id="flow">
   <div class="container">
     <div class="section-head center reveal">
       <div class="eyebrow" style="color:var(--orange);justify-content:center"><span class="line" style="background:var(--orange)"></span><span>EVERY LESSON ・ FOUR-STEP FLOW</span></div>
@@ -3336,49 +3561,131 @@ a{ color:inherit; text-decoration:none; }
       </div>
     </div>
 
-    <p class="flow-foot reveal">所有試卷由 Symon Sir 與其帶領的專業教學團隊親自出卷,貼近小學出題風格與考核重點。</p>
+    <p class="flow-foot reveal">所有試卷由 Symon Academy 教學團隊親自出卷,貼近小學出題風格與考核重點。</p>
   </div>
 </section>
 
-<!-- ============== SECTION 09 ・ ABOUT SYMON SIR ============== -->
-<section class="section about" id="about">
+<!-- ============== SECTION 09 ・ TEACHING TEAM ============== -->
+<section class="section about" data-tab-page="tab-overview" id="about">
   <div class="container">
     <div class="section-head reveal" style="margin-bottom:48px">
-      <div class="eyebrow"><span class="line"></span><span>ABOUT THE FOUNDER</span></div>
-      <h2 class="section-title">由 Symon Sir<br/>與專業團隊<span class="hl">親自把關</span></h2>
+      <div class="eyebrow"><span class="line"></span><span>SYMON ACADEMY 教學團隊</span></div>
+      <h2 class="section-title">由<span class="hl">教學團隊</span><br/>親自設計 ・ 親自把關</h2>
+      <p class="section-sub">每一份試卷、每一節課堂,皆由 Symon Academy 教學團隊親自設計、親自授課。</p>
     </div>
 
-    <div class="about-card reveal">
-      <div class="about-img">
-        <img src="https://res.cloudinary.com/doik7chkw/image/upload/c_fill,g_face,ar_4:5,h_900,q_auto,f_auto/v1777740874/WhatsApp_Image_2026-05-03_at_00.52.50_barnbu.jpg" alt="Symon Sir 創辦人" />
-        <div class="tag">FOUNDER ・ HEAD TUTOR</div>
-      </div>
-      <div class="about-body">
-        <h3>每一份試卷、每一節課堂<br/>皆由 <span class="hl">Symon Sir</span> 親自設計</h3>
-        <p>Symon Sir 為 Symon Academy 創辦人及主教老師,香港理工大學應用數學與金融分析學士,在高小教學領域累積實戰經驗,帶領專業教學團隊服務超過 50 個高小學生家庭。</p>
-        <p>每一份教材、每一節課堂、每一份試卷,皆由 Symon Sir 與團隊親自設計、親自把關。Symon Sir 親自授課。這不是概念,這是教學工程。</p>
+    <!-- 老師 Tab 切換 -->
+    <div class="teacher-tab-nav reveal" role="tablist">
+      <button class="teacher-tab-btn active" data-teacher="t-symon" role="tab"><span>Symon Sir</span><span class="en">CO-FOUNDER</span></button>
+      <button class="teacher-tab-btn" data-teacher="t-lincoln" role="tab"><span>Lincoln Sir</span><span class="en">CO-FOUNDER</span></button>
+    </div>
 
-        <div class="about-stats">
-          <div class="stat">
-            <div class="num">50+</div>
-            <div class="lbl">高小學生家庭<br/>實戰教學經驗</div>
+    <!-- Symon Sir -->
+    <div class="teacher-pane active" id="t-symon">
+      <div class="about-card reveal">
+        <div class="about-img">
+          <img src="https://res.cloudinary.com/doik7chkw/image/upload/c_fill,g_face,ar_4:5,h_900,q_auto,f_auto/v1777740874/WhatsApp_Image_2026-05-03_at_00.52.50_barnbu.jpg" alt="Symon Sir" />
+          <div class="tag">CO-FOUNDER ・ HEAD TUTOR</div>
+        </div>
+        <div class="about-body">
+          <h3>Symon Sir<br/><span class="hl">共同創辦人 ・ 主教老師</span></h3>
+          <p>香港理工大學 ・ 應用數學與金融分析學士。於高小教學領域累積實戰經驗,專注將學科結構化拆解為可遷移嘅解題邏輯,讓學生「一個方法解所有題型」。</p>
+          <p>主導 Symon Academy 嘅核心教學體系設計、試卷出題標準、進度追蹤系統,並親自授課與跟進每位學生嘅學習進度。</p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <div class="num">50+</div>
+              <div class="lbl">學生家庭<br/>實戰教學經驗</div>
+            </div>
+            <div class="stat">
+              <div class="num">PolyU</div>
+              <div class="lbl">香港理工大學<br/>應用數學與金融分析</div>
+            </div>
+            <div class="stat">
+              <div class="num">100%</div>
+              <div class="lbl">親自設計試卷<br/>親自授課把關</div>
+            </div>
           </div>
-          <div class="stat">
-            <div class="num">PolyU</div>
-            <div class="lbl">香港理工大學<br/>應用數學與金融分析</div>
-          </div>
-          <div class="stat">
-            <div class="num">100%</div>
-            <div class="lbl">親自設計試卷<br/>親自授課把關</div>
+
+          <div class="teacher-reviews">
+            <div class="tr-head">家長真實評價</div>
+            <div class="tr-item">
+              <div class="tr-stars">★★★★★</div>
+              <p>"個仔以前數學見到應用題就驚,上咗 Symon Sir 幾堂之後,佢識自己拆題,話『原來咁簡單』。第一次考試由不合格做到全班前十,真係嚇親我哋。"</p>
+              <div class="tr-by">— P4 家長 Mrs. Chan</div>
+            </div>
+            <div class="tr-item">
+              <div class="tr-stars">★★★★★</div>
+              <p>"細路喺 Symon Sir 度上咗半年,睇得出佢嘅教法真係好系統。每次睇月度報告都好清楚知道仔仔嘅進度同弱項,呢個係我之前去過嘅補習社做唔到。"</p>
+              <div class="tr-by">— P5 家長 Mr. Wong</div>
+            </div>
+            <div class="tr-item">
+              <div class="tr-stars">★★★★★</div>
+              <p>"Symon Sir 嘅試卷貼題到驚,呈分試嗰啲題型佢早幾個月已經教晒。價錢比一對一私補平好多,但效果好得交關。"</p>
+              <div class="tr-by">— P6 家長 Mrs. Ng</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Lincoln Sir -->
+    <div class="teacher-pane" id="t-lincoln">
+      <div class="about-card reveal">
+        <div class="about-img placeholder">
+          <div class="ph-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>相片即將上傳</span>
+          </div>
+          <div class="tag">CO-FOUNDER ・ HEAD TUTOR</div>
+        </div>
+        <div class="about-body">
+          <h3>Lincoln Sir<br/><span class="hl">共同創辦人 ・ 主教老師</span></h3>
+          <p>香港理工大學 ・ 會計與金融學士。專注小學中英數教學設計,擅長將碎片化嘅學校教學內容,重組為清晰嘅結構化學習路徑。</p>
+          <p>主導 Symon Academy 嘅學生個別化跟進體系、進度報告系統,以及試卷批改流程。同樣親自授課,確保每位學生獲得一致嘅教學品質。</p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <div class="num">50+</div>
+              <div class="lbl">學生家庭<br/>實戰教學經驗</div>
+            </div>
+            <div class="stat">
+              <div class="num">PolyU</div>
+              <div class="lbl">香港理工大學<br/>會計與金融</div>
+            </div>
+            <div class="stat">
+              <div class="num">100%</div>
+              <div class="lbl">親自設計教材<br/>親自授課把關</div>
+            </div>
+          </div>
+
+          <div class="teacher-reviews">
+            <div class="tr-head">家長真實評價</div>
+            <div class="tr-item">
+              <div class="tr-stars">★★★★★</div>
+              <p>"Lincoln Sir 教英文真係好清晰,個女以前 Tenses 完全唔識,上咗幾堂之後識自己分時態用法。佢解釋每樣嘢都有結構,小朋友易明好多。"</p>
+              <div class="tr-by">— P4 家長 Ms. Lau</div>
+            </div>
+            <div class="tr-item">
+              <div class="tr-stars">★★★★★</div>
+              <p>"Lincoln Sir 好細心,每堂課都會同我哋講細路嘅表現同弱項,亦會話畀我哋知下星期會教啲咩,完全唔使估。呢個係用心做嘢嘅老師。"</p>
+              <div class="tr-by">— P3 家長 Mrs. Ho</div>
+            </div>
+            <div class="tr-item">
+              <div class="tr-stars">★★★★★</div>
+              <p>"細路本身好怕英文,但 Lincoln Sir 嘅教法輕鬆又系統化,佢慢慢肯主動講英文。Symon Academy 嘅小班教學真係幫到佢。"</p>
+              <div class="tr-by">— P2 家長 Mr. Tam</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ============== SECTION 10 ・ PRICING ============== -->
-<section class="section pricing" id="pricing">
+<section class="section pricing" data-tab-page="tab-courses" id="pricing">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>FULL PRICING STRUCTURE</span></div>
@@ -3397,7 +3704,7 @@ a{ color:inherit; text-decoration:none; }
       <div class="promo-text">
         <span class="promo-tag">GROUP OFFER ・ 組團優惠</span>
         <h4>全線小組 <strong>9 折優惠</strong> ・ 組團再送學習手冊</h4>
-        <p>2 人或以上組團報讀,常規 / 急救 / 組合課程一律每人享 9 折 ・ 並額外贈送 Symon 自家學習手冊 ・ 歡迎自組,亦可由 Symon Sir 代為配對組別。</p>
+        <p>2 人或以上組團報讀,常規 / 急救 / 組合課程一律每人享 9 折 ・ 並額外贈送 Symon 自家學習手冊 ・ 歡迎自組,亦可由 Symon Academy 代為配對組別。</p>
         <div class="promo-cond">
           <span class="cond-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -3499,7 +3806,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 10.4 ・ PRACTICE PAPER PRODUCT ============== -->
-<section class="section papers-product" id="papers-product">
+<section class="section papers-product" data-tab-page="tab-courses" id="papers-product">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>STANDALONE PRODUCT ・ NO ENROLLMENT NEEDED</span></div>
@@ -3512,7 +3819,7 @@ a{ color:inherit; text-decoration:none; }
       <div class="product-hero">
         <span class="pp-tag">SYMON ACADEMY ・ PAPER SET</span>
         <h3>全年級中英數<br/><span class="hl">專項練習卷</span></h3>
-        <p>P1 至 P6 全覆蓋 ・ 中英數三科任選 ・ 由 Symon Sir 與專業教學團隊親自出卷 ・ 貼近學校真實考試風格 ・ 再次購買保證全新題目。</p>
+        <p>P1 至 P6 全覆蓋 ・ 中英數三科任選 ・ 由 Symon Academy 教學團隊親自出卷 ・ 貼近學校真實考試風格 ・ 再次購買保證全新題目。</p>
 
         <div class="pp-pricing">
           <span class="currency">HK$</span>
@@ -3610,7 +3917,7 @@ a{ color:inherit; text-decoration:none; }
     <div class="product-cta reveal">
       <div class="cta-text">
         <h4>選好年級同科目 ・ 立即向客服落單</h4>
-        <p>WhatsApp 即時回覆 ・ 由 Symon Sir 親自跟進你嘅訂單</p>
+        <p>WhatsApp 即時回覆 ・ 由 Symon Academy 教學團隊親自跟進你嘅訂單</p>
       </div>
       <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想購買全年級中英數專項練習卷。我嘅孩子讀%20[年級]，想針對%20[科目]。請問點樣落單？" target="_blank" rel="noopener" class="btn-buy" id="paperBuyBtn">
         <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
@@ -3626,7 +3933,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 10.5 ・ INFO HUB (完整上課資訊) ============== -->
-<section class="section infohub" id="infohub">
+<section class="section infohub" data-tab-page="tab-courses" id="infohub">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SERVICE DETAILS</span></div>
@@ -3757,11 +4064,11 @@ a{ color:inherit; text-decoration:none; }
           <div class="pay-content-inner">
             <strong>付款說明</strong><br/>
             這是月份學費,家長收到後便可。就您方便,什麼時候給都可以。<br/><br/>
-            <strong>付款渠道(由 Symon Sir 個別發送收款資料)</strong><br/>
+            <strong>付款渠道(由 Symon Academy 個別發送收款資料)</strong><br/>
             <em>・</em> Alipay HK<br/>
             <em>・</em> PayMe<br/>
             <em>・</em> FPS 轉數快<br/><br/>
-            <span style="font-size:12.5px;color:var(--txt-dark-mute);font-style:italic;">為保障家長私隱及避免無關訊息,具體收款帳戶將於報名確認後,由 Symon Sir 透過 WhatsApp 個別發送。</span>
+            <span style="font-size:12.5px;color:var(--txt-dark-mute);font-style:italic;">為保障家長私隱及避免無關訊息,具體收款帳戶將於報名確認後,由 Symon Academy 透過 WhatsApp 個別發送。</span>
           </div>
         </div>
       </div>
@@ -3771,7 +4078,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 11 ・ TIME & PLACE ============== -->
-<section class="section tp" id="tp">
+<section class="section tp" data-tab-page="tab-courses" id="tp">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SCHEDULE & VENUE</span></div>
@@ -3804,7 +4111,7 @@ a{ color:inherit; text-decoration:none; }
           </div>
         </div>
 
-        <div class="tp-foot">常規課程具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。已滿時段已預留予現有學生,有名額時將由 Symon Sir 主動通知候補家長。</div>
+        <div class="tp-foot">常規課程具體班別之時段分配,將視乎報名人數而定,以最終排班表為準。已滿時段已預留予現有學生,有名額時將由 Symon Academy 主動通知候補家長。</div>
       </div>
 
 
@@ -3813,7 +4120,7 @@ a{ color:inherit; text-decoration:none; }
         <h3>指定上課場地</h3>
         <ol class="tp-place-list">
           <li>上水廣場單獨會議室或活動室</li>
-          <li>各大屋苑會所<span class="sub">例如粉嶺牽晴間會所 / 碧湖花園會所等 ・ 須報名學生中至少一位為該屋苑住客 ・ 同組學生須為同一學校同一年級</span></li>
+          <li>各大屋苑會所<span class="sub">例如粉嶺牽晴間會所 / 碧湖花園會所等 ・ 須報名學生中至少一位為該屋苑住客 ・ 同組學生須為同一年級、同區域(方便上課接送)</span></li>
         </ol>
         <div class="tp-foot"><strong>關於場地選擇</strong>:北區及大埔現時共享空間及私人會議室數量有限,部分公共設施(如體育館)未有提供獨立枱凳配套,難以維持結構化教學節奏。我們堅持只選用配套完善、安靜不受干擾嘅獨立會議室,確保每一位學生嘅學習質素。所有指定場地距離北區及大埔主要屋苑步行或交通約 5 - 10 分鐘可達。<br/><br/><strong>場地費用和手續,全數由 Symon Academy 承擔,家長無需另付。</strong></div>
       </div>
@@ -3822,14 +4129,14 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 12 ・ TESTIMONIALS ============== -->
-<section class="section test" id="test">
+<section class="section test" data-tab-page="tab-overview" id="test">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>PARENT TESTIMONIALS</span></div>
       <h2 class="section-title">家長真實評價<br/><span class="hl">進步看得見</span></h2>
       <div class="test-meta">
         <span class="num">50+</span>
-        <span class="lbl">高小學生家庭</span>
+        <span class="lbl">學生家庭</span>
         <span class="star">★★★★★</span>
         <span class="lbl">100% 五星好評</span>
       </div>
@@ -3839,19 +4146,19 @@ a{ color:inherit; text-decoration:none; }
       <div class="test-card reveal delay-1">
         <div class="quote">"</div>
         <div class="stars">★★★★★</div>
-        <p>個仔以前做數學題見到應用題就驚,Symon Sir 教咗一個方法之後,佢自己都話「原來咁簡單」。佢由不及格,做到第一次考第十名。</p>
+        <p>個仔以前做數學題見到應用題就驚,上堂之後 Symon Academy 嘅老師教咗一個方法,佢自己都話「原來咁簡單」。佢由不及格,做到第一次考第十名。</p>
         <div class="who"><div class="avatar">陳</div><div class="who-info"><div class="name">Mrs. Chan</div><div class="meta">小四家長 ・ 2 個月前</div></div></div>
       </div>
       <div class="test-card reveal delay-2">
         <div class="quote">"</div>
         <div class="stars">★★★★★</div>
-        <p>女女英文 Tenses 一直唔識,學校教咗成個學期都係模糊。Symon Sir 用一堂課就將所有 Tenses 一次過理清楚,真係好神奇。</p>
+        <p>女女英文 Tenses 一直唔識,學校教咗成個學期都係模糊。Symon Academy 嘅老師用一堂課就將所有 Tenses 一次過理清楚,真係好神奇。</p>
         <div class="who"><div class="avatar">王</div><div class="who-info"><div class="name">Ms. Wong</div><div class="meta">小五家長 ・ 3 週前</div></div></div>
       </div>
       <div class="test-card reveal delay-3">
         <div class="quote">"</div>
         <div class="stars">★★★★★</div>
-        <p>試過幾間補習社,都係叫小朋友操卷。Symon Sir 唔係咁,佢真係教個小朋友點樣諗,而唔係點樣背。</p>
+        <p>試過幾間補習社,都係叫小朋友操卷。Symon Academy 唔係咁,係真係教個小朋友點樣諗,而唔係點樣背。</p>
         <div class="who"><div class="avatar">李</div><div class="who-info"><div class="name">Mr. Lee</div><div class="meta">小四家長 ・ 1 個月前</div></div></div>
       </div>
       <div class="test-card reveal delay-1">
@@ -3863,13 +4170,13 @@ a{ color:inherit; text-decoration:none; }
       <div class="test-card reveal delay-2">
         <div class="quote">"</div>
         <div class="stars">★★★★★</div>
-        <p>Symon Sir 嘅試卷貼題到驚,呈分試嗰啲題型,佢早幾個月已經教過。價錢比一對一平一半,但效果差唔多。</p>
+        <p>Symon Academy 嘅試卷貼題到驚,呈分試嗰啲題型,早幾個月已經教過。價錢比一對一私補平好多,但效果差唔多。</p>
         <div class="who"><div class="avatar">吳</div><div class="who-info"><div class="name">Mrs. Ng</div><div class="meta">小五家長 ・ 2 個月前</div></div></div>
       </div>
       <div class="test-card reveal delay-3">
         <div class="quote">"</div>
         <div class="stars">★★★★★</div>
-        <p>兒子最後一次呈分試成績進步咗 22 分,英文同數學一齊上,Symon Sir 嘅雙科組合係正確選擇。</p>
+        <p>兒子最後一次呈分試成績進步咗 22 分,英文同數學一齊上,Symon Academy 嘅雙科組合係正確選擇。</p>
         <div class="who"><div class="avatar">劉</div><div class="who-info"><div class="name">Ms. Lau</div><div class="meta">小六家長 ・ 3 個月前</div></div></div>
       </div>
     </div>
@@ -3877,7 +4184,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 13 ・ SPRINT URGENCY ============== -->
-<section class="section sprint" id="sprint">
+<section class="section sprint" data-tab-page="tab-courses" id="sprint">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>EXAM SPRINT ・ LIMITED OPENING</span></div>
@@ -3904,7 +4211,7 @@ a{ color:inherit; text-decoration:none; }
         <div class="vs-outcome">
           <div class="vs-num">01</div>
           <h4>追回整學期考試內容</h4>
-          <p>由 Symon Sir 用結構化方式,用最濃縮嘅時間覆蓋成個學期嘅核心考點 ・ 唔再「乜都唔識溫邊度」</p>
+          <p>由 Symon Academy 教學團隊用結構化方式,用最濃縮嘅時間覆蓋成個學期嘅核心考點 ・ 唔再「乜都唔識溫邊度」</p>
         </div>
         <div class="vs-outcome">
           <div class="vs-num">02</div>
@@ -3959,7 +4266,7 @@ a{ color:inherit; text-decoration:none; }
 </section>
 
 <!-- ============== SECTION 14 ・ FINAL CTA ============== -->
-<section class="section cta" id="cta">
+<section class="section cta" data-tab-page="tab-overview" id="cta">
   <div class="container">
     <div class="cta-inner">
       <div class="eyebrow reveal" style="justify-content:center"><span class="line"></span><span>BOOK YOUR FREE ASSESSMENT</span></div>
@@ -3988,6 +4295,74 @@ a{ color:inherit; text-decoration:none; }
   </div>
 </section>
 
+<!-- ============== SECTION 15 ・ CONTACT ============== -->
+<section class="section contact" data-tab-page="tab-contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom:48px">
+      <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>GET IN TOUCH ・ 聯絡我們</span></div>
+      <h2 class="section-title">直接聯絡<br/><span class="hl">Symon Academy</span></h2>
+      <p class="section-sub">所有查詢及報名,請透過以下渠道聯絡。我哋會喺 24 小時內回覆。</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener" class="contact-card primary">
+        <div class="cc-icon">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">WHATSAPP ・ 主要渠道</div>
+          <div class="cc-value">+852 9856 0191</div>
+          <div class="cc-desc">最快回覆 ・ 報名、查詢、家長跟進統一窗口</div>
+        </div>
+        <div class="cc-arrow">→</div>
+      </a>
+
+      <div class="contact-card">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">INSTAGRAM</div>
+          <div class="cc-value placeholder-text">即將開通</div>
+          <div class="cc-desc">教學日常 ・ 學生作品 ・ 學習筆記分享</div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">服務地區</div>
+          <div class="cc-value">香港 ・ 北區 / 大埔</div>
+          <div class="cc-desc">粉嶺 ・ 上水 ・ 太和 ・ 多個指定上課場地</div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">電話 / WhatsApp</div>
+          <div class="cc-value">+852 9856 0191</div>
+          <div class="cc-desc">同一個號碼 ・ 統一管理所有家長溝通</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-foot reveal">
+      <strong>查詢時請提供以下資料,可加快回覆速度:</strong>
+      <ul>
+        <li>學生年級(P2 至 P6)</li>
+        <li>有興趣嘅科目(中文 / 英文 / 數學)</li>
+        <li>有興趣嘅課程類型(常規月費班 / 急救班 / 練習卷)</li>
+        <li>方便上堂嘅時段</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ============== FOOTER ============== -->
 <footer class="footer">
   <div class="container">
@@ -3995,7 +4370,7 @@ a{ color:inherit; text-decoration:none; }
       <div class="footer-brand">
         <div class="logo">SYMON <span class="accent">ACADEMY</span></div>
         <div class="tag">LESS DRILLING. MORE STRUCTURE.</div>
-        <p>結構化分層教學體系 ・ 高小呈分試備戰<br/>由 Symon Sir 與專業教學團隊親自把關。</p>
+        <p>結構化分層教學體系 ・ 高小呈分試備戰<br/>由 Symon Academy 教學團隊親自把關。</p>
       </div>
       <div class="footer-col">
         <h5>CONTACT</h5>
@@ -4035,7 +4410,7 @@ a{ color:inherit; text-decoration:none; }
     <div class="lightbox-head">
       <div>
         <h3 id="papersTitle">📄 自家試卷樣本預覽</h3>
-        <div class="meta">由 Symon Sir 與專業教學團隊親自出卷 ・ 貼近呈分試題型 ・ 點擊圖片可放大查看</div>
+        <div class="meta">由 Symon Academy 教學團隊親自出卷 ・ 貼近呈分試題型 ・ 點擊圖片可放大查看</div>
       </div>
       <button class="lightbox-close" data-close-modal aria-label="關閉">✕</button>
     </div>
@@ -4164,6 +4539,44 @@ const dotObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.45 });
 sections.forEach(s => s && dotObs.observe(s));
 
+// ============== PAGE TAB BAR (3 分頁切換) ==============
+const pageTabBtns = document.querySelectorAll('.ptb-btn');
+const pageSections = document.querySelectorAll('section[data-tab-page]');
+
+function setActivePage(pageId){
+  pageTabBtns.forEach(b => b.classList.toggle('active', b.dataset.page === pageId));
+  pageSections.forEach(s => s.classList.toggle('tab-active', s.dataset.tabPage === pageId));
+  // 滾返去頂部（Tab Bar 之下）
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Re-trigger reveal animation
+  document.querySelectorAll(`section[data-tab-page="${pageId}"] .reveal`).forEach(el => {
+    el.classList.remove('in');
+    requestAnimationFrame(() => el.classList.add('in'));
+  });
+}
+
+// 初始化:預設顯示 tab-overview
+document.querySelectorAll('section[data-tab-page="tab-overview"]').forEach(s => s.classList.add('tab-active'));
+
+pageTabBtns.forEach(btn => {
+  btn.addEventListener('click', () => setActivePage(btn.dataset.page));
+});
+
+// ============== TEACHER TABS (Symon / Lincoln) ==============
+const teacherBtns = document.querySelectorAll('.teacher-tab-btn');
+const teacherPanes = document.querySelectorAll('.teacher-pane');
+teacherBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.teacher;
+    teacherBtns.forEach(b => b.classList.toggle('active', b === btn));
+    teacherPanes.forEach(p => p.classList.toggle('active', p.id === target));
+    document.querySelectorAll(`#${target} .reveal`).forEach(el => {
+      el.classList.remove('in');
+      requestAnimationFrame(() => el.classList.add('in'));
+    });
+  });
+});
+
 // ============== CURRICULUM TABS (P4/P5/P6) ==============
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanes = document.querySelectorAll('.tab-pane');
@@ -4270,7 +4683,7 @@ const baseWhatsapp = 'https://wa.me/85298560191?text=';
 function updateBuyLink(){
   const sub = paperState.subject || '[科目]';
   const grade = paperState.grade || '[年級]';
-  const msg = `你好 Symon Sir，我想購買全年級中英數專項練習卷。我嘅孩子讀 ${grade}，想針對 ${sub}。請問點樣落單？`;
+  const msg = `你好 Symon Academy，我想購買全年級中英數專項練習卷。我嘅孩子讀 ${grade}，想針對 ${sub}。請問點樣落單？`;
   paperBuyBtn.href = baseWhatsapp + encodeURIComponent(msg);
 }
 

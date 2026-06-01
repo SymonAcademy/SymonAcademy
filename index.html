@@ -203,6 +203,358 @@ a{ color:inherit; text-decoration:none; }
   color:var(--txt-light);
   padding:120px 0 80px;
 }
+
+/* ============== HERO DARK (深色品牌主題 ・ 還原原風格) ============== */
+.hero-dark{
+  position:relative;
+  min-height:auto;
+  background:linear-gradient(135deg, #1A1410 0%, #0F0A06 100%);
+  color:var(--txt-light);
+  padding:120px 24px 90px;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+@media (max-width:768px){
+  .hero-dark{ padding:100px 20px 70px; }
+}
+.hero-dark .hero-bg{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255,107,26,0.18), transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(255,107,26,0.12), transparent 40%);
+}
+.hero-dark .hero-grain{
+  position:absolute; inset:0; pointer-events:none; opacity:0.4;
+  background-image:radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:3px 3px;
+}
+.hero-dark-inner{
+  position:relative; z-index:2;
+  max-width:920px; width:100%;
+  display:flex; flex-direction:column; align-items:center; gap:28px;
+}
+@media (max-width:768px){
+  .hero-dark-inner{ gap:22px; }
+}
+
+/* Override hb-eyebrow for dark theme */
+.hero-dark .hb-eyebrow{
+  display:flex; align-items:center; gap:14px;
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.28em; color:var(--orange);
+}
+.hero-dark .hb-eyebrow .line{
+  width:36px; height:1.5px; background:var(--orange);
+}
+
+/* Brand mark 深色版 */
+.hero-dark .hb-brand-mark{
+  display:flex; flex-direction:column; align-items:center; gap:0;
+  margin:0; line-height:0.88;
+  font-family:'Bebas Neue',sans-serif;
+  font-weight:400; letter-spacing:0.04em;
+  opacity:0; transform:translateY(20px);
+  animation:hbBrandFade .9s var(--easing) forwards .15s;
+}
+.hero-dark .hb-brand-mark .bm-symon{
+  font-size:clamp(64px, 11vw, 132px);
+  color:white;
+}
+.hero-dark .hb-brand-mark .bm-academy{
+  font-size:clamp(72px, 12vw, 148px);
+  color:var(--orange);
+  text-shadow:0 6px 28px rgba(255,107,26,0.35);
+}
+
+/* Tagline 深色版 */
+.hero-dark .hb-tagline-row{
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .4s;
+}
+.hero-dark .hb-tag-zh{
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  font-size:clamp(18px, 2.2vw, 24px);
+  color:var(--orange);
+  letter-spacing:0.25em;
+  padding:6px 22px;
+  background:rgba(255,107,26,0.1);
+  border-radius:100px;
+  border:1px solid rgba(255,107,26,0.3);
+}
+.hero-dark .hb-tag-en{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(13px, 1.4vw, 16px);
+  letter-spacing:0.3em; color:var(--txt-mute);
+}
+
+/* CTA Buttons 深色版 */
+.hero-dark .hb-actions{
+  display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+  margin-top:8px;
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .55s;
+}
+.btn-primary-dark{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 30px;
+  background:var(--orange); color:white; border:none; cursor:pointer;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+  border-radius:100px;
+  transition:all .25s var(--easing);
+  box-shadow:0 6px 24px rgba(255,107,26,0.4);
+}
+.btn-primary-dark:hover{
+  background:var(--orange-2);
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(255,107,26,0.55);
+}
+.btn-primary-dark .arrow{ transition:transform .25s; }
+.btn-primary-dark:hover .arrow{ transform:translateX(4px); }
+
+.btn-wa-dark{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 30px;
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color:white; text-decoration:none;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+  border-radius:100px;
+  transition:all .25s var(--easing);
+  box-shadow:0 6px 20px rgba(37,211,102,0.35);
+}
+.btn-wa-dark:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(37,211,102,0.5);
+}
+.btn-wa-dark svg{ width:18px; height:18px; fill:currentColor; }
+
+/* Metrics 深色版 */
+.hero-dark .hb-metrics{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
+  width:100%; max-width:720px; margin-top:16px;
+  background:rgba(255,255,255,0.04);
+  border-radius:14px;
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.08);
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .7s;
+}
+@media (max-width:640px){
+  .hero-dark .hb-metrics{ grid-template-columns:repeat(2, 1fr); }
+}
+.hero-dark .hb-metric{
+  padding:20px 14px; text-align:center;
+  border-right:1px solid rgba(255,255,255,0.08);
+}
+.hero-dark .hb-metric:last-child{ border-right:none; }
+@media (max-width:640px){
+  .hero-dark .hb-metric:nth-child(2){ border-right:none; }
+  .hero-dark .hb-metric:nth-child(1),
+  .hero-dark .hb-metric:nth-child(2){ border-bottom:1px solid rgba(255,255,255,0.08); }
+}
+.hero-dark .hb-metric .num{
+  font-family:'Bebas Neue',sans-serif; font-size:36px;
+  color:var(--orange); line-height:1; margin-bottom:4px;
+}
+.hero-dark .hb-metric .lbl{
+  font-size:12px; color:var(--txt-mute); letter-spacing:0.05em;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-dark .hb-brand-mark, .hero-dark .hb-tagline-row,
+  .hero-dark .hb-actions, .hero-dark .hb-metrics{
+    opacity:1 !important; transform:none !important; animation:none !important;
+  }
+}
+
+/* ============== HERO BRIGHT (明亮陽光主題) ============== */
+.hero-bright{
+  min-height:auto;
+  background:linear-gradient(160deg, #FFF8EE 0%, #FEEFD8 45%, #FFE5C2 100%);
+  color:var(--txt-dark);
+  padding:120px 24px 100px;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+@media (max-width:768px){
+  .hero-bright{ padding:100px 20px 70px; }
+}
+.hero-bright-bg{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,107,26,0.18), transparent 38%),
+    radial-gradient(circle at 82% 78%, rgba(255,170,80,0.22), transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4), transparent 60%);
+}
+.hero-bright-grain{
+  position:absolute; inset:0; pointer-events:none; opacity:0.4;
+  background-image:radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size:3px 3px;
+  mix-blend-mode:multiply;
+}
+.hero-bright-inner{
+  position:relative; z-index:2;
+  max-width:920px; width:100%;
+  display:flex; flex-direction:column; align-items:center; gap:32px;
+}
+@media (max-width:768px){
+  .hero-bright-inner{ gap:24px; }
+}
+
+/* Eyebrow */
+.hb-eyebrow{
+  display:flex; align-items:center; gap:14px;
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.28em; color:var(--orange);
+}
+.hb-eyebrow .line{
+  width:36px; height:1.5px; background:var(--orange);
+}
+
+/* Brand Mark (大字置中) */
+.hb-brand-mark{
+  display:flex; flex-direction:column; align-items:center; gap:0;
+  margin:0; line-height:0.88;
+  font-family:'Bebas Neue',sans-serif;
+  font-weight:400; letter-spacing:0.04em;
+  opacity:0; transform:translateY(20px);
+  animation:hbBrandFade .9s var(--easing) forwards .15s;
+}
+.hb-brand-mark .bm-symon{
+  font-size:clamp(64px, 11vw, 132px);
+  color:var(--txt-dark);
+}
+.hb-brand-mark .bm-academy{
+  font-size:clamp(72px, 12vw, 148px);
+  color:var(--orange);
+  text-shadow:0 6px 28px rgba(255,107,26,0.22);
+}
+@keyframes hbBrandFade{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* Tagline */
+.hb-tagline-row{
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .4s;
+}
+.hb-tag-zh{
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  font-size:clamp(18px, 2.2vw, 24px);
+  color:var(--orange);
+  letter-spacing:0.25em;
+  padding:6px 22px;
+  background:rgba(255,255,255,0.6);
+  border-radius:100px;
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,107,26,0.2);
+}
+.hb-tag-en{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(13px, 1.4vw, 16px);
+  letter-spacing:0.3em; color:var(--txt-dark-mute);
+}
+
+/* Positioning */
+.hb-positioning{
+  max-width:560px;
+  font-family:'Noto Serif TC',serif; font-weight:400;
+  font-size:clamp(14.5px, 1.5vw, 16.5px);
+  line-height:1.85; color:var(--txt-dark);
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .55s;
+}
+
+/* CTA buttons */
+.hb-actions{
+  display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+  margin-top:8px;
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .7s;
+}
+.btn-primary-bright{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 30px;
+  background:var(--txt-dark); color:white; border:none; cursor:pointer;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+  border-radius:100px;
+  transition:all .25s var(--easing);
+  box-shadow:0 6px 20px rgba(28,25,23,0.25);
+}
+.btn-primary-bright:hover{
+  background:var(--orange);
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(255,107,26,0.35);
+}
+.btn-primary-bright .arrow{
+  transition:transform .25s;
+}
+.btn-primary-bright:hover .arrow{ transform:translateX(4px); }
+
+.btn-wa-bright{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 30px;
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color:white; text-decoration:none;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:15px;
+  border-radius:100px;
+  transition:all .25s var(--easing);
+  box-shadow:0 6px 20px rgba(37,211,102,0.3);
+}
+.btn-wa-bright:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(37,211,102,0.45);
+}
+.btn-wa-bright svg{ width:18px; height:18px; fill:currentColor; }
+
+/* Metrics */
+.hb-metrics{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
+  width:100%; max-width:720px; margin-top:24px;
+  background:rgba(255,255,255,0.55);
+  border-radius:14px;
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.8);
+  box-shadow:0 8px 32px rgba(255,107,26,0.08);
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .85s;
+}
+@media (max-width:640px){
+  .hb-metrics{ grid-template-columns:repeat(2, 1fr); }
+}
+.hb-metric{
+  padding:20px 14px; text-align:center;
+  border-right:1px solid rgba(255,107,26,0.12);
+}
+.hb-metric:last-child{ border-right:none; }
+@media (max-width:640px){
+  .hb-metric:nth-child(2){ border-right:none; }
+  .hb-metric:nth-child(1), .hb-metric:nth-child(2){ border-bottom:1px solid rgba(255,107,26,0.12); }
+}
+.hb-metric .num{
+  font-family:'Bebas Neue',sans-serif; font-size:36px;
+  color:var(--orange); line-height:1; margin-bottom:4px;
+}
+.hb-metric .lbl{
+  font-size:12px; color:var(--txt-dark-mute); letter-spacing:0.05em;
+}
+
+/* Decorative shapes */
+.hb-deco-1, .hb-deco-2{
+  position:absolute; pointer-events:none; z-index:1;
+  border-radius:50%;
+}
+.hb-deco-1{
+  width:280px; height:280px;
+  top:-80px; left:-80px;
+  background:radial-gradient(circle, rgba(255,107,26,0.18), transparent 70%);
+}
+.hb-deco-2{
+  width:360px; height:360px;
+  bottom:-120px; right:-100px;
+  background:radial-gradient(circle, rgba(255,170,80,0.22), transparent 70%);
+}
+@media (prefers-reduced-motion: reduce){
+  .hb-brand-mark, .hb-tagline-row, .hb-positioning, .hb-actions, .hb-metrics{
+    opacity:1 !important; transform:none !important; animation:none !important;
+  }
+}
 .hero-bg{
   position:absolute; inset:0; z-index:0; pointer-events:none;
   background:
@@ -1429,59 +1781,143 @@ a{ color:inherit; text-decoration:none; }
 .section-head{ max-width:760px; }
 .section-head.center{ margin:0 auto; text-align:center; }
 
-/* ============== PAGE TAB BAR (3 分頁) ============== */
-.page-tab-bar{
-  position:sticky; top:64px; z-index:90;
-  background:var(--black); border-bottom:1px solid rgba(255,255,255,0.08);
-  padding:0;
-}
-.page-tab-bar .ptb-inner{
-  display:flex; gap:0;
-  border-top:1px solid rgba(255,255,255,0.05);
-}
-.page-tab-bar .ptb-btn{
-  flex:1; background:transparent; border:none; cursor:pointer;
-  padding:18px 20px;
-  display:flex; flex-direction:column; align-items:flex-start; gap:4px;
-  color:var(--txt-mute); transition:all .25s;
-  border-right:1px solid rgba(255,255,255,0.08);
-  position:relative;
-}
-.page-tab-bar .ptb-btn:last-child{ border-right:none; }
-.page-tab-bar .ptb-btn:hover{ color:white; background:rgba(255,255,255,0.03); }
-.page-tab-bar .ptb-btn.active{
-  color:white; background:rgba(255,107,26,0.08);
-}
-.page-tab-bar .ptb-btn.active::after{
-  content:''; position:absolute; left:0; right:0; bottom:0;
-  height:3px; background:var(--orange);
-}
-.page-tab-bar .ptb-num{
-  font-family:'Bebas Neue',sans-serif; font-size:11px;
-  letter-spacing:0.25em; color:var(--orange);
-}
-.page-tab-bar .ptb-label{
-  font-family:'Noto Serif TC',serif; font-weight:700; font-size:16px;
-}
-.page-tab-bar .ptb-en{
-  font-family:'Bebas Neue',sans-serif; font-size:10px;
-  letter-spacing:0.2em; color:var(--txt-mute);
-}
-.page-tab-bar .ptb-btn.active .ptb-en{ color:var(--orange-2); }
-@media (max-width:768px){
-  .page-tab-bar .ptb-btn{ padding:14px 12px; }
-  .page-tab-bar .ptb-label{ font-size:13px; }
-  .page-tab-bar .ptb-en{ display:none; }
-}
-@media (max-width:540px){
-  .page-tab-bar .ptb-num{ font-size:9px; }
-  .page-tab-bar .ptb-label{ font-size:12px; }
-  .page-tab-bar .ptb-btn{ padding:12px 8px; gap:2px; }
-}
-
 /* Hide non-active tab pages */
 section[data-tab-page]{ display:none; }
-section[data-tab-page].tab-active{ display:block; }
+section[data-tab-page].tab-active.sub-tab-active{ display:block; }
+section[data-tab-page].tab-active:not([data-sub-tab]){ display:block; }
+
+/* ============== NAV MENU BUTTON (左上角當前頁顯示) ============== */
+.nav-menu-btn{
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:white; cursor:pointer;
+  padding:9px 16px 9px 18px;
+  border-radius:100px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:13.5px;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.nav-menu-btn:hover{
+  background:rgba(255,107,26,0.15);
+  border-color:rgba(255,107,26,0.4);
+}
+.nav-menu-btn .nm-current{
+  line-height:1.2;
+}
+.nav-menu-btn .nm-sub{
+  display:none;
+}
+.nav-menu-btn .nm-arrow{
+  width:14px; height:14px; color:var(--orange);
+  transition:transform .2s;
+}
+.nav-menu-btn.open .nm-arrow{ transform:rotate(180deg); }
+@media (max-width:540px){
+  .nav-menu-btn{ padding:8px 12px 8px 14px; font-size:12px; }
+  .nav-menu-btn .nm-arrow{ width:12px; height:12px; }
+}
+
+/* ============== NAV MENU FULL-SCREEN OVERLAY ============== */
+.nav-menu-overlay{
+  position:fixed; inset:0; z-index:9999;
+  background:linear-gradient(135deg, rgba(15,10,6,0.97) 0%, rgba(26,20,16,0.98) 100%);
+  backdrop-filter:blur(20px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden;
+  transition:opacity .35s var(--easing), visibility .35s var(--easing);
+}
+.nav-menu-overlay.open{
+  opacity:1; visibility:visible;
+}
+.nm-overlay-inner{
+  width:100%; max-width:680px;
+  padding:80px 32px 60px;
+  max-height:100vh; overflow-y:auto;
+  transform:translateY(20px);
+  transition:transform .4s var(--easing);
+}
+.nav-menu-overlay.open .nm-overlay-inner{
+  transform:translateY(0);
+}
+.nm-close{
+  position:absolute; top:24px; right:24px;
+  background:transparent; border:1px solid rgba(255,255,255,0.2);
+  color:white; cursor:pointer;
+  width:44px; height:44px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.nm-close:hover{
+  background:rgba(255,107,26,0.15); border-color:var(--orange);
+}
+.nm-close svg{ width:18px; height:18px; }
+
+.nm-eyebrow{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:0.3em;
+  color:var(--orange); text-align:center;
+  margin-bottom:36px;
+}
+
+.nm-nav{
+  display:flex; flex-direction:column; gap:28px;
+}
+.nm-group{
+  border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;
+}
+.nm-group-head{
+  display:flex; align-items:baseline; gap:14px;
+  margin-bottom:8px;
+}
+.nm-group-head .nm-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px; letter-spacing:0.25em; color:var(--orange);
+}
+.nm-group-head .nm-label{
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  font-size:13px; letter-spacing:0.15em; color:var(--txt-mute);
+}
+.nm-items{
+  display:flex; flex-direction:column; gap:2px;
+}
+.nm-item{
+  background:transparent; border:none; cursor:pointer;
+  color:white; text-align:left;
+  padding:14px 8px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:18px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:all .2s;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.nm-item:hover{
+  color:var(--orange); padding-left:16px;
+}
+.nm-item.active{
+  color:var(--orange);
+}
+.nm-item.active::before{
+  content:'';
+  position:absolute;
+  margin-left:-22px; margin-top:11px;
+  width:6px; height:6px;
+  background:var(--orange); border-radius:50%;
+}
+.nm-item .nm-arrow-r{
+  font-size:18px; color:var(--orange); opacity:0;
+  transition:opacity .2s, transform .2s;
+}
+.nm-item:hover .nm-arrow-r{
+  opacity:1; transform:translateX(4px);
+}
+
+body.menu-open{ overflow:hidden; }
+
+@media (max-width:540px){
+  .nm-item{ font-size:16px; padding:12px 8px; }
+  .nm-overlay-inner{ padding:72px 22px 40px; }
+}
 
 /* ============== CONTACT SECTION ============== */
 .contact{ background:var(--cream); color:var(--txt-dark); }
@@ -2754,6 +3190,11 @@ section[data-tab-page].tab-active{ display:block; }
 
 <!-- header -->
 <header class="site-header" id="siteHeader">
+  <button class="nav-menu-btn" id="navMenuBtn" aria-label="開啟選單">
+    <span class="nm-current">教學體系與成果</span>
+    <span class="nm-sub" id="navMenuSub"></span>
+    <svg class="nm-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
   <div class="brand-mark">
     <span class="bar"></span>
     <span>SYMON <span class="accent">ACADEMY</span></span>
@@ -2764,103 +3205,134 @@ section[data-tab-page].tab-active{ display:block; }
   </a>
 </header>
 
-<!-- ============== HERO ============== -->
-<section class="hero" id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grain"></div>
-  <div class="container hero-inner">
+<!-- ============== FULL-SCREEN NAV MENU OVERLAY ============== -->
+<div class="nav-menu-overlay" id="navMenuOverlay" role="dialog" aria-modal="true">
+  <div class="nm-overlay-inner">
+    <button class="nm-close" id="navMenuClose" aria-label="關閉選單">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
 
-    <div class="hero-text">
-      <div class="hero-eyebrow">
-        <span class="line"></span>
-        <span>SYMON ACADEMY ・ EST. 2026</span>
-      </div>
+    <div class="nm-eyebrow">SYMON ACADEMY ・ NAVIGATION</div>
 
-      <h1 class="hero-title">
-        <span class="word" style="animation-delay:.1s">不</span><span class="word" style="animation-delay:.18s">是</span><span class="word" style="animation-delay:.26s">不</span><span class="word" style="animation-delay:.34s">努</span><span class="word" style="animation-delay:.42s">力</span><span class="word punct" style="animation-delay:.5s">。</span><br/>
-        <span class="word" style="animation-delay:.6s">而</span><span class="word" style="animation-delay:.68s">是</span><span class="word" style="animation-delay:.76s">從</span><span class="word" style="animation-delay:.84s">未</span><span class="word" style="animation-delay:.92s">真</span><span class="word" style="animation-delay:1s">正</span><br/>
-        <span class="word" style="animation-delay:1.08s">學</span><span class="word" style="animation-delay:1.16s">懂</span><span class="word quote" style="animation-delay:1.24s">理解</span><span class="word punct" style="animation-delay:1.32s">。</span>
-      </h1>
-
-      <p class="hero-sub">
-        Less drilling. More structure.<br/>
-        結構化分層教學體系 ・ 讓進步有跡可循 ・ 由 Symon Academy 教學團隊親自把關
-      </p>
-
-      <div class="hero-actions">
-        <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-primary">
-          <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
-          預約免費程度評估
-          <span class="arrow">→</span>
-        </a>
-        <a href="#method" class="btn-ghost">了解 Symon Method</a>
-        <span class="hero-phone"><span class="dot"></span>+852 9856 0191</span>
-      </div>
-
-      <div class="hero-metrics">
-        <div class="hero-metric">
-          <div class="num" data-counter="50">0</div>
-          <div class="lbl">+ 高小家庭</div>
+    <nav class="nm-nav">
+      <!-- Group 1: 教學體系與成果 -->
+      <div class="nm-group">
+        <div class="nm-group-head">
+          <span class="nm-num">01</span>
+          <span class="nm-label">教學體系與成果</span>
         </div>
-        <div class="hero-metric">
-          <div class="num" data-counter="100">0</div>
-          <div class="lbl">% 五星好評</div>
-        </div>
-        <div class="hero-metric">
-          <div class="num">3-5</div>
-          <div class="lbl">人小班教學</div>
-        </div>
-        <div class="hero-metric">
-          <div class="num">4</div>
-          <div class="lbl">分層班別架構</div>
+        <div class="nm-items">
+          <button class="nm-item" data-page="tab-overview" data-sub="sub-issues">
+            <span>學校教學的盲點</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+          <button class="nm-item" data-page="tab-overview" data-sub="sub-system">
+            <span>Symon Academy 教學體系</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+          <button class="nm-item" data-page="tab-overview" data-sub="sub-team">
+            <span>教學團隊與評價</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
         </div>
       </div>
-    </div>
 
-    <div class="hero-brand">
-      <div class="hero-brand-cut"></div>
-      <div class="hero-brand-inner">
-        <div class="hb-line">SYMON</div>
-        <div class="hb-line accent">ACADEMY</div>
-        <div class="hb-divider"></div>
-        <div class="hb-en">LESS DRILLING.<br/>MORE STRUCTURE.</div>
-        <div class="hb-zh">少操練 ・ 多結構</div>
+      <!-- Group 2: 課程資訊 -->
+      <div class="nm-group">
+        <div class="nm-group-head">
+          <span class="nm-num">02</span>
+          <span class="nm-label">課程資訊</span>
+        </div>
+        <div class="nm-items">
+          <button class="nm-item" data-page="tab-courses" data-sub="sub-regular">
+            <span>常規月費班</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+          <button class="nm-item" data-page="tab-courses" data-sub="sub-sprint">
+            <span>考前急救班</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+          <button class="nm-item" data-page="tab-courses" data-sub="sub-papers">
+            <span>專項練習卷</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+        </div>
       </div>
-    </div>
 
-  </div>
-
-  <div class="scroll-cue">
-    <span>SCROLL</span>
-    <span class="line"></span>
-  </div>
-</section>
-
-<!-- ============== PAGE TAB NAV (教學體系 / 課程資訊 / 聯絡我們) ============== -->
-<div class="page-tab-bar" id="pageTabBar">
-  <div class="container">
-    <div class="ptb-inner" role="tablist">
-      <button class="ptb-btn active" data-page="tab-overview" role="tab">
-        <span class="ptb-num">01</span>
-        <span class="ptb-label">教學體系與成果</span>
-        <span class="ptb-en">OUR APPROACH</span>
-      </button>
-      <button class="ptb-btn" data-page="tab-courses" role="tab">
-        <span class="ptb-num">02</span>
-        <span class="ptb-label">課程資訊</span>
-        <span class="ptb-en">PROGRAMS</span>
-      </button>
-      <button class="ptb-btn" data-page="tab-contact" role="tab">
-        <span class="ptb-num">03</span>
-        <span class="ptb-label">聯絡我們</span>
-        <span class="ptb-en">CONTACT</span>
-      </button>
-    </div>
+      <!-- Group 3: 聯絡我們 -->
+      <div class="nm-group">
+        <div class="nm-group-head">
+          <span class="nm-num">03</span>
+          <span class="nm-label">聯絡我們</span>
+        </div>
+        <div class="nm-items">
+          <button class="nm-item" data-page="tab-contact" data-sub="">
+            <span>WhatsApp ・ 服務地區 ・ 上課地點</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+        </div>
+      </div>
+    </nav>
   </div>
 </div>
 
+<!-- ============== HERO ============== -->
+<section class="hero hero-dark" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="container hero-dark-inner">
+
+    <div class="hb-eyebrow">
+      <span class="line"></span>
+      <span>SYMON ACADEMY ・ EST. 2026</span>
+      <span class="line"></span>
+    </div>
+
+    <h1 class="hb-brand-mark">
+      <span class="bm-symon">SYMON</span>
+      <span class="bm-academy">ACADEMY</span>
+    </h1>
+
+    <div class="hb-tagline-row">
+      <span class="hb-tag-zh">少操練 ・ 多結構</span>
+      <span class="hb-tag-en">LESS DRILLING. MORE STRUCTURE.</span>
+    </div>
+
+    <div class="hb-actions">
+      <button class="btn-primary-dark" onclick="document.querySelector('.nm-item[data-sub=&quot;sub-system&quot;]').click();">
+        <span>了解教學體系</span>
+        <span class="arrow">→</span>
+      </button>
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-wa-dark">
+        <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+        <span>WhatsApp 預約</span>
+      </a>
+    </div>
+
+    <div class="hb-metrics">
+      <div class="hb-metric">
+        <div class="num" data-counter="50">0</div>
+        <div class="lbl">+ 學生家庭</div>
+      </div>
+      <div class="hb-metric">
+        <div class="num" data-counter="100">0</div>
+        <div class="lbl">% 五星好評</div>
+      </div>
+      <div class="hb-metric">
+        <div class="num">3-5</div>
+        <div class="lbl">人小班教學</div>
+      </div>
+      <div class="hb-metric">
+        <div class="num">4</div>
+        <div class="lbl">分層班別架構</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============== SECTION 02 ・ PAIN ============== -->
-<section class="section cream-light" data-tab-page="tab-overview" id="pain">
+<section class="section cream-light" data-tab-page="tab-overview" data-sub-tab="sub-issues" id="pain">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>WHY MOST STUDENTS STOP IMPROVING</span></div>
@@ -2896,7 +3368,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 03 ・ LOSS ============== -->
-<section class="section loss" data-tab-page="tab-overview" id="loss">
+<section class="section loss" data-tab-page="tab-overview" data-sub-tab="sub-issues" id="loss">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>THE COST OF DELAY</span></div>
@@ -2934,12 +3406,12 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 04 ・ METHOD (light) ============== -->
-<section class="section cream" data-tab-page="tab-overview" id="method">
+<section class="section cream" data-tab-page="tab-overview" data-sub-tab="sub-system" id="method">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>OUR METHOD ・ THE SOLUTION</span></div>
-      <h2 class="section-title">Symon Method<br/><span class="hl">結構化分層教學</span></h2>
-      <p class="section-sub">我們不追求短期分數,我們追求孩子終身受用的學習能力。Symon Method 是一套經 50+ 學生實戰驗證的教學體系,從根本重組知識結構,還原完整學習圖像。</p>
+      <h2 class="section-title">Symon Academy 教學體系<br/><span class="hl">結構化分層教學</span></h2>
+      <p class="section-sub">我們不追求短期分數,我們追求孩子終身受用的學習能力。Symon Academy 教學體系是一套經 50+ 學生實戰驗證的教學體系,從根本重組知識結構,還原完整學習圖像。</p>
     </div>
 
     <div class="method-grid">
@@ -2972,11 +3444,11 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 05 ・ COMPARISON ============== -->
-<section class="section comp" data-tab-page="tab-overview" id="comp">
+<section class="section comp" data-tab-page="tab-overview" data-sub-tab="sub-issues" id="comp">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SCHOOL/CRAM-SCHOOL VS SYMON METHOD</span></div>
-      <h2 class="section-title">學校 / 一般補習社<br/>vs <span class="hl">Symon Method</span></h2>
+      <h2 class="section-title">學校 / 一般補習社<br/>vs <span class="hl">Symon Academy</span></h2>
       <p class="section-sub">同一個概念,不同教法,結果完全不同。家長最該對比的,不是價錢,是教學方式本身。</p>
     </div>
 
@@ -2995,7 +3467,7 @@ section[data-tab-page].tab-active{ display:block; }
       <div class="comp-vs reveal delay-2"><span>VS</span></div>
       <div class="comp-col good reveal delay-3">
         <div class="col-tag">SYMON METHOD</div>
-        <h3>Symon Method 做法</h3>
+        <h3>Symon Academy 做法</h3>
         <ul>
           <li><span class="mark">✓</span><span>一堂課還原整個 Topic 完整圖像</span></li>
           <li><span class="mark">✓</span><span>一種底層邏輯,通解所有題型變化</span></li>
@@ -3009,7 +3481,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 06 ・ TIERS ============== -->
-<section class="section tiers" data-tab-page="tab-overview" id="tiers">
+<section class="section tiers" data-tab-page="tab-overview" data-sub-tab="sub-system" id="tiers">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>SYMON METHOD ・ FOUR-TIER ARCHITECTURE</span></div>
@@ -3083,7 +3555,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 07 ・ CURRICULUM (P4/P5/P6 + Templates) ============== -->
-<section class="section curriculum" data-tab-page="tab-courses" id="curriculum">
+<section class="section curriculum" data-tab-page="tab-courses" data-sub-tab="sub-regular" id="curriculum">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>FULL CURRICULUM ・ TEMPLATES</span></div>
@@ -3201,7 +3673,7 @@ section[data-tab-page].tab-active{ display:block; }
             <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
             <ul>
               <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
-              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>解題框架圖</strong> ・ Symon Academy 教學體系「整體 / 部分 / 關係」三步邏輯卡</li>
               <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
               <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
               <li class="group-gift"><strong>🎁 組團限定</strong> ・ 每人加送《Symon 數學思維全攻略》全年級通用解題框架 + 心算技巧 + 各年級易錯點與知識溫習</li>
@@ -3279,7 +3751,7 @@ section[data-tab-page].tab-active{ display:block; }
             <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
             <ul>
               <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
-              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>解題框架圖</strong> ・ Symon Academy 教學體系「整體 / 部分 / 關係」三步邏輯卡</li>
               <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
               <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
               <li class="group-gift"><strong>🎁 組團限定</strong> ・ 每人加送《Symon 數學思維全攻略》全年級通用解題框架 + 心算技巧 + 各年級易錯點與知識溫習</li>
@@ -3355,7 +3827,7 @@ section[data-tab-page].tab-active{ display:block; }
             <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
             <ul>
               <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
-              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>解題框架圖</strong> ・ Symon Academy 教學體系「整體 / 部分 / 關係」三步邏輯卡</li>
               <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
               <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
               <li class="group-gift"><strong>🎁 組團限定</strong> ・ 每人加送《Symon 數學思維全攻略》全年級通用解題框架 + 心算技巧 + 各年級易錯點與知識溫習</li>
@@ -3428,7 +3900,7 @@ section[data-tab-page].tab-active{ display:block; }
             <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
             <ul>
               <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
-              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>解題框架圖</strong> ・ Symon Academy 教學體系「整體 / 部分 / 關係」三步邏輯卡</li>
               <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
               <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
               <li class="group-gift"><strong>🎁 組團限定</strong> ・ 每人加送《Symon 數學思維全攻略》全年級通用解題框架 + 心算技巧 + 各年級易錯點與知識溫習</li>
@@ -3504,7 +3976,7 @@ section[data-tab-page].tab-active{ display:block; }
             <div class="bonus-head"><span class="gift">🎁</span><span>數學限定配套贈品</span><span class="label">FREE BONUS</span></div>
             <ul>
               <li><strong>核心公式速查表</strong> ・ 整個年級嘅核心公式一表看晒</li>
-              <li><strong>解題框架圖</strong> ・ Symon Method「整體 / 部分 / 關係」三步邏輯卡</li>
+              <li><strong>解題框架圖</strong> ・ Symon Academy 教學體系「整體 / 部分 / 關係」三步邏輯卡</li>
               <li><strong>易錯題型對照表</strong> ・ 最常失分題型 + 正確解題步驟</li>
               <li><strong>心算口訣表</strong> ・ 隨堂派發 ・ 加快做題速度</li>
               <li class="group-gift"><strong>🎁 組團限定</strong> ・ 每人加送《Symon 數學思維全攻略》全年級通用解題框架 + 心算技巧 + 各年級易錯點與知識溫習</li>
@@ -3530,7 +4002,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 08 ・ FLOW ============== -->
-<section class="section flow" data-tab-page="tab-overview" id="flow">
+<section class="section flow" data-tab-page="tab-overview" data-sub-tab="sub-system" id="flow">
   <div class="container">
     <div class="section-head center reveal">
       <div class="eyebrow" style="color:var(--orange);justify-content:center"><span class="line" style="background:var(--orange)"></span><span>EVERY LESSON ・ FOUR-STEP FLOW</span></div>
@@ -3542,7 +4014,7 @@ section[data-tab-page].tab-active{ display:block; }
       <div class="flow-step reveal delay-1">
         <div class="num">01</div>
         <h4>Topic 細分講解</h4>
-        <p>將該堂主題按 Symon Method 結構化拆解,建立完整知識圖。</p>
+        <p>將該堂主題按 Symon Academy 結構化拆解,建立完整知識圖。</p>
       </div>
       <div class="flow-step reveal delay-2">
         <div class="num">02</div>
@@ -3566,7 +4038,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 09 ・ TEACHING TEAM ============== -->
-<section class="section about" data-tab-page="tab-overview" id="about">
+<section class="section about" data-tab-page="tab-overview" data-sub-tab="sub-team" id="about">
   <div class="container">
     <div class="section-head reveal" style="margin-bottom:48px">
       <div class="eyebrow"><span class="line"></span><span>SYMON ACADEMY 教學團隊</span></div>
@@ -3685,7 +4157,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 10 ・ PRICING ============== -->
-<section class="section pricing" data-tab-page="tab-courses" id="pricing">
+<section class="section pricing" data-tab-page="tab-courses" data-sub-tab="sub-regular" id="pricing">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>FULL PRICING STRUCTURE</span></div>
@@ -3806,7 +4278,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 10.4 ・ PRACTICE PAPER PRODUCT ============== -->
-<section class="section papers-product" data-tab-page="tab-courses" id="papers-product">
+<section class="section papers-product" data-tab-page="tab-courses" data-sub-tab="sub-papers" id="papers-product">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>STANDALONE PRODUCT ・ NO ENROLLMENT NEEDED</span></div>
@@ -3933,7 +4405,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 10.5 ・ INFO HUB (完整上課資訊) ============== -->
-<section class="section infohub" data-tab-page="tab-courses" id="infohub">
+<section class="section infohub" data-tab-page="tab-courses" data-sub-tab="sub-regular" id="infohub">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SERVICE DETAILS</span></div>
@@ -4078,26 +4550,23 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 11 ・ TIME & PLACE ============== -->
-<section class="section tp" data-tab-page="tab-courses" id="tp">
+<section class="section tp" data-tab-page="tab-courses" data-sub-tab="sub-regular" id="tp">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SCHEDULE & VENUE</span></div>
       <h2 class="section-title">上課時間 + <span class="hl">指定地點</span></h2>
-      <p class="section-sub">服務範圍涵蓋新界北區(粉嶺、上水)及大埔。家長可從指定地點清單中選擇上課場地。</p>
+      <p class="section-sub">服務範圍涵蓋新界北區(粉嶺、上水)、大埔區及沙田。家長可從指定地點清單中選擇上課場地。</p>
     </div>
 
     <div class="tp-grid">
       <div class="tp-block reveal delay-1">
         <div class="lbl"><span class="line"></span>SCHEDULE ・ 上課時間</div>
         <h3>常規課程 ・ 可預約時段</h3>
-        <p class="tp-intro">以下時段適用於常規月費班(每星期固定上課)。暑期 / 長假期可安排全日時段,名額正快速填滿,額滿即止。</p>
-        <div class="tp-time-row"><span class="day">逢星期一</span><span class="hours">全日可約 <span class="open-tag">尚餘少量</span></span></div>
-        <div class="tp-time-row"><span class="day">逢星期三</span><span class="hours">全日可約 <span class="open-tag">尚餘少量</span></span></div>
-        <div class="tp-time-row"><span class="day">逢星期四</span><span class="hours">全日可約 <span class="open-tag">尚餘少量</span></span></div>
-        <div class="tp-time-row"><span class="day">逢星期五</span><span class="hours">全日可約 <span class="open-tag">尚餘少量</span></span></div>
-        <div class="tp-time-row"><span class="day">逢星期六</span><span class="hours">09:00 - 12:00 <span class="open-tag">尚餘少量</span></span></div>
+        <p class="tp-intro">常規月費班為每星期固定時段上課,確保學習節奏穩定。我們嘅營業時間係<strong>逢星期一至日 09:00 - 19:00</strong>,所有時段均可開設班別,具體時段視乎家長同學生時間夾配 ── 但名額正快速填滿,請盡早查詢。</p>
+        <div class="tp-time-row"><span class="day">星期一至五</span><span class="hours">全日均可開班 <span class="open-tag">尚餘少量</span></span></div>
+        <div class="tp-time-row"><span class="day">星期六 / 日</span><span class="hours">全日均可開班 <span class="open-tag">熱門時段 ・ 尚餘少量</span></span></div>
 
-        <div class="tp-time-divider"><span class="line"></span><span>FULLY BOOKED ・ 已額滿時段</span><span class="line"></span></div>
+        <div class="tp-time-divider"><span class="line"></span><span>FULLY BOOKED ・ 現已額滿時段</span><span class="line"></span></div>
 
         <div class="tp-time-row full"><span class="day">逢星期五</span><span class="hours">16:00 - 20:30 <span class="full-tag">已滿</span></span></div>
         <div class="tp-time-row full"><span class="day">逢星期六</span><span class="hours">13:00 - 18:30 <span class="full-tag">已滿</span></span></div>
@@ -4120,16 +4589,17 @@ section[data-tab-page].tab-active{ display:block; }
         <h3>指定上課場地</h3>
         <ol class="tp-place-list">
           <li>上水廣場單獨會議室或活動室</li>
+          <li>沙田新城市廣場單獨會議室</li>
           <li>各大屋苑會所<span class="sub">例如粉嶺牽晴間會所 / 碧湖花園會所等 ・ 須報名學生中至少一位為該屋苑住客 ・ 同組學生須為同一年級、同區域(方便上課接送)</span></li>
         </ol>
-        <div class="tp-foot"><strong>關於場地選擇</strong>:北區及大埔現時共享空間及私人會議室數量有限,部分公共設施(如體育館)未有提供獨立枱凳配套,難以維持結構化教學節奏。我們堅持只選用配套完善、安靜不受干擾嘅獨立會議室,確保每一位學生嘅學習質素。所有指定場地距離北區及大埔主要屋苑步行或交通約 5 - 10 分鐘可達。<br/><br/><strong>場地費用和手續,全數由 Symon Academy 承擔,家長無需另付。</strong></div>
+        <div class="tp-foot"><strong>關於場地選擇</strong>:北區、大埔及沙田區內共享空間及私人會議室數量有限,部分公共設施(如體育館)未有提供獨立枱凳配套,難以維持結構化教學節奏。我們堅持只選用配套完善、安靜不受干擾嘅獨立會議室,確保每一位學生嘅學習質素。所有指定場地距離主要屋苑步行或交通約 5 - 10 分鐘可達。<br/><br/><strong>場地費用和手續,全數由 Symon Academy 承擔,家長無需另付。</strong></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============== SECTION 12 ・ TESTIMONIALS ============== -->
-<section class="section test" data-tab-page="tab-overview" id="test">
+<section class="section test" data-tab-page="tab-overview" data-sub-tab="sub-team" id="test">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>PARENT TESTIMONIALS</span></div>
@@ -4184,7 +4654,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 13 ・ SPRINT URGENCY ============== -->
-<section class="section sprint" data-tab-page="tab-courses" id="sprint">
+<section class="section sprint" data-tab-page="tab-courses" data-sub-tab="sub-sprint" id="sprint">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>EXAM SPRINT ・ LIMITED OPENING</span></div>
@@ -4266,7 +4736,7 @@ section[data-tab-page].tab-active{ display:block; }
 </section>
 
 <!-- ============== SECTION 14 ・ FINAL CTA ============== -->
-<section class="section cta" data-tab-page="tab-overview" id="cta">
+<section class="section cta" data-tab-page="tab-overview" data-sub-tab="sub-system" id="cta">
   <div class="container">
     <div class="cta-inner">
       <div class="eyebrow reveal" style="justify-content:center"><span class="line"></span><span>BOOK YOUR FREE ASSESSMENT</span></div>
@@ -4319,23 +4789,23 @@ section[data-tab-page].tab-active{ display:block; }
 
       <div class="contact-card">
         <div class="cc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <div class="cc-body">
-          <div class="cc-label">INSTAGRAM</div>
-          <div class="cc-value placeholder-text">即將開通</div>
-          <div class="cc-desc">教學日常 ・ 學生作品 ・ 學習筆記分享</div>
+          <div class="cc-label">服務地區</div>
+          <div class="cc-value">北區 ・ 大埔 ・ 沙田</div>
+          <div class="cc-desc">粉嶺 ・ 上水 ・ 太和 ・ 沙田市中心</div>
         </div>
       </div>
 
       <div class="contact-card">
         <div class="cc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
         </div>
         <div class="cc-body">
-          <div class="cc-label">服務地區</div>
-          <div class="cc-value">香港 ・ 北區 / 大埔</div>
-          <div class="cc-desc">粉嶺 ・ 上水 ・ 太和 ・ 多個指定上課場地</div>
+          <div class="cc-label">指定上課地點</div>
+          <div class="cc-value">多個會議室 / 屋苑會所</div>
+          <div class="cc-desc">上水廣場 ・ 沙田新城市廣場 ・ 各區屋苑會所</div>
         </div>
       </div>
 
@@ -4376,14 +4846,14 @@ section[data-tab-page].tab-active{ display:block; }
         <h5>CONTACT</h5>
         <ul>
           <li><a href="https://wa.me/85298560191" target="_blank" rel="noopener">WhatsApp:+852 9856 0191</a></li>
-          <li>新界北區 ・ 粉嶺 / 上水 / 大埔</li>
+          <li>新界北區 ・ 大埔區 ・ 沙田</li>
           <li>多個指定場地任選</li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>NAVIGATE</h5>
         <ul>
-          <li><a href="#method">Symon Method</a></li>
+          <li><a href="#method">教學體系</a></li>
           <li><a href="#tiers">四大班別</a></li>
           <li><a href="#curriculum">課程內容</a></li>
           <li><a href="#pricing">收費結構</a></li>
@@ -4416,7 +4886,7 @@ section[data-tab-page].tab-active{ display:block; }
     </div>
     <div class="lightbox-body">
       <div class="lb-pane-desc">
-        以下為部分試卷樣本(共 11 頁),每一份試卷皆按 Symon Method 結構化邏輯設計,涵蓋呈分試各大常見題型,確保學生在堂上操練的就是考試會出現的題型。
+        以下為部分試卷樣本(共 11 頁),每一份試卷皆按 Symon Academy 結構化教學邏輯設計,涵蓋呈分試各大常見題型,確保學生在堂上操練的就是考試會出現的題型。
       </div>
       <div class="lb-grid">
         <img src="https://res.cloudinary.com/doik7chkw/image/upload/v1777901589/WhatsApp_Image_2026-05-04_at_21.28.55_1_bzvycd.jpg" alt="試卷樣本 1" loading="lazy" />
@@ -4539,27 +5009,110 @@ const dotObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.45 });
 sections.forEach(s => s && dotObs.observe(s));
 
-// ============== PAGE TAB BAR (3 分頁切換) ==============
-const pageTabBtns = document.querySelectorAll('.ptb-btn');
+// ============== NAV MENU OVERLAY (左上角 Menu 系統) ==============
+const navMenuBtn = document.getElementById('navMenuBtn');
+const navMenuOverlay = document.getElementById('navMenuOverlay');
+const navMenuClose = document.getElementById('navMenuClose');
+const navMenuCurrent = navMenuBtn ? navMenuBtn.querySelector('.nm-current') : null;
+const navMenuItems = document.querySelectorAll('.nm-item');
 const pageSections = document.querySelectorAll('section[data-tab-page]');
 
-function setActivePage(pageId){
-  pageTabBtns.forEach(b => b.classList.toggle('active', b.dataset.page === pageId));
-  pageSections.forEach(s => s.classList.toggle('tab-active', s.dataset.tabPage === pageId));
-  // 滾返去頂部（Tab Bar 之下）
+// Page + sub-page labels
+const pageLabels = {
+  'tab-overview': '教學體系與成果',
+  'tab-courses': '課程資訊',
+  'tab-contact': '聯絡我們',
+};
+const subLabels = {
+  'sub-issues': '學校教學的盲點',
+  'sub-system': 'Symon Academy 教學體系',
+  'sub-team': '教學團隊與評價',
+  'sub-regular': '常規月費班',
+  'sub-sprint': '考前急救班',
+  'sub-papers': '專項練習卷',
+};
+
+function openMenu(){
+  navMenuOverlay.classList.add('open');
+  navMenuBtn.classList.add('open');
+  document.body.classList.add('menu-open');
+}
+function closeMenu(){
+  navMenuOverlay.classList.remove('open');
+  navMenuBtn.classList.remove('open');
+  document.body.classList.remove('menu-open');
+}
+
+function updateNavMenuLabel(pageId, subPageId){
+  if (!navMenuCurrent) return;
+  if (subPageId && subLabels[subPageId]){
+    navMenuCurrent.textContent = subLabels[subPageId];
+  } else if (pageLabels[pageId]){
+    navMenuCurrent.textContent = pageLabels[pageId];
+  }
+}
+
+function updateSectionVisibility(pageId, subPageId){
+  pageSections.forEach(s => {
+    const matchPage = s.dataset.tabPage === pageId;
+    const matchSub = !s.dataset.subTab || s.dataset.subTab === subPageId;
+    s.classList.toggle('tab-active', matchPage);
+    s.classList.toggle('sub-tab-active', matchSub);
+  });
+}
+
+function setActive(pageId, subPageId){
+  // Update items active state
+  navMenuItems.forEach(item => {
+    const matchPage = item.dataset.page === pageId;
+    const matchSub = !item.dataset.sub || item.dataset.sub === subPageId;
+    item.classList.toggle('active', matchPage && (subPageId ? matchSub : true));
+  });
+  updateSectionVisibility(pageId, subPageId);
+  updateNavMenuLabel(pageId, subPageId);
+  closeMenu();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Re-trigger reveal animation
-  document.querySelectorAll(`section[data-tab-page="${pageId}"] .reveal`).forEach(el => {
+  document.querySelectorAll(`section[data-tab-page="${pageId}"].sub-tab-active .reveal`).forEach(el => {
     el.classList.remove('in');
     requestAnimationFrame(() => el.classList.add('in'));
   });
 }
 
-// 初始化:預設顯示 tab-overview
-document.querySelectorAll('section[data-tab-page="tab-overview"]').forEach(s => s.classList.add('tab-active'));
+// Initial state: Tab 1 + sub-issues
+updateSectionVisibility('tab-overview', 'sub-issues');
+updateNavMenuLabel('tab-overview', 'sub-issues');
+navMenuItems.forEach(item => {
+  if (item.dataset.page === 'tab-overview' && item.dataset.sub === 'sub-issues'){
+    item.classList.add('active');
+  }
+});
 
-pageTabBtns.forEach(btn => {
-  btn.addEventListener('click', () => setActivePage(btn.dataset.page));
+if (navMenuBtn){
+  navMenuBtn.addEventListener('click', () => {
+    if (navMenuOverlay.classList.contains('open')) closeMenu();
+    else openMenu();
+  });
+}
+if (navMenuClose){
+  navMenuClose.addEventListener('click', closeMenu);
+}
+if (navMenuOverlay){
+  navMenuOverlay.addEventListener('click', (e) => {
+    if (e.target === navMenuOverlay) closeMenu();
+  });
+}
+
+navMenuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    setActive(item.dataset.page, item.dataset.sub || null);
+  });
+});
+
+// ESC closes menu
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navMenuOverlay.classList.contains('open')){
+    closeMenu();
+  }
 });
 
 // ============== TEACHER TABS (Symon / Lincoln) ==============

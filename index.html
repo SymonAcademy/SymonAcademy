@@ -327,6 +327,16 @@ a{ color:inherit; text-decoration:none; }
 }
 .btn-wa-dark svg{ width:18px; height:18px; fill:currentColor; }
 
+/* Hero CTA Note ($200 評估提示) */
+.hero-dark .hb-cta-note{
+  margin-top:-10px;
+  font-size:12.5px; color:var(--txt-mute); letter-spacing:0.04em;
+  opacity:0; animation:hbBrandFade .8s var(--easing) forwards .62s;
+}
+.hero-dark .hb-cta-note strong{
+  color:var(--orange); font-weight:700;
+}
+
 /* Metrics 深色版 */
 .hero-dark .hb-metrics{
   display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
@@ -1236,8 +1246,84 @@ a{ color:inherit; text-decoration:none; }
 
 /* ============== SECTION 08 ・ FLOW ============== */
 .flow{ background:var(--cream); color:var(--txt-dark); }
+
+/* Flow prestep (程度評估前置步驟) */
+.flow-prestep{
+  margin:36px 0 28px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.02) 100%);
+  border:1px solid rgba(255,107,26,0.25);
+  border-left:4px solid var(--orange);
+  border-radius:12px;
+  padding:28px 32px;
+}
+@media (max-width:768px){ .flow-prestep{ padding:22px 22px; } }
+.flow-prestep .fps-tag{
+  font-family:'Bebas Neue',sans-serif; font-size:12px;
+  letter-spacing:0.25em; color:var(--orange);
+  margin-bottom:14px;
+}
+.flow-prestep .fps-body{
+  display:grid; grid-template-columns:1.6fr 1fr; gap:32px; align-items:center;
+}
+@media (max-width:768px){
+  .flow-prestep .fps-body{ grid-template-columns:1fr; gap:20px; }
+}
+.flow-prestep .fps-main h3{
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  font-size:24px; color:var(--txt-dark); margin-bottom:10px;
+}
+.flow-prestep .fps-main p{
+  font-size:14px; color:var(--txt-dark-mute); line-height:1.8;
+}
+.flow-prestep .fps-side{
+  display:flex; flex-direction:column; align-items:flex-start; gap:10px;
+  padding-left:24px;
+  border-left:1px dashed rgba(255,107,26,0.3);
+}
+@media (max-width:768px){
+  .flow-prestep .fps-side{ padding-left:0; border-left:none; padding-top:18px; border-top:1px dashed rgba(255,107,26,0.3); }
+}
+.flow-prestep .fps-price{
+  display:flex; align-items:baseline; gap:4px;
+}
+.flow-prestep .fps-currency{
+  font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--txt-dark-mute);
+}
+.flow-prestep .fps-amount{
+  font-family:'Bebas Neue',sans-serif; font-size:48px; color:var(--orange); line-height:1;
+}
+.flow-prestep .fps-note{
+  font-size:13px; color:var(--txt-dark); line-height:1.5;
+}
+.flow-prestep .fps-note strong{ color:var(--orange); }
+.flow-prestep .fps-cta{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:12px 22px; margin-top:4px;
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color:white; text-decoration:none;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:13.5px;
+  border-radius:100px;
+  box-shadow:0 4px 14px rgba(37,211,102,0.3);
+  transition:all .2s;
+}
+.flow-prestep .fps-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(37,211,102,0.45);
+}
+.flow-prestep .fps-cta svg{ width:16px; height:16px; }
+
+.flow-divider{
+  display:flex; align-items:center; gap:14px;
+  margin:32px 0 24px;
+}
+.flow-divider .line{ flex:1; height:1px; background:var(--line-dark); }
+.flow-divider .lbl{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.22em; color:var(--orange);
+}
+
 .flow-track{
-  margin-top:80px;
+  margin-top:32px;
   display:grid; grid-template-columns:repeat(4, 1fr); gap:0;
   position:relative;
 }
@@ -2077,6 +2163,25 @@ body.menu-open{ overflow:hidden; }
 .contact-card.primary:hover{
   transform:translateY(-2px); box-shadow:0 12px 32px rgba(37,211,102,0.25);
 }
+
+.contact-card.assessment{
+  background:linear-gradient(135deg, var(--orange) 0%, var(--orange-2) 100%);
+  border:none; color:white;
+  text-decoration:none;
+}
+.contact-card.assessment:hover{
+  transform:translateY(-2px); box-shadow:0 12px 32px rgba(255,107,26,0.35);
+}
+.contact-card.assessment .cc-icon{
+  background:rgba(255,255,255,0.2); color:white;
+}
+.contact-card.assessment .cc-label,
+.contact-card.assessment .cc-value{
+  color:white !important;
+}
+.contact-card.assessment .cc-desc{
+  color:rgba(255,255,255,0.9);
+}
 .contact-card .cc-icon{
   flex-shrink:0; width:48px; height:48px;
   display:flex; align-items:center; justify-content:center;
@@ -2439,6 +2544,50 @@ body.menu-open{ overflow:hidden; }
   content:'★'; background:#dc2626; top:11px;
 }
 .bonus-box li.group-gift strong{ color:#b45309; }
+
+/* Assessment CTA (常規課程資訊區內) */
+.assessment-cta{
+  margin-top:36px;
+  background:var(--txt-dark);
+  border-radius:14px;
+  padding:32px 36px;
+  display:grid; grid-template-columns:1.5fr auto; gap:28px; align-items:center;
+  color:white;
+}
+@media (max-width:768px){
+  .assessment-cta{ grid-template-columns:1fr; padding:26px 24px; gap:20px; }
+}
+.assessment-cta .ac-tag{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.25em; color:var(--orange);
+  margin-bottom:10px;
+}
+.assessment-cta h3{
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  font-size:24px; line-height:1.3; color:white; margin-bottom:10px;
+}
+.assessment-cta p{
+  font-size:14px; color:rgba(255,255,255,0.8); line-height:1.7;
+}
+.assessment-cta p strong{ color:var(--orange-2); }
+.assessment-cta .ac-cta{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:16px 26px;
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color:white; text-decoration:none;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:14.5px;
+  border-radius:100px;
+  white-space:nowrap;
+  box-shadow:0 6px 20px rgba(37,211,102,0.3);
+  transition:all .25s;
+}
+.assessment-cta .ac-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(37,211,102,0.5);
+}
+.assessment-cta .ac-cta svg{ width:18px; height:18px; }
+.assessment-cta .ac-cta .arrow{ transition:transform .2s; }
+.assessment-cta .ac-cta:hover .arrow{ transform:translateX(4px); }
 
 /* 客製化跟進說明 */
 .custom-care{
@@ -3438,11 +3587,12 @@ body.menu-open{ overflow:hidden; }
         <span>了解教學體系</span>
         <span class="arrow">→</span>
       </button>
-      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-wa-dark">
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約%20$200%20實體程度評估。" target="_blank" rel="noopener" class="btn-wa-dark">
         <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
-        <span>WhatsApp 預約</span>
+        <span>WhatsApp 預約評估</span>
       </a>
     </div>
+    <p class="hb-cta-note">$200 實體程度評估 ・ <strong>報常規月費班即抵扣首月學費</strong> ・ 等同免費</p>
 
     <div class="hb-metrics">
       <div class="hb-metric">
@@ -3881,6 +4031,21 @@ body.menu-open{ overflow:hidden; }
       </div>
 
     </div>
+
+    <!-- $200 實體程度評估 CTA -->
+    <div class="assessment-cta reveal">
+      <div class="ac-body">
+        <div class="ac-tag">REPORT-BACKED ASSESSMENT ・ 實體程度評估</div>
+        <h3>$200 實體程度評估 ・ <span style="color:var(--orange);">報名即抵扣</span></h3>
+        <p>未報名常規月費班?先預約一次 $200 實體程度評估。由認證導師親自面見、即場派發評估材料、深入診斷學生程度與弱項。<strong>報名常規月費班即抵扣首月學費 ── 等同免費評估</strong>,而我們以實體投入確保品質,篩除走過場式服務。</p>
+      </div>
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約%20$200%20實體程度評估。" target="_blank" rel="noopener" class="ac-cta">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+        <span>WhatsApp 預約評估</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -4335,9 +4500,37 @@ body.menu-open{ overflow:hidden; }
 <section class="section flow" data-tab-page="tab-overview" data-sub-tab="sub-system" id="flow">
   <div class="container">
     <div class="section-head center reveal">
-      <div class="eyebrow" style="color:var(--orange);justify-content:center"><span class="line" style="background:var(--orange)"></span><span>EVERY LESSON ・ FOUR-STEP FLOW</span></div>
-      <h2 class="section-title">每堂課堂結構<br/><span class="hl">教學工程</span></h2>
-      <p class="section-sub" style="margin:0 auto">每堂課堂均按以下標準流程執行,確保教學深度、操練密度、回饋精準度三者兼備。</p>
+      <div class="eyebrow" style="color:var(--orange);justify-content:center"><span class="line" style="background:var(--orange)"></span><span>FULL STUDENT JOURNEY ・ 完整學習流程</span></div>
+      <h2 class="section-title">由評估到上堂<br/><span class="hl">完整學習流程</span></h2>
+      <p class="section-sub" style="margin:0 auto">每位學生由報名前嘅實體評估開始,到每堂課堂執行嘅四步教學流程,完整透明 ・ 確保教學深度、操練密度、回饋精準度三者兼備。</p>
+    </div>
+
+    <!-- 前置步驟:程度評估 -->
+    <div class="flow-prestep reveal">
+      <div class="fps-tag">STEP 00 ・ 報名前</div>
+      <div class="fps-body">
+        <div class="fps-main">
+          <h3>實體程度評估</h3>
+          <p>由認證導師<strong>實體面見學生</strong>進行專業診斷:測試現時程度、識別弱項、了解學習需求,並提供完整評估報告。所有評估材料及配套即場派發 ── 不是表面試讀,而是真正深入嘅程度診斷。</p>
+        </div>
+        <div class="fps-side">
+          <div class="fps-price">
+            <span class="fps-currency">HK$</span>
+            <span class="fps-amount">200</span>
+          </div>
+          <div class="fps-note"><strong>報名常規月費班即抵扣首月學費</strong> ・ 等同免費</div>
+          <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約%20$200%20實體程度評估。" target="_blank" rel="noopener" class="fps-cta">
+            <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
+            WhatsApp 預約評估
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-divider reveal">
+      <span class="line"></span>
+      <span class="lbl">EVERY LESSON ・ 每堂課堂執行流程</span>
+      <span class="line"></span>
     </div>
 
     <div class="flow-track">
@@ -4389,7 +4582,7 @@ body.menu-open{ overflow:hidden; }
     <!-- 區域提示 -->
     <div class="region-note reveal" id="regionNote">
       <span class="rn-icon">✓</span>
-      <span class="rn-text"><strong>上水 / 粉嶺區</strong> ・ 目前認證導師 2 位 ・ 兩位均可即時匹配</span>
+      <span class="rn-text"><strong>上水 / 粉嶺區</strong> ・ 目前已有認證導師 ・ 可即時匹配</span>
     </div>
 
     <!-- 老師 Tab 切換 -->
@@ -5011,16 +5204,17 @@ body.menu-open{ overflow:hidden; }
         </div>
       </div>
 
-      <div class="contact-card">
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約%20$200%20實體程度評估。" target="_blank" rel="noopener" class="contact-card assessment">
         <div class="cc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
         <div class="cc-body">
-          <div class="cc-label">指定上課地點</div>
-          <div class="cc-value">多個會議室 / 屋苑會所</div>
-          <div class="cc-desc">上水廣場 ・ 沙田新城市廣場 ・ 各區屋苑會所</div>
+          <div class="cc-label">$200 實體程度評估</div>
+          <div class="cc-value">報名常規月費班即抵扣</div>
+          <div class="cc-desc">由認證導師實體面見學生 ・ 即場派發評估材料 ・ 報名即抵扣首月學費,等同免費</div>
         </div>
-      </div>
+        <div class="cc-arrow">→</div>
+      </a>
 
       <div class="contact-card">
         <div class="cc-icon">
@@ -5347,9 +5541,9 @@ teacherBtns.forEach(btn => {
 const regionBtns = document.querySelectorAll('.region-tab-btn');
 const regionNote = document.getElementById('regionNote');
 const regionContent = {
-  'r-sheungshui': '<strong>上水 / 粉嶺區</strong> ・ 目前認證導師 2 位 ・ 兩位均可即時匹配',
-  'r-shatin': '<strong>沙田區</strong> ・ 目前認證導師 2 位 ・ 額外導師招募中,可優先排隊匹配',
-  'r-taipo': '<strong>大埔區</strong> ・ 目前認證導師 2 位 ・ 額外導師招募中,可優先排隊匹配',
+  'r-sheungshui': '<strong>上水 / 粉嶺區</strong> ・ 目前已有認證導師 ・ 可即時匹配',
+  'r-shatin': '<strong>沙田區</strong> ・ 目前已有認證導師 ・ 額外導師招募中,可優先排隊匹配',
+  'r-taipo': '<strong>大埔區</strong> ・ 目前已有認證導師 ・ 額外導師招募中,可優先排隊匹配',
 };
 regionBtns.forEach(btn => {
   btn.addEventListener('click', () => {

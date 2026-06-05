@@ -1819,6 +1819,83 @@ a{ color:inherit; text-decoration:none; }
   font-size:13px; color:var(--txt-dark-mute); line-height:1.6;
 }
 
+/* ============== DAY TABS + TIME SLOTS (9 個時段 + 按日切換) ============== */
+.day-tabs{
+  display:flex; gap:6px; flex-wrap:wrap;
+  margin-top:18px; margin-bottom:12px;
+}
+.day-tab{
+  background:white; border:1px solid var(--line-dark); cursor:pointer;
+  padding:8px 16px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:13px;
+  color:var(--txt-dark);
+  border-radius:100px;
+  transition:all .2s;
+}
+.day-tab:hover{ border-color:var(--orange); color:var(--orange); }
+.day-tab.active{
+  background:var(--orange); border-color:var(--orange); color:white;
+}
+@media (max-width:540px){
+  .day-tab{ padding:7px 12px; font-size:12px; }
+}
+
+.day-note{
+  padding:10px 14px; margin-bottom:14px;
+  background:rgba(255,107,26,0.06);
+  border-left:3px solid var(--orange);
+  border-radius:4px;
+  display:flex; align-items:center; gap:10px;
+  font-size:13px; color:var(--txt-dark);
+}
+.day-note .dn-tag{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.2em; color:var(--orange);
+  padding:2px 10px; background:white;
+  border:1px solid rgba(255,107,26,0.3); border-radius:4px;
+}
+.day-note .dn-txt strong{ color:var(--orange); }
+
+.time-slots-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;
+  margin-bottom:18px;
+}
+@media (max-width:640px){
+  .time-slots-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:380px){
+  .time-slots-grid{ grid-template-columns:1fr; }
+}
+.time-slot{
+  background:white; border:1px solid var(--line-dark);
+  padding:10px 12px; border-radius:6px;
+  display:flex; flex-direction:column; gap:4px;
+  position:relative;
+  transition:all .2s;
+}
+.time-slot:hover{
+  border-color:rgba(255,107,26,0.4);
+  background:rgba(255,107,26,0.02);
+}
+.time-slot.disabled{
+  opacity:0.4;
+  background:rgba(0,0,0,0.02);
+}
+.time-slot .ts-num{
+  font-family:'Bebas Neue',sans-serif; font-size:10px;
+  letter-spacing:0.2em; color:var(--orange);
+}
+.time-slot .ts-time{
+  font-family:'Bebas Neue',sans-serif; font-size:15px;
+  color:var(--txt-dark); letter-spacing:0.03em;
+}
+.time-slot .ts-tag{
+  font-size:10px; color:var(--orange);
+  font-family:'Noto Serif TC',serif;
+}
+.time-slot.one-only .ts-tag{ color:#888; }
+.time-slot.disabled .ts-tag{ color:#bbb; }
+
 /* ============== SECTION 12 ・ TESTIMONIALS ============== */
 .test{ background:var(--cream); color:var(--txt-dark); }
 .test-meta{
@@ -3092,27 +3169,170 @@ body.menu-open{ overflow:hidden; }
   .sprint-note{ padding:20px 22px; }
 }
 
-/* ============== GROUP DISCOUNT (PRICING CARD HINT + SPRINT COMPARISON) ============== */
+/* Cross-link banner (子分頁之間嘅連結提示) */
+.cross-link{
+  margin-top:32px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.06) 0%, rgba(255,107,26,0.02) 100%);
+  border:1px solid rgba(255,107,26,0.25);
+  border-radius:10px;
+  padding:24px 28px;
+  display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+}
+@media (max-width:768px){
+  .cross-link{ grid-template-columns:1fr; padding:20px 22px; gap:16px; }
+}
+.cross-link .cl-tag{
+  display:inline-block; font-family:'Bebas Neue',sans-serif;
+  font-size:10px; letter-spacing:0.25em; color:var(--orange);
+  margin-bottom:6px;
+}
+.cross-link strong{
+  display:block;
+  font-family:'Noto Serif TC',serif; font-weight:700;
+  font-size:18px; color:var(--txt-dark);
+  margin-bottom:6px;
+}
+.cross-link p{
+  font-size:13px; color:var(--txt-dark-mute); line-height:1.7;
+  margin:0;
+}
+.cross-link .cl-cta{
+  background:var(--orange); color:white; border:none; cursor:pointer;
+  padding:14px 24px;
+  font-family:'Noto Serif TC',serif; font-weight:700; font-size:14px;
+  border-radius:100px;
+  white-space:nowrap;
+  display:inline-flex; align-items:center; gap:8px;
+  transition:all .2s;
+  box-shadow:0 4px 14px rgba(255,107,26,0.3);
+}
+.cross-link .cl-cta:hover{
+  background:var(--orange-2);
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(255,107,26,0.45);
+}
+.cross-link .cl-cta .arrow{ transition:transform .2s; }
+.cross-link .cl-cta:hover .arrow{ transform:translateX(4px); }
 
-/* 細小版 ・ 用在 PRICING 急救卡片內 */
-.price-card .group-hint{
-  margin-top:14px; padding:10px 14px;
-  background:rgba(34,197,94,0.08);
-  border:1px dashed rgba(34,197,94,0.4);
-  border-radius:6px;
-  font-size:12.5px; color:#16a34a; line-height:1.5;
+/* Level suffix (低級/中級/高級) */
+.level-suffix{
   font-family:'Noto Serif TC',serif;
+  font-size:0.65em; color:var(--orange);
+  font-weight:400;
+  margin-left:6px;
+  letter-spacing:0.04em;
 }
-.price-card .group-hint strong{
-  color:#15803d; font-weight:900;
+
+/* ============== DUAL PRICE (一對一 + 小組 同卡並列) ============== */
+
+.price-card.dual-price{
+  display:flex; flex-direction:column;
 }
-.price-card .group-hint.dark{
-  background:rgba(0,0,0,0.45);
-  border:1px dashed rgba(134,239,172,0.7);
-  color:#bbf7d0;
+.dual-price-grid{
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:stretch; gap:0;
+  margin:14px 0 12px;
+  padding:14px 0;
+  border-top:1px solid rgba(0,0,0,0.06);
+  border-bottom:1px solid rgba(0,0,0,0.06);
 }
-.price-card .group-hint.dark strong{
-  color:#86efac;
+.price-card.featured .dual-price-grid,
+.price-card.dark-feat .dual-price-grid{
+  border-top:1px solid rgba(255,255,255,0.12);
+  border-bottom:1px solid rgba(255,255,255,0.12);
+}
+.dp-col{
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center; padding:4px 8px;
+}
+.dp-divider{
+  width:1px; background:rgba(0,0,0,0.08);
+  margin:6px 8px;
+}
+.price-card.featured .dp-divider,
+.price-card.dark-feat .dp-divider{
+  background:rgba(255,255,255,0.15);
+}
+.dp-label{
+  font-family:'Bebas Neue',sans-serif; font-size:11px;
+  letter-spacing:0.22em;
+  color:var(--txt-dark-mute);
+  margin-bottom:4px;
+}
+.price-card.featured .dp-label,
+.price-card.dark-feat .dp-label{
+  color:rgba(255,255,255,0.75);
+}
+.dp-amount{
+  display:flex; align-items:baseline; gap:2px; line-height:1;
+}
+.dp-amount .currency{
+  font-family:'Bebas Neue',sans-serif; font-size:14px;
+  color:var(--txt-dark-mute); letter-spacing:0.04em;
+}
+.price-card.featured .dp-amount .currency,
+.price-card.dark-feat .dp-amount .currency{
+  color:rgba(255,255,255,0.75);
+}
+.dp-amount .price,
+.dp-amount .price-strike{
+  font-family:'Bebas Neue',sans-serif; font-size:32px;
+  color:var(--txt-dark); line-height:1;
+  letter-spacing:0.02em;
+}
+.price-card.featured .dp-amount .price,
+.price-card.featured .dp-amount .price-strike,
+.price-card.dark-feat .dp-amount .price,
+.price-card.dark-feat .dp-amount .price-strike{
+  color:white;
+}
+.dp-amount .price-strike{
+  position:relative;
+  color:var(--txt-dark-mute);
+}
+.price-card.featured .dp-amount .price-strike,
+.price-card.dark-feat .dp-amount .price-strike{
+  color:rgba(255,255,255,0.55);
+}
+.dp-amount .price-strike::after{
+  content:'';
+  position:absolute; left:-4%; right:-4%;
+  top:54%; height:2px;
+  background:var(--orange);
+  transform:rotate(-6deg);
+  pointer-events:none;
+}
+.dp-first-month{
+  margin-top:6px;
+  font-size:11.5px; color:var(--orange);
+  font-family:'Noto Serif TC',serif;
+  letter-spacing:0.02em;
+}
+.dp-first-month strong{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:15px; letter-spacing:0.04em;
+}
+.price-card.featured .dp-first-month{ color:var(--orange-2); }
+.price-card.dark-feat .dp-first-month{ color:var(--orange-2); }
+
+/* ============== FIRST MONTH BANNER (85 折橫額) ============== */
+.first-month-banner{
+  margin-top:24px;
+  background:linear-gradient(135deg, rgba(255,107,26,0.08) 0%, rgba(255,107,26,0.04) 100%);
+  border:1px solid rgba(255,107,26,0.3);
+  border-left:3px solid var(--orange);
+  padding:16px 22px;
+  border-radius:8px;
+  display:flex; align-items:center; gap:14px;
+  font-size:13.5px; color:var(--txt-dark); line-height:1.6;
+}
+.first-month-banner .fmb-icon{
+  flex-shrink:0;
+  font-size:18px; color:var(--orange);
+}
+.first-month-banner strong{ color:var(--orange); }
+@media (max-width:540px){
+  .first-month-banner{ font-size:12.5px; padding:14px 16px; }
 }
 
 /* 大版 ・ 用在 SPRINT 獨立區的比較圖 */
@@ -3486,7 +3706,7 @@ body.menu-open{ overflow:hidden; }
 </nav>
 
 <!-- floating whatsapp -->
-<a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="WhatsApp 預約">
+<a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="WhatsApp 預約">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Zm0 29.158a13.13 13.13 0 0 1-6.681-1.83l-.479-.286-4.842 1.27 1.295-4.722-.313-.485a13.13 13.13 0 0 1-2.012-6.999c0-7.265 5.911-13.176 13.176-13.176 7.265 0 13.176 5.911 13.176 13.176 0 7.265-5.911 13.176-13.176 13.176Zm7.226-9.857c-.396-.198-2.34-1.155-2.703-1.287-.363-.132-.627-.198-.891.198-.264.396-1.022 1.287-1.254 1.551-.231.264-.462.297-.858.099-.396-.198-1.673-.617-3.186-1.967-1.178-1.05-1.974-2.349-2.205-2.745-.231-.396-.024-.61.174-.808.179-.178.396-.462.594-.694.198-.231.264-.396.396-.66.132-.264.066-.495-.033-.694-.099-.198-.891-2.151-1.221-2.943-.321-.772-.648-.668-.891-.681-.231-.012-.495-.014-.759-.014a1.46 1.46 0 0 0-1.056.495c-.363.396-1.386 1.353-1.386 3.299s1.419 3.825 1.617 4.089c.198.264 2.793 4.265 6.769 5.984.946.408 1.683.652 2.258.834.948.302 1.811.259 2.494.157.761-.114 2.34-.957 2.671-1.881.33-.924.33-1.716.231-1.881-.099-.165-.363-.264-.759-.462Z"/></svg>
 </a>
 
@@ -3552,6 +3772,10 @@ body.menu-open{ overflow:hidden; }
           </button>
           <button class="nm-item" data-page="tab-courses" data-sub="sub-sprint">
             <span>考前急救班</span>
+            <span class="nm-arrow-r">→</span>
+          </button>
+          <button class="nm-item" data-page="tab-courses" data-sub="sub-pricing">
+            <span>課程定價</span>
             <span class="nm-arrow-r">→</span>
           </button>
           <button class="nm-item" data-page="tab-courses" data-sub="sub-papers">
@@ -3838,8 +4062,8 @@ body.menu-open{ overflow:hidden; }
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>SYMON ACADEMY ・ FOUR-TIER ARCHITECTURE</span></div>
-      <h2 class="section-title">四大班別架構<br/><span class="hl">配對你的實際程度</span></h2>
-      <p class="section-sub"><strong style="color:var(--orange);">常規月費班按學生程度分為三個層級:打底班、實戰班、高級班。</strong> 第四層為考前急救班(限時加開、不分程度、純應試衝刺)。所有班別<strong>皆可選擇私補一對一形式,或 2-5 人小組形式</strong>,由認證導師完全配合家長需求 ── 同一份課題清單,根據學生程度切入不同深度,真正配對實際程度。</p>
+      <h2 class="section-title">四大程度架構<br/><span class="hl">配對你的實際程度</span></h2>
+      <p class="section-sub"><strong style="color:var(--orange);">常規月費班按學生程度分為三個層級:打底程度（低級）・ 實戰程度（中級）・ 高級程度。</strong> 第四層為考前急救班(限時加開、不分程度、純應試衝刺)。所有班別<strong>皆可選擇私補一對一形式,或 2-5 人小組形式</strong>,由認證導師完全配合家長需求 ── 同一份課題清單,根據學生程度切入不同深度,真正配對實際程度。</p>
     </div>
 
     <div class="tiers-grid">
@@ -3849,7 +4073,7 @@ body.menu-open{ overflow:hidden; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           </div>
           <div>
-            <h4>打底班</h4>
+            <h4>打底程度<span class="level-suffix">(低級)</span></h4>
             <div class="en">FOUNDATION</div>
           </div>
         </div>
@@ -3864,7 +4088,7 @@ body.menu-open{ overflow:hidden; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
           </div>
           <div>
-            <h4>實戰班</h4>
+            <h4>實戰程度<span class="level-suffix">(中級)</span></h4>
             <div class="en">APPLICATION</div>
           </div>
         </div>
@@ -3879,7 +4103,7 @@ body.menu-open{ overflow:hidden; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20l3-9 5 4 5-9 7 14"/></svg>
           </div>
           <div>
-            <h4>高級班</h4>
+            <h4>高級程度<span class="level-suffix">(高級)</span></h4>
             <div class="en">MASTERY</div>
           </div>
         </div>
@@ -3933,7 +4157,7 @@ body.menu-open{ overflow:hidden; }
         <div class="info-row">
           <span class="k">科目選擇</span>
           <span class="v">
-            <span class="pill-mini">英文</span><span class="pill-mini">數學</span>
+            <span class="pill-mini">中文</span><span class="pill-mini">英文</span><span class="pill-mini">數學</span>
           </span>
         </div>
         <div class="info-row">
@@ -3969,61 +4193,28 @@ body.menu-open{ overflow:hidden; }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <div>
-            <h3>課程配套 ・ 付款方式</h3>
-            <div class="en">PACKAGE ・ PAYMENT</div>
+            <h3>常規課程配套 ・ 付款方式</h3>
+            <div class="en">REGULAR PACKAGE ・ PAYMENT</div>
           </div>
         </div>
 
-        <!-- 配套切換 Tab -->
-        <div class="pkg-tab">
-          <button class="active" data-pkg="pkg-regular" type="button">常規課程</button>
-          <button data-pkg="pkg-sprint" type="button">考試急救班</button>
-        </div>
-
-        <div class="pkg-pane active" id="pkg-regular">
-          <ul class="pkg-list">
-            <li>結構化筆記教材</li>
-            <li>各課題針對性練習</li>
-            <li>完整考試試卷操練</li>
-            <li>每週進度報告 + 每月學習總結(共兩份)</li>
-            <li>必要時加堂補強</li>
+        <ul class="pkg-list">
+          <li>結構化筆記教材</li>
+          <li>各課題針對性練習</li>
+          <li>完整考試試卷操練</li>
+          <li>每週進度報告 + 每月學習總結(共兩份)</li>
+          <li>必要時加堂補強</li>
+        </ul>
+        <div class="bonus-box" style="margin-top:16px;">
+          <div class="bonus-head"><span class="gift">🎁</span><span>專屬學習工具贈品</span><span class="label">FREE BONUS</span></div>
+          <ul>
+            <li><strong>英文</strong>:Tenses 總結表 + 轉換表 + 核心單詞表 + 文法速查卡</li>
+            <li><strong>數學</strong>:核心公式速查表 + 解題框架圖 + 易錯題型對照表 + 心算口訣表</li>
+            <li class="group-gift"><strong>★ 組團限定</strong> ・ 每人加送《Symon English Vocabulary Builder》+《Symon 數學思維全攻略》</li>
           </ul>
-          <div class="bonus-box" style="margin-top:16px;">
-            <div class="bonus-head"><span class="gift">🎁</span><span>專屬學習工具贈品</span><span class="label">FREE BONUS</span></div>
-            <ul>
-              <li><strong>英文</strong>:Tenses 總結表 + 轉換表 + 核心單詞表 + 文法速查卡</li>
-              <li><strong>數學</strong>:核心公式速查表 + 解題框架圖 + 易錯題型對照表 + 心算口訣表</li>
-              <li class="group-gift"><strong>★ 組團限定</strong> ・ 每人加送《Symon English Vocabulary Builder》+《Symon 數學思維全攻略》</li>
-            </ul>
-          </div>
-          <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
-            <strong style="color:var(--orange);">課時:</strong> 打底班 90mins ・ 實戰班 90mins ・ 高級班 90mins ・ 每星期固定時間
-          </div>
-          <div class="custom-care">
-            <div class="cc-head">客製化跟進 ・ 物有所值</div>
-            <p>我們追求的不是最平,而是真正客製化的教學服務。除咗英文 / 數學各自的完整配套,每位學生另有每堂及每月系統化跟進報告,並設定期家長通話,深度了解孩子的學習狀況 ── 每一分學費,都對應實在的跟進與成果。</p>
-          </div>
         </div>
-
-        <div class="pkg-pane" id="pkg-sprint">
-          <ul class="pkg-list">
-            <li>3 份完整試卷 ・ 堂上考試模式做卷</li>
-            <li>即時批改 + 詳細講解</li>
-            <li>額外試卷自主操練</li>
-            <li>進度報告兩份(短期診斷)</li>
-            <li>應試前任何日期靈活編排 ・ WhatsApp 個別查詢</li>
-          </ul>
-          <div class="bonus-box" style="margin-top:16px;">
-            <div class="bonus-head"><span class="gift">🎁</span><span>應試工具贈品</span><span class="label">FREE BONUS</span></div>
-            <ul>
-              <li><strong>英文</strong>:Tenses 總結表 + 轉換表 + 核心單詞表 + 文法速查卡</li>
-              <li><strong>數學</strong>:核心公式速查表 + 解題框架圖 + 易錯題型對照表 + 心算口訣表</li>
-              <li class="group-gift"><strong>★ 組團限定</strong> ・ 每人加送《Symon English Vocabulary Builder》+《Symon 數學思維全攻略》</li>
-            </ul>
-          </div>
-          <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
-            <strong style="color:var(--orange);">課時:</strong> 單科 2 節(第 1 節 120mins + 第 2 節 60mins)= 共 3 小時 ・ 雙科每科 2 節 = 共 6 小時 ・ 限時加開
-          </div>
+        <div style="font-size:13px;color:var(--txt-dark-mute);margin-top:14px;line-height:1.7;">
+          <strong style="color:var(--orange);">課時:</strong> 打底程度 90mins ・ 實戰程度 90mins ・ 高級程度 90mins ・ 每星期固定時間
         </div>
 
         <!-- 付款方式 ・ 摺疊 -->
@@ -4034,30 +4225,28 @@ body.menu-open{ overflow:hidden; }
         <div class="pay-content" id="payContent">
           <div class="pay-content-inner">
             <strong>付款說明</strong><br/>
-            這是月份學費,家長收到後便可。就您方便,什麼時候給都可以。<br/><br/>
+            按月收取學費,家長收到後付款即可。<br/><br/>
             <strong>付款渠道(由 Symon Academy 個別發送收款資料)</strong><br/>
             <em>・</em> Alipay HK<br/>
             <em>・</em> PayMe<br/>
             <em>・</em> FPS 轉數快<br/><br/>
-            <span style="font-size:12.5px;color:var(--txt-dark-mute);font-style:italic;">為保障家長私隱及避免無關訊息,具體收款帳戶將於報名確認後,由 Symon Academy 透過 WhatsApp 個別發送。</span>
+            <span style="font-size:12.5px;color:var(--txt-dark-mute);font-style:italic;">為保障私隱,具體收款帳戶將於報名確認後,由 Symon Academy 透過 WhatsApp 個別發送。</span>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- $100 實體程度評估 CTA -->
-    <div class="assessment-cta reveal">
-      <div class="ac-body">
-        <div class="ac-tag">REPORT-BACKED ASSESSMENT ・ 實體程度評估</div>
-        <h3>$100 實體程度評估 ・ <span style="color:var(--orange);">報名即抵扣</span></h3>
-        <p>未報名常規月費班?先預約一次 $100 實體程度評估。由認證導師親自面見、即場派發評估材料、深入診斷學生程度與弱項。<strong>報名常規月費班即抵扣首月學費 ── 等同免費評估</strong>,而我們以實體投入確保品質,篩除走過場式服務。</p>
+    <!-- Cross-link to Pricing Tab -->
+    <div class="cross-link reveal">
+      <div class="cl-body">
+        <span class="cl-tag">FULL PRICING</span>
+        <strong>查看完整收費結構</strong>
+        <p>一對一價 ・ 小組價 ・ 急救班 ・ 組合優惠 ・ 首月 85 折 ・ 上課時間及地點,全部資訊已整理在「課程定價」分頁。</p>
       </div>
-      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約%20$100%20實體程度評估。" target="_blank" rel="noopener" class="ac-cta">
-        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
-        <span>WhatsApp 預約評估</span>
-        <span class="arrow">→</span>
-      </a>
+      <button class="cl-cta" onclick="document.querySelector('.nm-item[data-sub=&quot;sub-pricing&quot;]').click();">
+        前往課程定價 <span class="arrow">→</span>
+      </button>
     </div>
 
   </div>
@@ -4101,7 +4290,7 @@ body.menu-open{ overflow:hidden; }
 
     <div class="curr-cap reveal">
       <h4>四大班別 ・ 同一份課題清單</h4>
-      <p>以下課題涵蓋全年知識結構,四個班別皆會教授,差別在於「形式與作用」:打底班從零拆解概念、實戰班建立答題框架、高級班挑戰進階變題、急救班操卷強化應試。同一份課題,不同班別有不同切入點。</p>
+      <p>以下課題涵蓋全年知識結構,四個程度皆會教授,差別在於「形式與作用」:打底程度從零拆解概念、實戰程度建立答題框架、高級程度挑戰進階變題、急救程度操卷強化應試。同一份課題,不同程度有不同切入點。</p>
     </div>
 
     <!-- 年級 Tab 切換 -->
@@ -4117,7 +4306,7 @@ body.menu-open{ overflow:hidden; }
     <div class="tab-pane" id="grade-p2">
       <div class="curr-tab-meta reveal">
         <span class="grade-tag">P2 ・ 小二</span>
-        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小二全年學校考核重點 ・ 對應四大班別架構</div>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小二全年學校考核重點 ・ 對應四大程度架構</div>
       </div>
 
       <div class="curr-grid">
@@ -4196,7 +4385,7 @@ body.menu-open{ overflow:hidden; }
     <div class="tab-pane" id="grade-p3">
       <div class="curr-tab-meta reveal">
         <span class="grade-tag">P3 ・ 小三</span>
-        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小三全年學校考核重點 ・ 對應四大班別架構</div>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小三全年學校考核重點 ・ 對應四大程度架構</div>
       </div>
 
       <div class="curr-grid">
@@ -4274,7 +4463,7 @@ body.menu-open{ overflow:hidden; }
     <div class="tab-pane active" id="grade-p4">
       <div class="curr-tab-meta reveal">
         <span class="grade-tag">P4 ・ 小四</span>
-        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小四全年呈分試考核重點 ・ 對應四大班別架構</div>
+        <div class="info"><strong>數學 + 英文 雙科開設</strong> ・ 涵蓋小四全年呈分試考核重點 ・ 對應四大程度架構</div>
       </div>
 
       <div class="curr-grid">
@@ -4707,7 +4896,7 @@ body.menu-open{ overflow:hidden; }
 </section>
 
 <!-- ============== SECTION 10 ・ PRICING ============== -->
-<section class="section pricing" data-tab-page="tab-courses" data-sub-tab="sub-regular" id="pricing">
+<section class="section pricing" data-tab-page="tab-courses" data-sub-tab="sub-pricing" id="pricing">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow" style="color:var(--orange)"><span class="line" style="background:var(--orange)"></span><span>FULL PRICING STRUCTURE</span></div>
@@ -4717,38 +4906,7 @@ body.menu-open{ overflow:hidden; }
 
     <div class="pricing-anchor reveal">
       <div class="lbl">MARKET ANCHOR</div>
-      <div class="txt">區內<strong>一對一私補月費 HK$ 2,400 - 3,200</strong>,只能上一科。<strong>Symon Academy 雙科月費 HK$ 2,499</strong>,涵蓋兩個班別 + 私補一對一或小組形式 ── 同等價錢,雙科齊上;組團更享 9 折。</div>
-    </div>
-
-    <!-- 8 折限時優惠 Banner -->
-    <div class="promo-banner reveal">
-      <div class="promo-icon"><span>10% OFF</span></div>
-      <div class="promo-text">
-        <span class="promo-tag">GROUP OFFER ・ 組團優惠</span>
-        <h4>全線小組 <strong>9 折優惠</strong> ・ 組團再送學習手冊</h4>
-        <p>2 人或以上組團報讀,常規 / 急救 / 組合課程一律每人享 9 折 ・ 並額外贈送 Symon 自家學習手冊 ・ 歡迎自組,亦可由 Symon Academy 代為配對組別。</p>
-        <div class="promo-cond">
-          <span class="cond-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            2 人即享 9 折
-          </span>
-          <span class="cond-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            組團送學習手冊
-          </span>
-          <span class="cond-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            可代為配對組別
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="newbie-banner reveal">
-      <span class="nb-tag">新生限定</span>
-      <div class="nb-text">
-        <strong>所有新生首月 85 折</strong> ── 一對一 / 小組均適用,可於現有價格(原價或組團 9 折)基礎上再享 85 折體驗 ・ <span class="nb-note">次月起恢復標準收費</span>
-      </div>
+      <div class="txt">區內<strong>一對一私補月費 HK$ 2,400 - 3,200</strong>,只能上一科。<strong>Symon Academy 雙科月費 HK$ 2,499</strong>,涵蓋兩個班別 + 私補一對一或小組形式 ── 同等價錢,雙科齊上。</div>
     </div>
 
     <div class="price-block reveal">
@@ -4758,20 +4916,42 @@ body.menu-open{ overflow:hidden; }
         <span class="pill">不綁約 ・ 月費制</span>
       </div>
       <div class="price-grid">
-        <div class="price-card">
+        <div class="price-card dual-price">
           <h4>單科月費</h4>
-          <p class="desc">任選一個班別 ・ 適合單科加強</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">1,499</span></div>
-          <div class="save">每月 ・ 任選打底/實戰/高級任一層級</div>
-          <div class="group-hint">👥 2 人或以上組團 ・ 每人享 9 折</div>
+          <p class="desc">任選一個程度 ・ 適合單科加強</p>
+          <div class="dual-price-grid">
+            <div class="dp-col">
+              <div class="dp-label">一對一</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price-strike">1,499</span></div>
+              <div class="dp-first-month">首月 <strong>HK$ 1,274</strong></div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-col">
+              <div class="dp-label">小組</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price-strike">999</span></div>
+              <div class="dp-first-month">首月 <strong>HK$ 849</strong></div>
+            </div>
+          </div>
+          <div class="save">每月 ・ 任選打底 / 實戰 / 高級任一程度</div>
         </div>
-        <div class="price-card featured">
+        <div class="price-card featured dual-price">
           <div class="pill-tag">主推</div>
           <h4>雙科月費</h4>
-          <p class="desc">任選兩個班別 ・ 不限層級 ・ 最具性價比</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">2,499</span></div>
-          <div class="save">每月 ・ 任選兩個班別,不限層級</div>
-          <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折</div>
+          <p class="desc">任選兩個程度 ・ 不限層級 ・ 最具性價比</p>
+          <div class="dual-price-grid">
+            <div class="dp-col">
+              <div class="dp-label">一對一</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price-strike">2,499</span></div>
+              <div class="dp-first-month">首月 <strong>HK$ 2,124</strong></div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-col">
+              <div class="dp-label">小組</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price-strike">1,699</span></div>
+              <div class="dp-first-month">首月 <strong>HK$ 1,444</strong></div>
+            </div>
+          </div>
+          <div class="save">每月 ・ 任選兩個程度,不限層級</div>
         </div>
       </div>
     </div>
@@ -4783,19 +4963,37 @@ body.menu-open{ overflow:hidden; }
         <span class="pill">限時加開</span>
       </div>
       <div class="price-grid">
-        <div class="price-card">
+        <div class="price-card dual-price">
           <h4>單科急救班</h4>
           <p class="desc">2 節課堂 ・ 共 3 小時操卷強化(120mins + 60mins)</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">799</span></div>
-          <div class="save">一次性課程 ・ 不綁月費 ・ 一對一或小組形式皆可</div>
-          <div class="group-hint">👥 2 人或以上組團 ・ 每人享 9 折</div>
+          <div class="dual-price-grid">
+            <div class="dp-col">
+              <div class="dp-label">一對一</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">799</span></div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-col">
+              <div class="dp-label">小組</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">549</span></div>
+            </div>
+          </div>
+          <div class="save">一次性課程 ・ 不綁月費 ・ 應試前彈性安排</div>
         </div>
-        <div class="price-card featured">
+        <div class="price-card featured dual-price">
           <h4>雙科急救班</h4>
           <p class="desc">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
-          <div class="save">一次性課程 ・ 不綁月費 ・ 一對一或小組形式皆可</div>
-          <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折</div>
+          <div class="dual-price-grid">
+            <div class="dp-col">
+              <div class="dp-label">一對一</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-col">
+              <div class="dp-label">小組</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">949</span></div>
+            </div>
+          </div>
+          <div class="save">一次性課程 ・ 不綁月費 ・ 應試前彈性安排</div>
         </div>
       </div>
     </div>
@@ -4807,21 +5005,47 @@ body.menu-open{ overflow:hidden; }
         <span class="pill">最完整</span>
       </div>
       <div class="price-grid">
-        <div class="price-card">
+        <div class="price-card dual-price">
           <h4>月費 + 急救組合(單科)</h4>
           <p class="desc">單科月費 + 單科急救班</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">2,099</span></div>
+          <div class="dual-price-grid">
+            <div class="dp-col">
+              <div class="dp-label">一對一</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">2,099</span></div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-col">
+              <div class="dp-label">小組</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">1,399</span></div>
+            </div>
+          </div>
           <div class="save">單科常規 + 單科急救 ・ 一次過報讀</div>
-          <div class="group-hint">👥 2 人或以上組團 ・ 每人享 9 折</div>
         </div>
-        <div class="price-card dark-feat">
+        <div class="price-card dark-feat dual-price">
           <div class="pill-tag">最完整</div>
           <h4>雙科月費 + 雙科急救全包</h4>
           <p class="desc">雙科月費 + 雙科急救班 ・ 一站式應試</p>
-          <div class="amount"><span class="currency">HK$</span><span class="price">3,499</span></div>
+          <div class="dual-price-grid">
+            <div class="dp-col">
+              <div class="dp-label">一對一</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">3,499</span></div>
+            </div>
+            <div class="dp-divider"></div>
+            <div class="dp-col">
+              <div class="dp-label">小組</div>
+              <div class="dp-amount"><span class="currency">HK$</span><span class="price">2,399</span></div>
+            </div>
+          </div>
           <div class="save">雙科常規 + 雙科急救 ・ 一站式應試全包</div>
-          <div class="group-hint dark">👥 2 人或以上組團 ・ 每人享 9 折</div>
         </div>
+      </div>
+    </div>
+
+    <!-- 首月優惠橫額 -->
+    <div class="first-month-banner reveal">
+      <span class="fmb-icon">★</span>
+      <div>
+        <strong>新生首月 85 折</strong> ・ 適用於常規月費班(一對一及小組皆可) ・ 次月起恢復標準月費
       </div>
     </div>
   </div>
@@ -4941,7 +5165,7 @@ body.menu-open{ overflow:hidden; }
         <h4>選好年級同科目 ・ 立即向客服落單</h4>
         <p>WhatsApp 即時回覆 ・ 由 Symon Academy 教學團隊親自跟進你的訂單</p>
       </div>
-      <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想購買全年級中英數專項練習卷。我的孩子讀%20[年級]，想針對%20[科目]。請問如何落單？" target="_blank" rel="noopener" class="btn-buy" id="paperBuyBtn">
+      <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想購買全年級中英數專項練習卷。我的孩子讀%20[年級]，想針對%20[科目]。請問如何落單？" target="_blank" rel="noopener" class="btn-buy" id="paperBuyBtn">
         <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
         立即購買 ・ WhatsApp 落單
       </a>
@@ -4957,7 +5181,7 @@ body.menu-open{ overflow:hidden; }
 
 
 <!-- ============== SECTION 11 ・ TIME & PLACE ============== -->
-<section class="section tp" data-tab-page="tab-courses" data-sub-tab="sub-regular" id="tp">
+<section class="section tp" data-tab-page="tab-courses" data-sub-tab="sub-pricing" id="tp">
   <div class="container">
     <div class="section-head reveal">
       <div class="eyebrow"><span class="line"></span><span>SCHEDULE & VENUE</span></div>
@@ -4968,22 +5192,82 @@ body.menu-open{ overflow:hidden; }
     <div class="tp-grid">
       <div class="tp-block reveal delay-1">
         <div class="lbl"><span class="line"></span>SCHEDULE ・ 上課時間</div>
-        <h3>彈性時間 ・ 完全配合</h3>
-        <p class="tp-intro"><strong>所有課程</strong>的時間安排均按家長與學生時間彈性編配 ・ 無固定時段限制 ・ WhatsApp 查詢可用時段,我們會為你匹配最合適的導師同時段。</p>
+        <h3>9 個時段 ・ 自由揀選</h3>
+        <p class="tp-intro">每日營業時間<strong>上午 9:00 - 下午 6:00</strong> ・ 每堂 1.5 小時 ・ 每日提供 9 個時段任揀。<strong>一對一</strong>:星期一至日全週可約 ・ <strong>小組</strong>:星期一至五 ・ 星期六日僅限一對一。</p>
 
-        <div class="tp-time-row"><span class="day">一對一形式</span><span class="hours">完全配合家長時間 <span class="open-tag">即時匹配</span></span></div>
-        <div class="tp-time-row"><span class="day">小組形式</span><span class="hours">按報名情況編配 <span class="open-tag">尚餘少量</span></span></div>
-        <div class="tp-time-row"><span class="day">考前急救班</span><span class="hours">應試前彈性安排 <span class="open-tag">限時加開</span></span></div>
+        <!-- Day Tab 切換 -->
+        <div class="day-tabs" role="tablist">
+          <button class="day-tab active" data-day="mon">星期一</button>
+          <button class="day-tab" data-day="tue">星期二</button>
+          <button class="day-tab" data-day="wed">星期三</button>
+          <button class="day-tab" data-day="thu">星期四</button>
+          <button class="day-tab" data-day="fri">星期五</button>
+          <button class="day-tab" data-day="sat">星期六</button>
+          <button class="day-tab" data-day="sun">星期日</button>
+        </div>
+
+        <!-- Day Note -->
+        <div class="day-note" id="dayNote">
+          <span class="dn-tag">星期一</span>
+          <span class="dn-txt"><strong>一對一</strong> 全 9 時段可約 ・ <strong>小組</strong> 全 9 時段可約</span>
+        </div>
+
+        <!-- Time Slots Grid (9 個) -->
+        <div class="time-slots-grid">
+          <div class="time-slot">
+            <span class="ts-num">01</span>
+            <span class="ts-time">09:00 - 10:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">02</span>
+            <span class="ts-time">10:00 - 11:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">03</span>
+            <span class="ts-time">11:00 - 12:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">04</span>
+            <span class="ts-time">12:00 - 13:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">05</span>
+            <span class="ts-time">13:00 - 14:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">06</span>
+            <span class="ts-time">14:00 - 15:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">07</span>
+            <span class="ts-time">15:00 - 16:30</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">08</span>
+            <span class="ts-time">15:30 - 17:00</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+          <div class="time-slot">
+            <span class="ts-num">09</span>
+            <span class="ts-time">16:30 - 18:00</span>
+            <span class="ts-tag both">一對一 / 小組</span>
+          </div>
+        </div>
 
         <div class="sprint-time-callout">
           <span class="bolt">⚡</span>
           <div>
-            <strong>所有時段均可 WhatsApp 個別查詢</strong>
-            <p>家長只需提供方便上堂的時段,我們會為你匹配最合適的認證導師 ・ 真正做到時間完全配合,無需遷就固定排班。</p>
+            <strong>WhatsApp 個別查詢即時匹配</strong>
+            <p>家長告訴我們方便上堂的時段,我們會即時匹配最合適的認證導師 ・ 全週時段都可預約。</p>
           </div>
         </div>
-
-        <div class="tp-foot">需求高峰期間,部分時段名額有限 ・ 建議盡早 WhatsApp 鎖定時段。</div>
       </div>
 
       <div class="tp-block reveal delay-2">
@@ -5001,18 +5285,16 @@ body.menu-open{ overflow:hidden; }
         <div class="venue-card">
           <div class="venue-card-head">
             <span class="vc-icon">👥</span>
-            <span class="vc-title">小組形式</span>
+            <span class="vc-title">小組形式 ・ 限指定地點</span>
           </div>
-          <p class="venue-card-desc">地點完全由家長決定 ・ Symon Academy 可建議以下熱門地點:</p>
+          <p class="venue-card-desc">為確保教學質素,小組形式僅於 Symon Academy 兩個固定指定場地進行:</p>
           <ol class="tp-place-list" style="margin-top:8px;">
-            <li>上水廣場單獨會議室或活動室</li>
+            <li>上水廣場單獨會議室</li>
             <li>沙田新城市廣場單獨會議室</li>
-            <li>各大屋苑會所<span class="sub">例如粉嶺牽晴間會所 / 碧湖花園會所等 ・ 須報名學生中至少一位為該屋苑住客</span></li>
           </ol>
-          <p class="venue-card-desc" style="margin-top:10px;font-size:13px;">家長亦可<strong>自選其他地點</strong>,WhatsApp 個別商議。</p>
           <div class="venue-match-note">
             <strong>★ 未有組別?可幫你配對</strong>
-            <p>如想以小組形式上課但未有合適組別,Symon Academy 可按你嘅地區、年級、程度,為你<strong>匹配最就近的組別</strong> ── 免家長自行尋找,由我們撮合。</p>
+            <p>Symon Academy 主動為你按<strong>地區、年級、程度</strong>匹配最就近組別,報名即可入班 ・ 亦歡迎家長自行組團入班(同樣使用上述兩個指定場地)。</p>
           </div>
         </div>
 
@@ -5230,27 +5512,27 @@ body.menu-open{ overflow:hidden; }
       </div>
     </div>
 
-    <div class="sprint-grid reveal">
-      <div class="sprint-card">
-        <h4>單科急救班</h4>
-        <div><span class="currency">HK$</span><span class="price">799</span></div>
-        <div class="save">2 節課堂 ・ 共 3 小時操卷(120mins + 60mins)・ 一次性課程</div>
-      </div>
-      <div class="sprint-card">
-        <h4>雙科急救班</h4>
-        <div><span class="currency">HK$</span><span class="price">1,399</span></div>
-        <div class="save">每科 2 節 ・ 共 4 節 ・ 共 6 小時雙科衝刺</div>
-      </div>
-    </div>
-
     <div class="sprint-note reveal">
       <div class="note-head">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <strong>組團報讀 ・ 每人 9 折優惠</strong>
+        <strong>急救班開放兩種形式 ・ 自由選擇</strong>
       </div>
-      <p><strong>2 人或以上組團報讀,每人即享 9 折優惠</strong> ・ 強烈建議組團,既享同等優質教學,又可分擔成本、互相鼓勵 ・ 效果同步提升。組團報讀更額外贈送 Symon 自家學習手冊。</p>
-      <p class="note-foot">可選私補一對一形式,或 2-5 人小組形式 ・ 家長可自行組團;<strong>未有合適組別,我們可按地區、年級、程度,為你匹配最就近的組別</strong> ・ 最終形式及時間以家長需求為準。</p>
+      <p><strong>可選私補一對一,或 2-5 人小組形式</strong> ・ 小組價格獨立計算(已預設更具吸引力嘅組合定價)・ 兩種形式同等優質教學,組團更可分擔成本、互相鼓勵。組團報讀更額外贈送 Symon 自家學習手冊。</p>
+      <p class="note-foot">家長可自行組團;<strong>未有合適組別,我們可按地區、年級、程度,為你匹配最就近的組別</strong> ・ 最終形式及時間以家長需求為準。</p>
     </div>
+
+    <!-- Cross-link to Pricing Tab -->
+    <div class="cross-link reveal">
+      <div class="cl-body">
+        <span class="cl-tag">FULL PRICING</span>
+        <strong>查看完整收費結構</strong>
+        <p>急救班一對一價 ・ 小組價 ・ 雙科組合 ・ 同期報常規 + 急救組合優惠,全部已整理在「課程定價」分頁。</p>
+      </div>
+      <button class="cl-cta" onclick="document.querySelector('.nm-item[data-sub=&quot;sub-pricing&quot;]').click();">
+        前往課程定價 <span class="arrow">→</span>
+      </button>
+    </div>
+
   </div>
 </section>
 
@@ -5263,7 +5545,7 @@ body.menu-open{ overflow:hidden; }
       <p class="reveal delay-1">了解孩子的學習狀況,診斷學習結構漏洞,制定最適合的進步計劃。<br/>無論最終是否報讀,評估報告完全免費。</p>
 
       <div class="actions reveal delay-2">
-        <a href="https://wa.me/85298560191?text=你好%20Symon%20Sir，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-primary">
+        <a href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener" class="btn-primary">
           <svg viewBox="0 0 32 32"><path d="M16.003 0C7.166 0 0 7.166 0 16.003c0 2.823.736 5.585 2.135 8.022L0 32l8.155-2.139a15.97 15.97 0 0 0 7.848 2.04c8.836 0 16.003-7.166 16.003-16.003C32.006 7.166 24.84 0 16.003 0Z"/></svg>
           WhatsApp 即時預約
           <span class="arrow">→</span>
@@ -5549,6 +5831,7 @@ const subLabels = {
   'sub-team': '教學團隊與評價',
   'sub-regular': '常規月費班',
   'sub-sprint': '考前急救班',
+  'sub-pricing': '課程定價',
   'sub-papers': '專項練習卷',
 };
 
@@ -5633,6 +5916,50 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && navMenuOverlay.classList.contains('open')){
     closeMenu();
   }
+});
+
+// ============== DAY TABS (時段切換) ==============
+const dayTabs = document.querySelectorAll('.day-tab');
+const dayNote = document.getElementById('dayNote');
+const timeSlots = document.querySelectorAll('.time-slot');
+
+const dayLabels = {
+  'mon': '星期一', 'tue': '星期二', 'wed': '星期三', 'thu': '星期四',
+  'fri': '星期五', 'sat': '星期六', 'sun': '星期日',
+};
+const weekdays = ['mon','tue','wed','thu','fri'];
+
+function updateDayDisplay(day) {
+  if (!dayNote) return;
+  const isWeekday = weekdays.includes(day);
+  const tagEl = dayNote.querySelector('.dn-tag');
+  const txtEl = dayNote.querySelector('.dn-txt');
+  tagEl.textContent = dayLabels[day];
+
+  if (isWeekday) {
+    txtEl.innerHTML = '<strong>一對一</strong> 全 9 時段可約 ・ <strong>小組</strong> 全 9 時段可約';
+    timeSlots.forEach(slot => {
+      slot.classList.remove('disabled', 'one-only');
+      const tag = slot.querySelector('.ts-tag');
+      tag.textContent = '一對一 / 小組';
+      tag.className = 'ts-tag both';
+    });
+  } else {
+    txtEl.innerHTML = '<strong>一對一</strong> 全 9 時段可約 ・ <strong>小組</strong> 不開班(星期六日僅限一對一)';
+    timeSlots.forEach(slot => {
+      slot.classList.add('one-only');
+      const tag = slot.querySelector('.ts-tag');
+      tag.textContent = '只限一對一';
+      tag.className = 'ts-tag one-only';
+    });
+  }
+}
+
+dayTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    dayTabs.forEach(t => t.classList.toggle('active', t === tab));
+    updateDayDisplay(tab.dataset.day);
+  });
 });
 
 // ============== TEACHER TABS (Symon / Lincoln) ==============

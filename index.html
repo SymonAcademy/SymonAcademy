@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Symon Academy ・ 少操練,多結構 ・ 結構化分層教學</title>
-<meta name="description" content="Symon Academy ・ 改變香港小學教育,解決學校概念碎片化 ・ 學一次、終身會,建立系統性思維 ・ 英文 / 數學 / 呈分試 / 考前急救 ・ 一對一或 2-5 人小組 ・ 粉嶺・上水・沙田" />
+<meta name="description" content="Symon Academy ・ 改變香港小學教育,解決學校概念碎片化 ・ 學一次、終身會,建立系統性思維 ・ 英文 / 數學 / 呈分試 / 考前急救 ・ 一對一或 2-5 人小組 ・ 全港" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -764,15 +764,17 @@ body.lock{ overflow:hidden; }
 .btn-learn:hover .ar{ transform:translateX(4px); }
 
 /* 彈出全頁 CTA */
-.popup{ position:fixed; inset:0; z-index:500; display:none; align-items:center; justify-content:center; padding:24px;
-  background:rgba(18,13,9,0.82); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.popup{ position:fixed; inset:0; z-index:500; display:none; align-items:center; justify-content:center; padding:0;
+  background:rgba(8,9,11,0.97); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
 .popup.open{ display:flex; animation:popfade .35s var(--ease); }
 @keyframes popfade{ from{ opacity:0; } to{ opacity:1; } }
-.popup-card{ position:relative; width:100%; max-width:520px; background:var(--card-2); color:#fff;
-  border:1px solid var(--on-dark-line); border-radius:28px; padding:48px 38px; text-align:center; overflow:hidden;
+.popup-card{ position:relative; width:100%; height:100%; max-width:none; background:var(--card-2); color:#fff;
+  border:none; border-radius:0; padding:32px; text-align:center; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
   animation:poprise .4s var(--ease); }
-@keyframes poprise{ from{ transform:translateY(20px) scale(.98); opacity:0; } to{ transform:none; opacity:1; } }
-.popup-card::before{ content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(226,91,23,0.22),transparent 65%); }
+@keyframes poprise{ from{ transform:scale(.99); opacity:0; } to{ transform:none; opacity:1; } }
+.popup-card .pc-in{ position:relative; z-index:2; max-width:520px; width:100%; margin:0 auto; }
+.popup-card::before{ content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(226,91,23,0.20),transparent 62%); }
 .popup-card .pc-in{ position:relative; z-index:2; }
 .popup-close{ position:absolute; top:16px; right:16px; z-index:3; width:38px; height:38px; border-radius:50%;
   background:rgba(243,243,244,0.08); border:1px solid var(--on-dark-line); color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center; transition:all .2s; }
@@ -913,7 +915,7 @@ body.lock{ overflow:hidden; }
 
 /* ---------- 軟身高級質感 ---------- */
 .offer{ border-radius:28px; }
-.popup-card{ border-radius:30px; }
+.popup-card{ border-radius:0; }
 .form-card{ border-radius:24px; }
 .card, .feature, .info-card, .tier, .cmp-col, .callout, .sel-card, .preview, .vstack, .record, .venue, .paper-main, .pq, .proof .pc{
   border-radius:20px;
@@ -1305,7 +1307,12 @@ body{ letter-spacing:0.002em; }
     </div>
     <div class="callout rv" style="margin-bottom:30px;">
       <h4>STEP 00 ・ 報名前 ・ 實體程度評估 ・ HK$100</h4>
-      <p>由認證導師<strong>實體面見學生</strong>進行專業診斷:測試現時程度、識別弱項、了解學習需求,並提供完整評估報告。所有評估材料及配套即場派發 ── 不是表面試讀,而是真正深入嘅程度診斷。<strong>報名常規月費班即抵扣首月學費,等同免費。</strong></p>
+      <p style="margin-bottom:14px;">由認證導師<strong>實體面見學生</strong>,真正深入嘅程度診斷 ── 不是表面試讀。</p>
+      <ul class="clist">
+        <li>測試現時程度 ・ 識別弱項 ・ 了解學習需求</li>
+        <li>提供完整評估報告 ・ 評估材料及配套即場派發</li>
+        <li><strong>報名常規月費班即抵扣首月學費,等同免費</strong></li>
+      </ul>
     </div>
     <div class="flow rv">
       <div class="flow-step"><div class="fn">01</div><h4>Topic 細分講解</h4><p>將該堂主題按 Symon Academy 結構化拆解,建立完整知識圖。</p></div>
@@ -1451,7 +1458,13 @@ body{ letter-spacing:0.002em; }
 
     <div class="callout rv" style="margin-bottom:36px;">
       <h4>四大班別 ・ 同一份課題清單</h4>
-      <p>以下課題涵蓋全年知識結構,四個程度皆會教授,差別在於「形式與作用」:打底程度從零拆解概念、實戰程度建立答題框架、高級程度挑戰進階變題、急救程度操卷強化應試。同一份課題,不同程度有不同切入點。</p>
+      <p style="margin-bottom:14px;">以下課題涵蓋全年知識結構,四個程度皆會教授 ── 同一份課題,不同程度有不同切入點:</p>
+      <ul class="clist">
+        <li><strong>打底程度</strong> ・ 從零拆解概念</li>
+        <li><strong>實戰程度</strong> ・ 建立答題框架</li>
+        <li><strong>高級程度</strong> ・ 挑戰進階變題</li>
+        <li><strong>急救程度</strong> ・ 操卷強化應試</li>
+      </ul>
     </div>
 
     <div class="rv">
@@ -1912,7 +1925,11 @@ body{ letter-spacing:0.002em; }
         </div>
         <div class="callout rv" style="margin-top:14px;">
           <h4>★ 未有組別?可幫你配對</h4>
-          <p>Symon Academy 主動為你按<strong>地區、年級、程度</strong>匹配最就近組別,報名即可入班 ・ 亦歡迎家長自行組團入班。<br/><strong>場地費用和手續,全數由 Symon Academy 承擔,家長無需另付。</strong></p>
+          <ul class="clist">
+            <li>Symon Academy 主動按<strong>地區、年級、程度</strong>配對最就近組別,報名即可入班</li>
+            <li>亦歡迎家長自行組團入班</li>
+            <li><strong>場地費用及手續全數由 Symon Academy 承擔,家長無需另付</strong></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -2108,7 +2125,7 @@ body{ letter-spacing:0.002em; }
         <h4 style="font-family:'Noto Serif TC',sans-serif;font-weight:700;font-size:19px;margin-bottom:16px;">每份產品包含</h4>
         <ul class="clist">
           <li><strong>實體練習卷 3 份</strong> ・ 同一主題不同題目</li>
-          <li><strong>完整答案及解題思路 PDF</strong> ・ 可自行對答案學習</li>
+          <li><strong>完整答案 PDF</strong> ・ 可自行對答案核對(只提供答案,不含解題思路)</li>
           <li><strong>有限度答疑支援</strong> ・ 不明白可向客服提問</li>
           <li><strong>學校真實考試風格出題</strong> ・ 貼近呈分試題型</li>
           <li><strong>再次購買保證全新題目</strong> ・ 不重複出題</li>
@@ -2170,7 +2187,7 @@ body{ letter-spacing:0.002em; }
       </a>
       <div class="card dcard rv d2" style="padding:26px 28px;">
         <span class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        <div><div class="eyebrow" style="margin-bottom:2px;">服務地區</div><h6 style="font-size:18px;">北區 ・ 大埔 ・ 沙田</h6><p>粉嶺 ・ 上水 ・ 太和 ・ 沙田市中心</p></div>
+        <div><div class="eyebrow" style="margin-bottom:2px;">服務地區</div><h6 style="font-size:18px;">全港</h6><p>一對一:全港任何地點 ・ 小組:上水 / 沙田指定場地</p></div>
       </div>
       <a class="card dcard rv d3" style="padding:26px 28px;" href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約%20$100%20實體程度評估。" target="_blank" rel="noopener">
         <span class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
@@ -2223,8 +2240,8 @@ body{ letter-spacing:0.002em; }
           <input class="f-input" id="fGrade" type="text" placeholder="小五 ・ 數學(或 英文 + 數學)" />
         </div>
         <div class="f-field">
-          <label>上課區域 <span class="ex">例如:上水 / 粉嶺</span></label>
-          <input class="f-input" id="fRegion" type="text" placeholder="上水 / 粉嶺 ・ 大埔 ・ 沙田" />
+          <label>上課區域 <span class="ex">例如:全港任何地區</span></label>
+          <input class="f-input" id="fRegion" type="text" placeholder="你所在地區(一對一全港上門;小組:上水 / 沙田)" />
         </div>
         <div class="f-field">
           <label>想報課程 <span class="ex">例如:常規月費班 ・ 雙科</span></label>
@@ -2268,7 +2285,7 @@ body{ letter-spacing:0.002em; }
         <h5>CONTACT</h5>
         <ul>
           <li><a href="https://wa.me/85298560191" target="_blank" rel="noopener">WhatsApp:+852 9856 0191</a></li>
-          <li>新界北區 ・ 大埔區 ・ 沙田</li>
+          <li>全港服務(一對一)・ 小組設指定場地</li>
           <li>多個指定場地任選</li>
         </ul>
       </div>

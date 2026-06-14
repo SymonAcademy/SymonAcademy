@@ -199,16 +199,23 @@ section[data-page].on{ display:block; }
 .sheet-cta{ margin-top:24px; display:flex; align-items:center; justify-content:center; gap:8px; padding:17px; border-radius:100px; background:var(--orange); color:#fff; font-weight:700; font-size:16px; }
 body.lock{ overflow:hidden; }
 
-/* 浮動 WhatsApp */
+/* 浮動 WhatsApp ・ 橙色 + 脈衝特效 */
 .fab{
   position:fixed; right:18px; bottom:18px; z-index:90;
-  width:56px; height:56px; border-radius:50%; background:var(--wa);
+  width:58px; height:58px; border-radius:50%; background:var(--orange);
   display:flex; align-items:center; justify-content:center;
-  box-shadow:0 10px 26px rgba(31,168,85,0.4);
-  transition:transform .2s var(--ease);
+  box-shadow:0 12px 30px rgba(226,91,23,0.5);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
 }
-.fab:hover{ transform:scale(1.06); }
-.fab svg{ width:28px; height:28px; fill:#fff; }
+.fab::before{ content:''; position:absolute; inset:0; border-radius:50%;
+  border:2px solid var(--orange); animation:fabpulse 2.2s var(--ease) infinite; }
+@keyframes fabpulse{ 0%{ transform:scale(1); opacity:.7; } 70%{ transform:scale(1.55); opacity:0; } 100%{ opacity:0; } }
+.fab:hover{ transform:scale(1.1); box-shadow:0 16px 38px rgba(226,91,23,0.6); }
+.fab svg{ width:28px; height:28px; fill:#fff; position:relative; z-index:1; }
+
+/* nav 右組 (CTA + burger) */
+.nav-right{ display:flex; align-items:center; gap:10px; }
+.logo-icon .mark{ width:38px; height:38px; }
 
 /* ============================================================
    HERO
@@ -889,12 +896,12 @@ body.lock{ overflow:hidden; }
 /* ---------- Hero 全幅輪播背景 ---------- */
 .hero{ position:relative; overflow:hidden; }
 .hero-slides{ position:absolute; inset:0; z-index:0; overflow:hidden; background:#0A0B0E; }
-.hero-slide{ position:absolute; inset:0; background-size:cover; background-position:center; opacity:0;
+.hero-slide{ position:absolute; inset:0; background-size:cover; background-position:center 70%; opacity:0;
   transition:opacity 1.5s var(--ease); will-change:opacity,transform; }
 .hero-slide.on{ opacity:1; animation:heroKB 7s ease-out forwards; }
 @keyframes heroKB{ from{ transform:scale(1.06); } to{ transform:scale(1.14); } }
 .hero-slides::after{ content:''; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(180deg,rgba(10,11,14,0.60) 0%,rgba(10,11,14,0.74) 55%,rgba(10,11,14,0.90) 100%); }
+  background:linear-gradient(180deg,rgba(10,11,14,0.90) 0%,rgba(10,11,14,0.80) 30%,rgba(10,11,14,0.70) 52%,rgba(10,11,14,0.82) 74%,rgba(10,11,14,0.97) 100%); }
 .hero-inner{ position:relative; z-index:3; }
 .hero::before{ z-index:2; }
 .deco-watermark{ z-index:2; }
@@ -915,6 +922,13 @@ body.lock{ overflow:hidden; }
 .btn-pri, .nav-cta, .btn-learn, .send-btn, .btn-wa{ box-shadow:0 10px 30px rgba(0,0,0,0.10); }
 .offer:hover{ box-shadow:0 36px 70px rgba(0,0,0,0.28); }
 body{ letter-spacing:0.002em; }
+/* feature 卡加圖頂 (白色區補圖) */
+.feature.has-img{ padding:0 !important; overflow:hidden; }
+.feature.has-img .feat-cover{ width:100%; height:170px; overflow:hidden; background:linear-gradient(150deg,#1F2127,#0C0D10); }
+.feature.has-img .feat-cover img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease); }
+.feature.has-img:hover .feat-cover img{ transform:scale(1.05); }
+.feature.has-img .feat-body{ padding:28px 30px 32px; }
+.feature.has-img .fi{ display:none; }
 </style>
 
 </head>
@@ -927,13 +941,8 @@ body{ letter-spacing:0.002em; }
 
 <!-- ===================== 頂部導航 ===================== -->
 <nav class="nav on-dark" id="nav">
-  <button class="burger" id="burger" aria-label="選單">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-  </button>
-
-  <a class="logo" href="#top" onclick="goPage('p-home');return false;">
+  <a class="logo logo-icon" href="#top" onclick="goPage('p-home');return false;" aria-label="Symon Academy">
     <span class="mark"><svg viewBox="0 0 32 32" fill="none"><rect x="3" y="19" width="6" height="10" rx="2" fill="#E25B17"/><rect x="13" y="12" width="6" height="17" rx="2" fill="#E25B17"/><rect x="23" y="4" width="6" height="25" rx="2" fill="#E25B17"/></svg></span>
-    <span class="l1">SYMON</span><span class="l2">ACADEMY</span>
   </a>
 
   <div class="nav-links">
@@ -970,7 +979,12 @@ body{ letter-spacing:0.002em; }
     <button class="nav-link" data-go="p-contact">聯絡我們</button>
   </div>
 
-  <button class="nav-cta desk" onclick="scrollToForm()">預約 / 查詢</button>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="scrollToForm()">預約課程 <span class="ar">→</span></button>
+    <button class="burger" id="burger" aria-label="選單">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
 </nav>
 
 <!-- ===================== 手機全屏選單 ===================== -->
@@ -2632,6 +2646,22 @@ body{ letter-spacing:0.002em; }
     var u=CARD_IMGS[m.getAttribute('data-img')];
     if(u){ m.innerHTML=''; var img=new Image(); img.onerror=function(){ this.style.display='none'; }; img.src=cld(u,800); img.loading='lazy'; img.alt=''; m.appendChild(img); }
   });
+  /* 白色 feature 卡加圖頂 */
+  (function(){
+    var POOL=HERO_IMGS.slice(); var pi=0;
+    document.querySelectorAll('section[data-page] .feature').forEach(function(card){
+      if(card.classList.contains('has-img')) return;
+      var u=POOL[pi%POOL.length]; pi++;
+      var cover=document.createElement('div'); cover.className='feat-cover';
+      var img=new Image(); img.alt=''; img.loading='lazy';
+      img.onerror=function(){ cover.style.display='none'; };
+      img.src=cld(u,700); cover.appendChild(img);
+      var body=document.createElement('div'); body.className='feat-body';
+      while(card.firstChild){ body.appendChild(card.firstChild); }
+      card.appendChild(cover); card.appendChild(body);
+      card.classList.add('has-img');
+    });
+  })();
   (function(){
     var h1=document.querySelector('.hero h1'); if(!h1) return;
     var toks=[['全'],['港'],['越'],['教'],['越'],['複'],['雜'],['<br>'],['我'],['們'],['越',1],['教',1],['越',1],['直',1],['接',1]];

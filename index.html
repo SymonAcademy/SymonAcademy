@@ -16,18 +16,19 @@
    單一重點色 ・ 大量留白 ・ serif 標題 ・ 手機優先
    ============================================================ */
 :root{
-  --ink:#141519;            /* 近黑 (文字 / 深色區底) */
-  --ink-2:#1F2127;
-  --ink-soft:rgba(20,21,25,0.60);   /* 灰 內文 */
-  --ink-faint:rgba(20,21,25,0.40);
+  --ink:#F3F3F4;            /* 文字 白 */
+  --ink-2:#1B1C22;
+  --ink-soft:rgba(243,243,244,0.60);   /* 灰 副字 */
+  --ink-faint:rgba(243,243,244,0.38);
   --orange:#E25B17;         /* 品牌橙 (唯一重點色) */
   --orange-deep:#C24A0E;
-  --orange-soft:#FBECE3;    /* 淡橙底 */
-  --paper:#FFFFFF;          /* 主背景 純白 */
-  --paper-2:#F4F4F6;        /* 次背景 淺灰 */
-  --card:#FFFFFF;
-  --line:rgba(20,21,25,0.10);
-  --line-soft:rgba(20,21,25,0.06);
+  --orange-soft:rgba(226,91,23,0.16);   /* 橙底 (深色用) */
+  --paper:#0A0B0D;          /* 主背景 純黑 */
+  --paper-2:#101117;        /* 次背景 */
+  --card:#16171D;           /* 卡片 (黑底上抬高) */
+  --card-2:#1E1F26;         /* 重點卡 */
+  --line:rgba(255,255,255,0.10);
+  --line-soft:rgba(255,255,255,0.06);
   --on-dark:#F3F3F4;
   --on-dark-soft:rgba(243,243,244,0.62);
   --on-dark-line:rgba(255,255,255,0.12);
@@ -63,7 +64,7 @@ button{ font-family:inherit; cursor:pointer; border:none; background:none; color
 .sect{ padding:104px 0; position:relative; }
 @media (max-width:768px){ .sect{ padding:68px 0; } }
 
-.sect.dark{ background:var(--ink); color:var(--on-dark); }
+.sect.dark{ background:var(--paper); color:var(--on-dark); }
 .sect.alt{ background:var(--paper-2); }
 
 .eyebrow{
@@ -113,7 +114,7 @@ section[data-page].on{ display:block; }
   border-bottom:1px solid transparent;
 }
 .nav.solid{
-  background:rgba(251,248,243,0.92);
+  background:rgba(10,11,13,0.86);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
   padding:11px 28px;
@@ -182,7 +183,7 @@ section[data-page].on{ display:block; }
 
 /* 全屏選單 (手機) */
 .sheet{
-  position:fixed; inset:0; z-index:200; background:var(--ink); color:var(--on-dark);
+  position:fixed; inset:0; z-index:200; background:var(--card-2); color:var(--on-dark);
   opacity:0; visibility:hidden; transition:opacity .3s var(--ease),visibility .3s;
   display:flex; flex-direction:column; padding:24px;
   overflow-y:auto;
@@ -221,7 +222,7 @@ body.lock{ overflow:hidden; }
    HERO
    ============================================================ */
 .hero{
-  position:relative; background:var(--ink); color:var(--on-dark);
+  position:relative; background:var(--card-2); color:var(--on-dark);
   padding:150px 0 96px; overflow:hidden;
 }
 @media (max-width:768px){ .hero{ padding:120px 0 72px; } }
@@ -364,7 +365,7 @@ body.lock{ overflow:hidden; }
 .tier .tf{ font-size:13.5px; color:var(--orange-deep); font-weight:700; margin-bottom:12px; }
 .tier .tg{ font-size:14px; color:var(--ink-soft); line-height:1.75; margin-bottom:18px; }
 .tier .td{ font-size:12.5px; color:var(--ink-faint); padding-top:14px; border-top:1px dashed var(--line); }
-.tier.spr{ background:var(--ink); color:var(--on-dark); }
+.tier.spr{ background:var(--card-2); color:var(--on-dark); }
 .tier.spr .tt{ color:#fff; } .tier.spr .tg{ color:var(--on-dark-soft); } .tier.spr .td{ color:var(--on-dark-soft); border-color:var(--on-dark-line); }
 .tier.spr .badge{ position:absolute; top:18px; right:18px; font-size:11px; font-weight:700; padding:4px 11px; border-radius:100px; background:var(--orange); color:#fff; }
 
@@ -373,7 +374,7 @@ body.lock{ overflow:hidden; }
 @media (max-width:768px){ .cmp{ grid-template-columns:1fr; } }
 .cmp-col{ padding:32px 28px; border-radius:18px; }
 .cmp-col.bad{ background:var(--card); border:1px solid var(--line); }
-.cmp-col.good{ background:var(--ink); color:var(--on-dark); }
+.cmp-col.good{ background:var(--card-2); color:var(--on-dark); }
 .cmp-col h3{ font-family:'Noto Sans TC',sans-serif; font-weight:700; font-size:20px; margin-bottom:22px; }
 .cmp-col.good h3{ color:#fff; }
 .cmp-col .tag{ font-family:'Inter','Noto Sans TC',sans-serif;  font-size:15px; margin-bottom:6px; display:block; color:var(--ink-faint); }
@@ -422,7 +423,7 @@ body.lock{ overflow:hidden; }
 .mini li strong{ color:var(--orange-deep); }
 
 /* 已服務 record 條 */
-.record{ margin-top:24px; padding:24px 26px; border-radius:16px; background:var(--ink); color:var(--on-dark); }
+.record{ margin-top:24px; padding:24px 26px; border-radius:16px; background:var(--card-2); color:var(--on-dark); }
 .record .rl{ font-family:'Inter','Noto Sans TC',sans-serif;  color:var(--orange); font-size:15px; margin-bottom:8px; }
 .record h4{ font-family:'Noto Sans TC',sans-serif; font-weight:700; font-size:18px; color:#fff; margin-bottom:14px; }
 .record .rp{ display:flex; flex-wrap:wrap; gap:8px; }
@@ -445,7 +446,7 @@ body.lock{ overflow:hidden; }
 .price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
 @media (max-width:600px){ .price-grid{ grid-template-columns:1fr; } }
 .price{ padding:30px 26px; position:relative; }
-.price.feat{ background:var(--ink); color:var(--on-dark); border-color:var(--ink); }
+.price.feat{ background:var(--card-2); color:var(--on-dark); border-color:var(--line); }
 .price .tag{ position:absolute; top:-11px; left:24px; padding:5px 14px; border-radius:100px; background:var(--orange); color:#fff; font-size:12px; font-weight:700; }
 .price h4{ font-family:'Noto Sans TC',sans-serif; font-weight:700; font-size:18px; margin-bottom:5px; }
 .price.feat h4{ color:#fff; }
@@ -537,7 +538,7 @@ body.lock{ overflow:hidden; }
 /* 練習卷 */
 .paper-hero{ display:grid; grid-template-columns:1.15fr 1fr; gap:24px; }
 @media (max-width:860px){ .paper-hero{ grid-template-columns:1fr; } }
-.paper-main{ padding:42px 38px; background:var(--ink); color:var(--on-dark); border-radius:20px; }
+.paper-main{ padding:42px 38px; background:var(--card-2); color:var(--on-dark); border-radius:20px; }
 .paper-main h3{ font-family:'Noto Sans TC',sans-serif; font-weight:900; font-size:clamp(24px,3vw,32px); line-height:1.35; margin-bottom:14px; color:#fff; }
 .paper-main h3 .hl{ color:var(--orange); }
 .paper-main p{ font-size:14.5px; color:var(--on-dark-soft); line-height:1.85; margin-bottom:24px; }
@@ -623,7 +624,7 @@ body.lock{ overflow:hidden; }
 /* ============================================================
    通用收尾組件 (社交證明 + 報名表) — 每頁底部
    ============================================================ */
-.closer{ background:var(--ink); color:var(--on-dark); padding:96px 0; position:relative; overflow:hidden; }
+.closer{ background:var(--card-2); color:var(--on-dark); padding:96px 0; position:relative; overflow:hidden; }
 .closer::before{ content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 50% 50% at 20% 10%,rgba(226,91,23,0.14),transparent 60%); }
 @media (max-width:768px){ .closer{ padding:64px 0; } }
 .closer-inner{ position:relative; z-index:2; }
@@ -708,7 +709,7 @@ body.lock{ overflow:hidden; }
 .lb-head .m{ font-size:12.5px; color:var(--on-dark-soft); margin-top:3px; }
 .lb-close{ width:42px; height:42px; border-radius:50%; background:rgba(243,243,244,0.1); border:1px solid var(--on-dark-line); color:#fff; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0; transition:all .2s; }
 .lb-close:hover{ background:var(--orange); transform:rotate(90deg); }
-.lb-body{ flex:1; overflow-y:auto; background:#fff; border-radius:16px; padding:22px; }
+.lb-body{ flex:1; overflow-y:auto; background:var(--card); border-radius:16px; padding:22px; }
 .lb-desc{ margin-bottom:14px; padding:12px 16px; border-radius:10px; background:var(--orange-soft); font-size:13px; color:var(--ink); line-height:1.6; }
 .lb-desc strong{ color:var(--orange-deep); }
 .lb-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
@@ -738,7 +739,7 @@ body.lock{ overflow:hidden; }
 .offer{
   position:relative; border-radius:24px; overflow:hidden; min-height:420px;
   display:flex; flex-direction:column; justify-content:flex-end;
-  background:var(--ink); color:#fff; isolation:isolate;
+  background:var(--card-2); color:#fff; isolation:isolate;
   transition:transform .35s var(--ease),box-shadow .35s var(--ease);
 }
 .offer:hover{ transform:translateY(-4px); box-shadow:0 30px 60px rgba(15,16,20,0.22); }
@@ -755,7 +756,7 @@ body.lock{ overflow:hidden; }
 .offer-body p{ font-size:15px; line-height:1.7; color:var(--on-dark-soft); margin-bottom:22px; max-width:340px; }
 .btn-learn{
   display:inline-flex; align-items:center; gap:9px; padding:14px 26px; border-radius:100px;
-  background:#fff; color:var(--ink); font-weight:700; font-size:15px;
+  background:#fff; color:#15161B; font-weight:700; font-size:15px;
   transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,color .2s;
 }
 .btn-learn .ar{ transition:transform .2s; }
@@ -767,7 +768,7 @@ body.lock{ overflow:hidden; }
   background:rgba(18,13,9,0.82); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
 .popup.open{ display:flex; animation:popfade .35s var(--ease); }
 @keyframes popfade{ from{ opacity:0; } to{ opacity:1; } }
-.popup-card{ position:relative; width:100%; max-width:520px; background:var(--ink); color:#fff;
+.popup-card{ position:relative; width:100%; max-width:520px; background:var(--card-2); color:#fff;
   border:1px solid var(--on-dark-line); border-radius:28px; padding:48px 38px; text-align:center; overflow:hidden;
   animation:poprise .4s var(--ease); }
 @keyframes poprise{ from{ transform:translateY(20px) scale(.98); opacity:0; } to{ transform:none; opacity:1; } }
@@ -875,7 +876,7 @@ body.lock{ overflow:hidden; }
 .f-field{ margin-bottom:18px; }
 .f-field label{ display:block; font-family:'Noto Serif TC','Noto Sans TC',serif; font-weight:700; font-size:16px; color:#fff; margin-bottom:9px; }
 .f-field label .ex{ font-family:'Inter','Noto Sans TC',sans-serif; font-weight:400; font-size:12px; color:var(--on-dark-soft); margin-left:8px; }
-.f-input, .f-area{ width:100%; background:#fff; color:var(--ink); border:1.5px solid transparent; border-radius:14px;
+.f-input, .f-area{ width:100%; background:#fff; color:#15161B; border:1.5px solid transparent; border-radius:14px;
   padding:15px 17px; font-family:'Inter','Noto Sans TC',sans-serif; font-size:15px; line-height:1.6; transition:border-color .2s,box-shadow .2s; }
 .f-input::placeholder, .f-area::placeholder{ color:#A89E92; }
 .f-input:focus, .f-area:focus{ outline:none; border-color:var(--orange); box-shadow:0 0 0 4px rgba(226,91,23,0.15); }
@@ -929,6 +930,28 @@ body{ letter-spacing:0.002em; }
 .feature.has-img:hover .feat-cover img{ transform:scale(1.05); }
 .feature.has-img .feat-body{ padding:28px 30px 32px; }
 .feature.has-img .fi{ display:none; }
+/* ============================================================
+   v7 ・ 深色主題微調
+   ============================================================ */
+/* 卡片喺黑底上要有邊界分隔 */
+.card, .feature, .info-card, .tier, .cmp-col, .callout, .sel-card, .preview, .vstack, .record, .venue, .paper-main, .pq, .proof .pc, .form-card, .dcard{
+  border:1px solid var(--line);
+}
+/* 重點 / 正面卡 用橙邊突出 */
+.cmp-col.good, .tier.spr, .price.feat{ border:1px solid rgba(226,91,23,0.45) !important; }
+/* 區段層次:淡淡漸層 + 橙光暈,唔再死黑一片 */
+.sect{ position:relative; }
+.sect:nth-child(even){ background:linear-gradient(180deg,var(--paper-2),var(--paper)); }
+.closer{ background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(226,91,23,0.10),transparent 60%), var(--card-2); }
+/* feature 卡圖頂喺深色下嘅漸變過渡 */
+.feature.has-img .feat-cover::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:50%;
+  background:linear-gradient(180deg,transparent,var(--card)); }
+.feature.has-img .feat-cover{ position:relative; }
+/* 價錢卡淡背景圖層 (JS 注入) */
+.price{ position:relative; overflow:hidden; }
+.price .price-bg{ position:absolute; inset:0; z-index:0; opacity:0.14; background-size:cover; background-position:center; }
+.price .price-bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(10,11,13,0.6),rgba(10,11,13,0.9)); }
+.price > *{ position:relative; z-index:1; }
 </style>
 
 </head>
@@ -1238,7 +1261,7 @@ body{ letter-spacing:0.002em; }
           <li>知識之間建立連繫,不再孤立</li>
         </ul>
       </div>
-      <div class="card feature rv d2" style="background:var(--ink);color:var(--on-dark);border-color:var(--ink);">
+      <div class="card feature rv d2" style="background:var(--card-2);color:var(--on-dark);border-color:var(--line);">
         <span class="pill" style="background:rgba(226,91,23,.18);color:var(--orange);">核心新賣點</span>
         <h3 style="color:#fff;margin-top:12px;">客製化服務</h3>
         <p style="color:var(--orange);font-weight:700;font-size:13px;margin-bottom:12px;">完全配合每位學生需求</p>
@@ -1925,20 +1948,6 @@ body{ letter-spacing:0.002em; }
         <div class="vo"><div class="vn">02</div><h4>重新建立做卷手感</h4><p>3 份完整試卷實戰操練 ・ 即時批改 ・ 老師親自講解錯題模式 ・ 重拾應試節奏</p></div>
         <div class="vo"><div class="vn">03</div><h4>精準診斷失分弱項</h4><p>2 份個人化進度報告 ・ 找出真正的丟分原因 ・ 將剩餘時間花在最有效的地方</p></div>
       </div>
-      <div class="vinc">
-        <div class="vinc-h">✓ 每位學員都會獲得</div>
-        <div class="vpills">
-          <span><strong>3 份</strong> 完整真題模擬試卷</span>
-          <span><strong>即時批改</strong> + 詳細講解</span>
-          <span><strong>額外試卷</strong> 自主操練(帶返屋企)</span>
-          <span><strong>2 份</strong> 個人化進度報告</span>
-          <span><strong>有限度</strong> 課後答疑支援</span>
-          <span><strong>應試心理</strong> 狀態調整建議</span>
-          <span><strong>⚡ 時段超靈活</strong> WhatsApp 個別編排</span>
-          <span><strong>🎁 英文</strong> Tenses 總結表 + 轉換表 + 單詞表</span>
-          <span><strong>🎁 數學</strong> 公式速查表 + 解題框架圖 + 易錯題型對照</span>
-        </div>
-      </div>
     </div>
 
     <div class="grid-2 rv" style="margin-top:24px;">
@@ -1947,8 +1956,9 @@ body{ letter-spacing:0.002em; }
         <ul class="clist" style="color:var(--on-dark);">
           <li>3 份完整試卷 ・ 堂上考試模式做卷</li>
           <li>即時批改 + 詳細講解</li>
-          <li>額外試卷自主操練</li>
+          <li>額外試卷自主操練(可帶返屋企)</li>
           <li>進度報告兩份(短期診斷)</li>
+          <li>有限度課後答疑 ・ 應試心理狀態調整建議</li>
           <li>應試前任何日期靈活編排 ・ WhatsApp 個別查詢</li>
         </ul>
       </div>
@@ -2165,7 +2175,7 @@ body{ letter-spacing:0.002em; }
     </div>
 
     <div class="grid-2">
-      <a class="card dcard rv d1" style="padding:26px 28px;background:var(--ink);border-color:var(--ink);" href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener">
+      <a class="card dcard rv d1" style="padding:26px 28px;background:var(--card-2);border-color:var(--line);" href="https://wa.me/85298560191?text=你好%20Symon%20Academy，我想預約免費程度評估。" target="_blank" rel="noopener">
         <span class="di" style="background:var(--wa);color:#fff;"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.2 0 0 7.2 0 16c0 2.8.7 5.6 2.1 8L0 32l8.2-2.1A16 16 0 1 0 16 0Z"/></svg></span>
         <div><div class="eyebrow" style="margin-bottom:2px;">WhatsApp ・ 主要渠道</div><h6 style="color:#fff;font-size:18px;">+852 9856 0191</h6><p style="color:var(--on-dark-soft);">最快回覆 ・ 報名、查詢、家長跟進統一窗口</p></div>
         <span class="df" style="color:var(--orange);">→</span>
@@ -2646,10 +2656,10 @@ body{ letter-spacing:0.002em; }
     var u=CARD_IMGS[m.getAttribute('data-img')];
     if(u){ m.innerHTML=''; var img=new Image(); img.onerror=function(){ this.style.display='none'; }; img.src=cld(u,800); img.loading='lazy'; img.alt=''; m.appendChild(img); }
   });
-  /* 白色 feature 卡加圖頂 */
+  /* 白色 → 深色:feature 卡加圖頂(只限盲點頁同教學體系頁,避免配套頁重複) */
   (function(){
     var POOL=HERO_IMGS.slice(); var pi=0;
-    document.querySelectorAll('section[data-page] .feature').forEach(function(card){
+    document.querySelectorAll('[data-page="p-why"] .feature, [data-page="p-method"] .feature').forEach(function(card){
       if(card.classList.contains('has-img')) return;
       var u=POOL[pi%POOL.length]; pi++;
       var cover=document.createElement('div'); cover.className='feat-cover';
@@ -2660,6 +2670,15 @@ body{ letter-spacing:0.002em; }
       while(card.firstChild){ body.appendChild(card.firstChild); }
       card.appendChild(cover); card.appendChild(body);
       card.classList.add('has-img');
+    });
+    /* 價錢卡淡背景圖,增加層次 */
+    var pj=0;
+    document.querySelectorAll('.price').forEach(function(card){
+      if(card.querySelector('.price-bg')) return;
+      var u=POOL[pj%POOL.length]; pj++;
+      var bg=document.createElement('div'); bg.className='price-bg';
+      bg.style.backgroundImage='url("'+cld(u,700)+'")';
+      card.insertBefore(bg,card.firstChild);
     });
   })();
   (function(){

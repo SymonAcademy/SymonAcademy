@@ -594,15 +594,15 @@ body.lock{ overflow:hidden; }
 .venue .mlist{ counter-reset:v; }
 
 /* value stack (急救 ・ 去黃,改橙) */
-.vstack{ margin-top:28px; padding:34px 32px; border-radius:20px; background:var(--ink-2); border:1px solid var(--on-dark-line); }
+.vstack{ margin-top:28px; padding:34px 32px; border-radius:20px; background:var(--card); border:1px solid var(--line); }
 .vstack .vt{ font-family:'Inter','Noto Serif TC',sans-serif; color:var(--orange); font-size:16px; margin-bottom:8px; }
-.vstack h3{ font-family:'Noto Serif TC',sans-serif; font-weight:900; font-size:clamp(20px,2.4vw,26px); color:#fff; margin-bottom:24px; }
+.vstack h3{ font-family:'Noto Serif TC',sans-serif; font-weight:900; font-size:clamp(20px,2.4vw,26px); color:var(--ink); margin-bottom:24px; }
 .vout{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
 @media (max-width:860px){ .vout{ grid-template-columns:1fr; } }
-.vo{ padding:20px; border-radius:14px; background:rgba(243,243,244,0.04); border:1px solid var(--on-dark-line); }
+.vo{ padding:20px; border-radius:14px; background:var(--paper-2); border:1px solid var(--line); }
 .vo .vn{ font-family:'Noto Serif TC',sans-serif; font-weight:900; font-size:28px; color:var(--orange); line-height:1; margin-bottom:10px; }
-.vo h4{ font-family:'Noto Serif TC',sans-serif; font-weight:700; font-size:16px; color:#fff; margin-bottom:7px; }
-.vo p{ font-size:13px; color:var(--on-dark-soft); line-height:1.7; }
+.vo h4{ font-family:'Noto Serif TC',sans-serif; font-weight:700; font-size:16px; color:var(--ink); margin-bottom:7px; }
+.vo p{ font-size:13px; color:var(--ink-soft); line-height:1.7; }
 .vinc{ padding-top:22px; border-top:1px dashed var(--on-dark-line); }
 .vinc-h{ font-family:'Noto Serif TC',sans-serif; font-weight:700; font-size:15px; color:var(--orange); margin-bottom:14px; }
 .vpills{ display:flex; flex-wrap:wrap; gap:9px; }
@@ -1260,7 +1260,7 @@ body{ letter-spacing:0.002em; }
     <span class="pill" style="background:rgba(226,91,23,.18);color:var(--orange);">核心新賣點</span>
     <h3 style="color:#fff;margin-top:12px;">客製化服務</h3>
     <p style="color:var(--orange);font-weight:700;font-size:13px;margin-bottom:12px;">完全配合每位學生需求</p>
-    <ul class="clist" style="color:var(--on-dark);">
+    <ul class="clist" style="color:var(--ink);">
      <li>獨立進度追蹤 + 系統化報告</li>
      <li>認證導師按需求完全配合</li>
      <li>定期家長通話,深度了解學習狀況</li>
@@ -1337,22 +1337,41 @@ body{ letter-spacing:0.002em; }
  <div class="wrap">
   <div class="sect-head rv">
    <span class="eyebrow">Symon Academy 認證導師體系</span>
-   <h2 class="sect-title">不靠個人 ・ <span class="hl">靠一套統一體系</span><br/>每位導師都是 Symon Academy 標準</h2>
-   <p class="sect-sub">我們不以任何個人作賣點。所有導師均經 Symon Academy 認證體系審核,使用統一教材、統一教學標準、統一進度跟進 ── 確保每位學生,無論配到邊位導師、邊個地區,都得到一致品質。</p>
+   <h2 class="sect-title">不靠個人 ・ <span class="hl">靠一套統一體系</span><br/>每位導師都是 <span style="white-space:nowrap;">Symon Academy</span> 標準</h2>
+   <ul class="mini" style="display:inline-block;text-align:left;margin:12px auto 0;">
+    <li>不以任何個人作賣點,所有導師均經 <span style="white-space:nowrap;">Symon Academy</span> 認證體系審核</li>
+    <li>統一教材、統一教學標準、統一進度跟進</li>
+    <li>無論由哪位導師任教,都能得到一致的教學品質</li>
+   </ul>
   </div>
 
-  <div class="region-tabs rv">
-   <button class="rtag active" data-region="r-ss">上水 / 粉嶺</button>
-   <button class="rtag" data-region="r-st">沙田</button>
-   <button class="rtag" data-region="r-tp">大埔</button>
+  <div class="rv" style="margin-bottom:28px;">
+   <div class="rh" style="margin-bottom:16px;">創辦團隊</div>
+   <div class="grid-2">
+    <div class="card" style="padding:0;overflow:hidden;">
+     <div style="aspect-ratio:4/5;overflow:hidden;background:var(--paper-2);"><img src="https://res.cloudinary.com/doik7chkw/image/upload/c_fill,g_face,ar_4:5,h_900,q_auto,f_auto/v1777740874/WhatsApp_Image_2026-05-03_at_00.52.50_barnbu.jpg" alt="Symon Sir" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.closest('.card').style.display='none';"/></div>
+     <div style="padding:18px 20px;">
+      <h3 style="font-size:18px;margin-bottom:3px;">Symon Sir</h3>
+      <div style="color:var(--orange);font-size:13px;font-weight:700;margin-bottom:8px;">共同創辦人 ・ 課程體系設計</div>
+      <p style="font-size:14px;color:var(--ink-soft);margin:0;">主導結構化分層教學體系與試卷出題標準的設計與把關。</p>
+     </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+     <div style="aspect-ratio:4/5;overflow:hidden;background:var(--paper-2);"><img src="https://res.cloudinary.com/doik7chkw/image/upload/c_fill,g_face,ar_4:5,h_900,q_auto,f_auto/v1780319753/WhatsApp_Image_2026-06-01_at_21.14.01_d5mxuh.jpg" alt="Lincoln Sir" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.closest('.card').style.display='none';"/></div>
+     <div style="padding:18px 20px;">
+      <h3 style="font-size:18px;margin-bottom:3px;">Lincoln Sir</h3>
+      <div style="color:var(--orange);font-size:13px;font-weight:700;margin-bottom:8px;">共同創辦人 ・ 教學與進度跟進</div>
+      <p style="font-size:14px;color:var(--ink-soft);margin:0;">主導學生個別化跟進、進度報告系統與課堂質素監控。</p>
+     </div>
+    </div>
+   </div>
   </div>
-  <div class="rnote rv" id="rnote"><strong>上水 / 粉嶺區</strong> ・ 目前已有認證導師 ・ 可即時匹配</div>
 
   <div class="grid-3 rv" style="margin-top:8px;">
    <div class="card feature" style="padding:28px 26px;">
     <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
     <h3>統一認證審核</h3>
-    <p>每位導師入職前須通過 Symon Academy 學科測試、試教評核與教學理念審核,確保完全掌握結構化分層教學法,先可以正式授課。</p>
+    <p>每位導師入職前須通過 Symon Academy 學科測試、試教評核與教學理念審核,確保完全掌握結構化分層教學法,方可正式授課。</p>
    </div>
    <div class="card feature" style="padding:28px 26px;">
     <div class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
@@ -1367,11 +1386,11 @@ body{ letter-spacing:0.002em; }
   </div>
 
   <div class="callout rv" style="margin-top:24px;">
-   <h4>點解我們不賣「邊個老師」?</h4>
+   <h4>為何我們不以「個別老師」作賣點?</h4>
    <ul class="clist">
-    <li>個人會離開、狀態會起伏;<strong>體系不會</strong> ── 標準寫死在教材同流程入面</li>
-    <li>無論你個小朋友配到邊位認證導師,拎到的都是<strong>同一套 Symon Academy 教學品質</strong></li>
-    <li>這個正是我們可以全港擴展、而質素不走樣的原因</li>
+    <li>個人會離開、狀態會有起伏;<strong>體系不會</strong> ── 標準已固化於教材與流程之中</li>
+    <li>無論孩子由哪位認證導師任教,得到的都是<strong>同一套 Symon Academy 教學品質</strong></li>
+    <li>這正是我們能夠全港擴展、而品質不走樣的原因</li>
    </ul>
   </div>
 
@@ -1687,11 +1706,11 @@ body{ letter-spacing:0.002em; }
     <h3>科目 ・ 年級 ・ 人數</h3>
     <div class="ce">Subjects ・ Grades ・ Class size</div>
     <div class="irow"><span class="k">科目選擇</span><span class="v"><span class="pill">英文</span><span class="pill">數學</span></span></div>
-    <div class="irow"><span class="k">開放年級</span><span class="v">P2 至 P6 全年級開設 ・ 英文 / 數學兩科任選</span></div>
-    <div class="irow"><span class="k">上課形式</span><span class="v"><strong style="color:var(--orange);">2-5 人小組(主推)</strong> ・ 或 <strong>一對一</strong> ・ 統一於 Symon Academy 中心上課</span></div>
-    <div class="irow"><span class="k">課堂節奏</span><span class="v"><strong>1 個月 4 堂</strong> ・ 每星期 1 堂 ・ <strong>1.5 小時 / 堂</strong> ・ 時間自由選擇</span></div>
-    <div class="irow"><span class="k">分級程度</span><span class="v">按學生程度分:<strong>打底(低級)・ 實戰(中級)・ 高級</strong> ・ 同年級同程度編組</span></div>
-    <div class="irow"><span class="k">小組入班</span><span class="v">由品牌按<strong>同年級、同程度</strong>配對入班 ・ 亦可自組團（詳見下方）</span></div>
+    <div class="irow"><span class="k">開放年級</span><span class="v"><ul class="mini"><li>P2 至 P6 全年級開設</li><li>英文 / 數學兩科任選</li></ul></span></div>
+    <div class="irow"><span class="k">上課形式</span><span class="v"><ul class="mini"><li><strong style="color:var(--orange);">2-5 人小組(主推)</strong> 或 <strong>一對一</strong></li><li>統一於 Symon Academy 中心上課</li></ul></span></div>
+    <div class="irow"><span class="k">課堂節奏</span><span class="v"><ul class="mini"><li><strong>1 個月 4 堂</strong> ・ 每星期 1 堂</li><li>每堂 <strong>1.5 小時</strong></li><li>時間自由選擇</li></ul></span></div>
+    <div class="irow"><span class="k">分級程度</span><span class="v"><ul class="mini"><li>按程度分:<strong>打底 / 實戰 / 高級</strong></li><li>同年級同程度編組</li></ul></span></div>
+    <div class="irow"><span class="k">小組入班</span><span class="v"><ul class="mini"><li>由品牌按<strong>同年級、同程度</strong>配對入班</li><li>亦可自組團（詳見下方）</li></ul></span></div>
     <div class="record">
      <div class="rl">Service track record</div>
      <h4>已服務 200+ 學生家庭</h4>
@@ -1831,12 +1850,12 @@ body{ letter-spacing:0.002em; }
 </section>
 
 <!-- ============ p-spr-teach ・ 考前急救班 ・ 課程內容與配套 ============ -->
-<section class="sect dark" data-page="p-spr-teach">
+<section class="sect" data-page="p-spr-teach">
  <div class="wrap">
   <div class="sect-head rv">
    <span class="eyebrow">Exam Sprint ・ limited opening</span>
    <h2 class="sect-title">考試急救班 Sprint<br/>限時加開 ・ <span class="hl">3 小時改寫整次考試</span></h2>
-   <p class="sect-sub"><strong style="color:#fff;">專為臨時抱佛腳的學生而設。</strong>用最濃縮的時間,幫學生快速追回整個學期的考試重點 ・ 解決「概念明、做卷散」的應試漏洞。</p>
+   <p class="sect-sub"><strong style="color:var(--ink);">專為臨時抱佛腳的學生而設。</strong>用最濃縮的時間,幫學生快速追回整個學期的考試重點 ・ 解決「概念明、做卷散」的應試漏洞。</p>
   </div>
 
   <div class="vstack rv">
@@ -1850,9 +1869,9 @@ body{ letter-spacing:0.002em; }
   </div>
 
   <div class="grid-2 rv" style="margin-top:24px;">
-   <div class="card feature" style="background:var(--ink-2);border-color:var(--on-dark-line);padding:30px 28px;">
-    <h3 style="font-family:'Noto Serif TC',sans-serif;font-weight:700;font-size:19px;color:#fff;margin-bottom:14px;">應試配套</h3>
-    <ul class="clist" style="color:var(--on-dark);">
+   <div class="card feature" style="background:var(--card);border-color:var(--line);padding:30px 28px;">
+    <h3 style="font-family:'Noto Serif TC',sans-serif;font-weight:700;font-size:19px;color:var(--ink);margin-bottom:14px;">應試配套</h3>
+    <ul class="clist" style="color:var(--ink);">
      <li>3 份完整試卷 ・ 堂上考試模式做卷</li>
      <li>即時批改 + 詳細講解</li>
      <li>額外試卷自主操練(可帶回家)</li>
@@ -1861,10 +1880,10 @@ body{ letter-spacing:0.002em; }
      <li>應試前任何日期靈活編排 ・ WhatsApp 個別查詢</li>
     </ul>
    </div>
-   <div class="card feature" style="background:var(--ink-2);border-color:var(--on-dark-line);padding:30px 28px;">
+   <div class="card feature" style="background:var(--card);border-color:var(--line);padding:30px 28px;">
     <div class="gift" style="margin-top:0;background:rgba(226,91,23,.14);">
      <div class="gift-h">應試工具贈品 ・ FREE BONUS</div>
-     <ul style="color:var(--on-dark);">
+     <ul style="color:var(--ink);">
       <li><strong>英文</strong>:Symon Academy Vocabulary Summary + Grade-Level Summary + Tense Conversion Map + Common-Error Guide</li>
       <li><strong>數學</strong>:Symon Academy 各年級總表 + 解題框架表 + 易錯題型對照表 + 心算法速查</li>
       <li class="team"><strong>組團贈品 ・ 2 人或以上</strong> ・ 凡 2 人或以上自行組團報讀,每位額外贈送《Symon Academy English Vocabulary Builder》+《Symon Academy 數學思維全攻略》,另送 Symon Academy 自家學習手冊</li>
@@ -1889,14 +1908,14 @@ body{ letter-spacing:0.002em; }
    <div class="ce">Exam Sprint ・ full details</div>
    <div class="grid-2" style="gap:0 36px;">
     <div>
-     <div class="irow"><span class="k">科目選擇</span><span class="v"><span class="pill">英文</span><span class="pill">數學</span> 可單科或雙科組合報讀</span></div>
+     <div class="irow"><span class="k">科目選擇</span><span class="v"><span class="pill">英文</span><span class="pill">數學</span><ul class="mini" style="margin-top:7px;"><li>可單科或雙科組合報讀</li></ul></span></div>
      <div class="irow"><span class="k">開放年級</span><span class="v">P2 至 P6 全年級開設</span></div>
-     <div class="irow"><span class="k">上課形式</span><span class="v"><strong>私補一對一</strong> ・ 或 <strong>2-5 人小組</strong></span></div>
+     <div class="irow"><span class="k">上課形式</span><span class="v"><ul class="mini"><li><strong>私補一對一</strong></li><li>或 <strong>2-5 人小組</strong></li></ul></span></div>
     </div>
     <div>
-     <div class="irow"><span class="k">課時安排</span><span class="v"><strong>單科</strong>:2 節 ・ 共 3 小時(120mins + 60mins)<br/><strong>雙科</strong>:每科 2 節 ・ 共 4 節 ・ 共 6 小時</span></div>
-     <div class="irow"><span class="k">分級程度</span><span class="v"><strong>不分程度</strong> ・ 一次性應試衝刺 ・ 操卷強化 + 弱項診斷</span></div>
-     <div class="irow"><span class="k">限時加開期</span><span class="v"><strong>2026.05.05 – 2026.06.15</strong> ・ 應試前彈性編排</span></div>
+     <div class="irow"><span class="k">課時安排</span><span class="v"><ul class="mini"><li><strong>單科</strong>:2 節 ・ 共 3 小時（120 + 60 mins）</li><li><strong>雙科</strong>:每科 2 節 ・ 共 4 節 ・ 共 6 小時</li></ul></span></div>
+     <div class="irow"><span class="k">分級程度</span><span class="v"><ul class="mini"><li><strong>不分程度</strong> ・ 一次性應試衝刺</li><li>操卷強化 + 弱項診斷</li></ul></span></div>
+     <div class="irow"><span class="k">限時加開期</span><span class="v"><ul class="mini"><li><strong>2026.05.05 – 2026.06.15</strong></li><li>應試前彈性編排</li></ul></span></div>
     </div>
    </div>
   </div>
@@ -1962,12 +1981,12 @@ body{ letter-spacing:0.002em; }
  <div class="wrap">
   <div class="sect-head rv">
    <span class="eyebrow">Combo Offer ・ 組合優惠</span>
-   <h2 class="sect-title">同期報讀 <span class="hl">更優惠</span><br/>常規 + 急救一次過搞掂</h2>
+   <h2 class="sect-title">同期報讀 <span class="hl">更優惠</span><br/>常規 + 急救一次過完成</h2>
    <p class="sect-sub">同時報讀<strong>常規月費班</strong>及<strong>考前急救班</strong>,享獨家組合定價 ・ 一對一或小組皆可。個別產品定價請查閱對應分頁。</p>
   </div>
 
   <div class="callout rv" style="margin-bottom:32px;">
-   <h4>組合一次過搞掂全年部署</h4>
+   <h4>組合一次過完成全年部署</h4>
    <p>平時用常規月費班建結構,考試前用急救班作衝刺強化。同期報讀更享獨家組合優惠。</p>
   </div>
 
@@ -2116,10 +2135,10 @@ body{ letter-spacing:0.002em; }
    <div class="pc"><div class="pn">雙報告</div><div class="pl">每週 + 每月進度追蹤</div></div>
   </div>
   <div class="proof-quotes rv">
-   <div class="pq"><div class="rs">★★★★★</div><p>個仔由不及格做到第一次考第十名,他自己都話「原來這麼簡單」。</p><div class="by">— Mrs. Chan ・ 小四家長</div></div>
-   <div class="pq"><div class="rs">★★★★★</div><p>女女英文 Tenses 一直不識,一堂課就將所有 Tenses 理清楚,真是好神奇。</p><div class="by">— Ms. Wong ・ 小五家長</div></div>
-   <div class="pq"><div class="rs">★★★★★</div><p>是真是教個小朋友點樣諗,而不是點樣背。試過幾間補習社都不同。</p><div class="by">— Mr. Lee ・ 小四家長</div></div>
-   <div class="pq"><div class="rs">★★★★★</div><p>每星期、每個月都收到清楚的進度報告,知道個女強弱項在邊,好放心。</p><div class="by">— Mrs. Ho ・ 小六家長</div></div>
+   <div class="pq"><div class="rs">★★★★★</div><p>個仔由唔合格做到第一次考第十名,佢自己都話『原來咁簡單』。</p><div class="by">— Mrs. Chan ・ 小四家長</div></div>
+   <div class="pq"><div class="rs">★★★★★</div><p>女女英文 Tenses 一直唔識,一堂課就將所有 Tenses 理清楚,真係好神奇。</p><div class="by">— Ms. Wong ・ 小五家長</div></div>
+   <div class="pq"><div class="rs">★★★★★</div><p>佢哋唔係叫小朋友死背,係真係教個小朋友點樣諗。試過幾間補習社都唔同。</p><div class="by">— Mr. Lee ・ 小四家長</div></div>
+   <div class="pq"><div class="rs">★★★★★</div><p>每星期、每個月都收到清楚嘅進度報告,知道個女強弱項喺邊,好放心。</p><div class="by">— Mrs. Ho ・ 小六家長</div></div>
   </div>
 
   <div class="form-wrap rv">
